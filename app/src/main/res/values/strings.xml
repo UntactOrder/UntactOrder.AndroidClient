@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Untact Order</string>
+    <string name="at_pwin_guide">Please input table password</string>
+    <string name="at_pwin_del_all">clear</string>
+    <string name="at_pwin_del_one">remove</string>
+    <string name="at_pwin_table_hint">Table Number</string>
+    <string name="at_pwin_guide_new">Please input new table password</string>
+    <string name="at_pwin_guide_confirm">Please confirm your password\nIf you enter it incorrectly 3 times, the registration password will be initialized</string>
+    <string name="at_pwin_guide_retry">You entered the wrong password\nPlease enter it again</string>
+    <string name="at_pwin_wrong_password_msg">"Different password! Try again! "</string>
+    <string name="text_confirm">Confirm</string>
+    <string name="text_reject">Reject</string>
+    <string name="text_cancel">Cancle</string>
+    <string name="text_okay">Okay</string>
 </resources>

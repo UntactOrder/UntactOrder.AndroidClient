@@ -20,13 +20,37 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 
 public class MainActivity extends AppCompatActivity {
+    boolean __DEBUG = true;
+
+    protected void println(String tag, String data) {
+        if (__DEBUG) {
+            Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
+        }
+        Log.d(tag, data);
+    }
+    protected void println(String data) {
+        println("Main", data);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AndPermission.with(this)
+                .runtime().permission(Permission.READ_PHONE_NUMBERS)
+                .permission(Permission.READ_PHONE_STATE)
+                .onGranted(permissions -> {
+                    println("허용된 권한 개수 : "+permissions.size());
+                })
+                .onDenied(permissions -> {
+                    println("거부된 권한 개수 : "+permissions.size());
+                })
+                .start();
 
         Window window = getWindow();
         View decorView = window.getDecorView();
@@ -48,10 +72,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "SIM 카드 시리얼넘버 : [ getSimSerialNumber ] >>> "+tm.getSimSerialNumber());
         Log.d(TAG, "SIM 카드 상태 : [ getSimState ] >>> "+tm.getSimState());
         Log.d(TAG, "소프트웨어 버전넘버 : [ getDeviceSoftwareVersion ] >>> "+tm.getDeviceSoftwareVersion());
-
-        // 유니크한 단말 번호 >>> Android ID 사용
-        String android_id = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
-        Log.d(TAG, "Android_ID >>> "+android_id);
 
 
 
@@ -140,15 +160,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private void showPersonalInfoConsentForm(ActivityResultLauncher<Intent> launcher) {
         launcher.launch(new Intent(this, PersonalInfoConsentFormActivity.class));
-    }
-
-
-    public void println(String tag, String data) {
-        Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
-        Log.d(tag, data);
-    }
-    public void println(String data) {
-        println("Main", data);
     }
 
 }
