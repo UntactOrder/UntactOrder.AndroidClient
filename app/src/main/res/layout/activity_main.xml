@@ -29,8 +29,15 @@
                     android:paddingStart="20dp"
                     android:paddingTop="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingBottom="5dp"
-                    />
+                    android:paddingBottom="5dp"/>
+
+            <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button2"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"/>
 
             <TextView
                     android:layout_width="match_parent"
@@ -41,7 +48,8 @@
                     android:textSize="34sp"
                     android:fontFamily="sans-serif-light"
                     android:hint="010-0000-0000"
-                    android:typeface="serif"/>
+                    android:typeface="serif"
+                    tools:ignore="HardcodedText"/>
 
         </LinearLayout>
     </ScrollView>

@@ -5,8 +5,21 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="gray_primary_light">#FFF1F2F4</color>
-    <color name="gray_primary_dark">#FF3A3947</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="gray_primary_light">#FFF1F2F4</color>
+    <color name="gray_primary_dark">#FF3A3947</color>
+    <color name="grey_deep">#FF707070</color>
+    <color name="magenta">#FFFF7C80</color>
+    <color name="yellow">#FFF9BF00</color>
+    <color name="purple_deep">#FF9291BE</color>
+
+    <!-- 액티비티 레이아웃별 색상 지정 -->
+    <color name="at_pwin_num_pad_text">@color/grey_deep</color>
+    <color name="at_pwin_num_pad_background">@color/white</color>
+    <color name="at_pwin_pw_view_circle_ordinal">@color/white</color>
+    <color name="at_pwin_pw_view_circle_pressed">@color/gray_primary_light</color>
+    <color name="at_pwin_pw_view_circle_filled">@color/purple_deep</color>
+    <color name="ac_pwin_table_name_background">#FFDBDBDC</color>
 </resources>
