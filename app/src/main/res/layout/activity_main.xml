@@ -11,52 +11,50 @@
         android:fillViewport="true"
         android:background="@color/gray_primary_light">
 
-    <ImageView
-            android:id="@+id/main_iv_linear_logo"
-            android:paddingTop="20dp"
-            android:paddingBottom="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitStart"
-            android:contentDescription="@string/app_name"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            app:srcCompat="@drawable/ic_linear_logo"/>
-
-    <TextView
-            android:textSize="28sp"
-            android:typeface="serif"
-            android:id="@+id/main_tv_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="010-0000-0000"
-            android:fontFamily="sans-serif-light"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            tools:ignore="HardcodedText,TextContrastCheck"/>
-
-    <TextView
-            android:textSize="14sp"
-            android:textColor="@color/gray_primary_light"
-            android:id="@+id/main_bt_guide_top_corner"
-            android:background="@drawable/shape_rect_top_corner"
-            android:paddingTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/at_main_guide"
-            android:onClick="onGuideButtonClicked"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            tools:ignore="TouchTargetSizeCheck"/>
-
-    <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true"
+    <LinearLayout
             android:orientation="vertical"
-            android:background="@color/gray_primary_light">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:id="@+id/main_iv_linear_logo"
+                android:paddingTop="20dp"
+                android:paddingBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:contentDescription="@string/app_name"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                app:srcCompat="@drawable/ic_linear_logo"/>
+
+        <TextView
+                android:textSize="28sp"
+                android:typeface="serif"
+                android:id="@+id/main_tv_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="010-0000-0000"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                tools:ignore="HardcodedText,TextContrastCheck"/>
+
+        <TextView
+                android:textSize="14sp"
+                android:textColor="@color/gray_primary_light"
+                android:id="@+id/main_bt_guide_top_corner"
+                android:background="@drawable/shape_rect_top_corner"
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/at_main_guide"
+                android:onClick="onGuideButtonClicked"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                tools:ignore="TouchTargetSizeCheck"/>
 
         <TextView
                 android:textSize="20sp"
@@ -89,101 +87,117 @@
                 android:onClick="onGuideButtonClicked"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"/>
-    </androidx.core.widget.NestedScrollView>
 
-    <androidx.core.widget.NestedScrollView
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="5dp"
-            android:layout_weight="1"
-            android:background="@color/white">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/main_bt_new_order_body"
-                android:background="@drawable/shape_rect_all_corner"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
-                android:backgroundTint="@color/at_main_new_order_body"
-                android:elevation="5dp"
-                android:clickable="true"
-                android:onClick="onNewOrderButtonClicked"
-                android:focusable="true">
+                android:orientation="vertical"
+                android:background="@color/white">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:id="@+id/main_list_of_orders"
+                    android:layout_height="wrap_content"
+                    >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/main_bt_new_order_body"
+                        android:background="@drawable/shape_rect_all_corner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:backgroundTint="@color/at_main_new_order_body"
+                        android:elevation="5dp"
+                        android:clickable="true"
+                        android:onClick="onNewOrderButtonClicked"
+                        android:focusable="true">
+
+                    <TextView
+                            android:textSize="24sp"
+                            android:textColor="@color/at_main_new_order_body"
+                            android:gravity="center"
+                            android:id="@+id/textView6"
+                            android:background="@drawable/shape_circle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20dp"
+                            android:text="+"
+                            android:paddingStart="9dp"
+                            android:paddingEnd="9dp"
+                            android:backgroundTint="@color/at_main_new_order_plus_btn"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="HardcodedText,TouchTargetSizeCheck,TouchTargetSizeCheck"
+                            android:elevation="5dp"
+                            android:clickable="true"
+                            android:onClick="onNewOrderButtonClicked"
+                            android:focusable="true"/>
+
+                    <TextView
+                            android:textSize="20sp"
+                            android:textColor="@color/at_main_new_order_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="@string/at_main_make_new_order"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView6"
+                            android:clickable="true"
+                            android:onClick="onNewOrderButtonClicked"
+                            android:focusable="true"
+                            tools:ignore="TouchTargetSizeCheck"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
             <TextView
-                    android:textSize="24sp"
-                    android:textColor="@color/at_main_new_order_body"
-                    android:gravity="center"
-                    android:id="@+id/textView6"
-                    android:background="@drawable/shape_circle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/main_line_order_separator"/>
+
+            <TextView
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_deep"
+                    android:gravity="start|center|top"
+                    android:id="@+id/main_tv_total_price_top"
+                    android:background="@drawable/shape_rect_top_corner"
+                    android:paddingTop="6dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="+"
-                    android:paddingStart="9dp"
-                    android:paddingEnd="9dp"
-                    android:backgroundTint="@color/at_main_new_order_plus_btn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText"
-                    android:elevation="5dp"
-                    android:clickable="true"
-                    android:onClick="onNewOrderButtonClicked"
-                    android:focusable="true"/>
+                    android:text="@string/at_main_total_price"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:elevation="2dp"
+                    android:backgroundTint="@color/at_main_total_price_background"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    />
 
             <TextView
                     android:textSize="20sp"
-                    android:textColor="@color/at_main_new_order_text"
-                    android:layout_width="wrap_content"
+                    android:textColor="@color/magenta"
+                    android:gravity="end|bottom|center"
+                    android:id="@+id/main_tv_total_price_bottom"
+                    android:background="@drawable/shape_rect_bottom_corner"
+                    android:paddingBottom="12dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:text="@string/at_main_make_new_order"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView6"
-                    android:clickable="true"
-                    android:onClick="onNewOrderButtonClicked"
-                    android:focusable="true"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:text="@string/krw"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:elevation="2dp"
+                    android:backgroundTint="@color/at_main_total_price_background"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="20dp"
+                    tools:ignore="TextContrastCheck"/>
 
-        <TextView
-                android:textSize="16sp"
-                android:textColor="@color/grey_deep"
-                android:gravity="start|center|top"
-                android:id="@+id/main_tv_total_price_top"
-                android:background="@drawable/shape_rect_top_corner"
-                android:paddingTop="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/at_main_total_price"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:elevation="1dp"
-                android:backgroundTint="@color/at_main_total_price_background"/>
+        </LinearLayout>
 
-        <TextView
-                android:textSize="20sp"
-                android:textColor="@color/magenta"
-                android:gravity="end|bottom|center"
-                android:id="@+id/main_tv_total_price_bottom"
-                android:background="@drawable/shape_rect_bottom_corner"
-                android:paddingBottom="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="@string/krw"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:elevation="1dp"
-                android:backgroundTint="@color/at_main_total_price_background"
-                tools:ignore="TextContrastCheck"/>
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

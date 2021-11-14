@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/ic_launcher_background.xml" value="0.36354166666666665" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/shape_circle.xml" value="0.1859375" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/shape_rect_all_corner.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/shape_rect_bottom_corner.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/shape_rect_top_corner.xml" value="0.1859375" />
-        <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_main2.xml" value="0.375" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_prsn_inf_consent_form.xml" value="0.34739583333333335" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_pwin.xml" value="0.346875" />
