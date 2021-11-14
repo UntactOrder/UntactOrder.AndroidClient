@@ -11,14 +11,10 @@ public class PersonalInfoConsentFormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_info_consent_form);
-
-        Window window = getWindow();
-        View decorView = window.getDecorView();
-        MainActivity.setStatusBarTextColor(this, window, decorView);
+        setContentView(R.layout.activity_prsn_inf_consent_form);
     }
 
-    private void pressConfirmButton(View v) {
+    public void pressConfirmButton(View v) {
         setResult(RESULT_OK, new Intent().putExtra("confirm", true));
         finish();
     }
