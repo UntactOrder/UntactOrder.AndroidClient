@@ -13,4 +13,18 @@
     <string name="text_reject">거부</string>
     <string name="text_cancel">취소</string>
     <string name="text_okay">확인</string>
+    <string name="at_main_detailed_guide_msg">
+        0. 언택트 오더는 비대면 주문 어플리케이션 입니다.\n\n
+        1. 주문하기 버튼을 누르고 매장 테이블에 비치 된 QR코드를 스캔하면 주문이 가능합니다.\n\n
+        2. 주문 시에 비밀번호 6자리가 요구되며, 이 비밀번호로 다른 스마트폰으로도 주문을 확인할 수 있습니다.\n\n
+        3. 주문 옵션을 선택한 뒤 완료하기 버튼을 누르면 주문이 완료됩니다.\n\n
+        4. 추가 주문은 이전 주문이 확정된 이후에 추가 주문하기 버튼을 누르게 되면 같은 방법으로 가능합니다.\n\n
+        ※ 앱 사용 도중 와이파이 연결이 끊어진 경우에는 앱을 재시작해 주세요!
+    </string>
+    <string name="at_main_guide">도움말</string>
+    <string name="at_main_guide_msg">사용 방법이 궁금하신가요? ></string>
+    <string name="at_main_total_price">총 주문 금액</string>
+    <string name="at_main_make_additional_order">추가 주문 하러 가기</string>
+    <string name="at_main_make_new_order">주문 하러 가기</string>
+    <string name="krw">원</string>
 </resources>
