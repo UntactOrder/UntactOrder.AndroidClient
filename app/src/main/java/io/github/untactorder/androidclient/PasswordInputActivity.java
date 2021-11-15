@@ -16,16 +16,17 @@ enum InputType {SignUp, Confirm, SignIn, Retry}
 public class PasswordInputActivity extends AppCompatActivity {
     public static final int RESULT_INCORRECT = -300;
 
-    boolean __DEBUG = true;
+    String TAG = "PwIn";
+    boolean __DEBUG = false;
 
-    protected void println(String tag, String data) {
-        if (__DEBUG) {
+    protected void println(String tag, String data, boolean showToast) {
+        if (showToast) {
             Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
         }
         Log.d(tag, data);
     }
     protected void println(String data) {
-        println("PwIn", data);
+        println(TAG, data, __DEBUG);
     }
 
     InputType inputType;
@@ -44,10 +45,10 @@ public class PasswordInputActivity extends AppCompatActivity {
             intent = new Intent();
             intent.putExtra("table_name", "창가 7번");
             intent.putExtra("input_type", InputType.SignIn);
-            println("pwin", "디버그 모드");
+            println("디버그 모드");
         } else {
             intent = getIntent();
-            println("pwin", "릴리즈 모드");
+            println("릴리즈 모드");
         }
 
         TextView tableName = findViewById(R.id.pwin_tv_table_num);
@@ -143,21 +144,36 @@ public class PasswordInputActivity extends AppCompatActivity {
     }
 
     public void onNumPadClicked(View v) {
-        println("numpad clicked");
-        int clicked = Integer.parseInt((String) ((TextView) v).getText());
-        password += clicked;
-        showNumPadInput(clicked);
+        if (password.length() < 6) {
+            println("numpad clicked");
+            int clicked = Integer.parseInt((String) ((TextView) v).getText());
+            showNumPadInput(clicked);
+            println(password.length()+"/6");
 
-        if (password.length() >= 6) {
-            finish();
+            if (password.length() >= 6) {
+                finish();
+            }
         }
     }
 
-    protected void showDialog(String msg) {
+    protected void showDialog(String msg, boolean cancelAble,
+                              android.content.DialogInterface.OnClickListener onPositiveClickListener,
+                              android.content.DialogInterface.OnClickListener onNegativeClickListener,
+                              android.content.DialogInterface.OnClickListener onNeutalClickListener) {
         println("show dialog");
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        //alertDialogBuilder.setTitle("종료할까요?");
+        alertDialogBuilder.setCancelable(cancelAble);
         alertDialogBuilder.setMessage(msg);
-        alertDialogBuilder.setPositiveButton(R.string.text_okay, (dialog, which) -> {});
+        if (onPositiveClickListener != null) {
+            alertDialogBuilder.setPositiveButton(R.string.text_okay, onPositiveClickListener);
+        }
+        if (onNegativeClickListener != null) {
+            alertDialogBuilder.setNegativeButton(R.string.text_reject, onNegativeClickListener);
+        }
+        if (onNeutalClickListener != null) {
+            alertDialogBuilder.setNeutralButton(R.string.text_cancel, onNeutalClickListener);
+        }
         alertDialogBuilder.create().show();
     }
 
@@ -166,12 +182,16 @@ public class PasswordInputActivity extends AppCompatActivity {
         Intent result = getIntent();
         if (password.length() < 6) {
             setResult(RESULT_CANCELED, result);
-        } else if (password.equals(intentPassword)) {
+            super.finish();
+        } else if (inputType == InputType.Confirm && !password.equals(intentPassword)) {
             String msg = getResources().getString(R.string.at_pwin_wrong_password_msg)+'('+repeatCount+"/3)";
-            showDialog(msg);
+            setCircleView(password.length()-1, "", false);
             setResult(RESULT_INCORRECT, result);
+            showDialog(msg, false, (dialog, which) -> super.finish(), null, null);
         } else {
+            result.putExtra("password", password);
             setResult(RESULT_OK, result);
+            super.finish();
         }
     }
 }

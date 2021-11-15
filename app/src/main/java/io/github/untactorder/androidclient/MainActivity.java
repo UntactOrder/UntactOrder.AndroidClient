@@ -6,35 +6,39 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
-import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 
-public class MainActivity extends AppCompatActivity {
-    boolean __DEBUG = true;
+import java.util.Objects;
 
-    protected void println(String tag, String data) {
-        if (__DEBUG) {
+import static io.github.untactorder.androidclient.PasswordInputActivity.RESULT_INCORRECT;
+
+public class MainActivity extends AppCompatActivity {
+    String TAG = "UntactOrder.main";
+    boolean __DEBUG = false;
+
+    protected void println(String tag, String data, boolean showToast) {
+        if (showToast) {
             Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
         }
         Log.d(tag, data);
     }
     protected void println(String data) {
-        println("Main", data);
+        println(TAG, data, __DEBUG);
     }
+
+    String userIMEI, userPhoneNumber;
+    ActivityResultLauncher<Intent> qrScanActivityLauncher, passwordInputActivityLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,38 +46,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         AndPermission.with(this)
-                .runtime().permission(Permission.READ_PHONE_NUMBERS)
+                .runtime()
                 .permission(Permission.READ_PHONE_STATE)
                 .onGranted(permissions -> {
-                    println("허용된 권한 개수 : "+permissions.size());
+                    println("허용된 권한 개수 : " + permissions.size());
                 })
                 .onDenied(permissions -> {
-                    println("거부된 권한 개수 : "+permissions.size());
+                    println("거부된 권한 개수 : " + permissions.size());
+                    finish();
                 })
                 .start();
-
-        Window window = getWindow();
-        View decorView = window.getDecorView();
-        setStatusBarTextColor(this, window, decorView);
-
-        String TAG = "info";
-        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-
-        Log.d(TAG, "음성통화 상태 : [ getCallState ] >>> "+tm.getCallState());
-        Log.d(TAG, "데이터통신 상태 : [ getDataState ] >>> "+tm.getDataState());
-        Log.d(TAG, "IMEI : [ getDeviceId ] >>>"+tm.getDeviceId());
-        Log.d(TAG, "전화번호 : [ getLine1Number ] >>> "+tm.getLine1Number());
-        Log.d(TAG, "통신사 ISO 국가코드 : [ getNetworkCountryIso ] >>> "+tm.getNetworkCountryIso());
-        Log.d(TAG, "통신사 ISO 국가코드 : [ getSimCountryIso ] >>> "+tm.getSimCountryIso());
-        Log.d(TAG, "망사업자 MCC+MNC : [ getNetworkOperator ] >>> "+tm.getNetworkOperator());
-        Log.d(TAG, "망사업자 MCC+MNC : [ getSimOperator ] >>> "+tm.getSimOperator());
-        Log.d(TAG, "망사업자명 : [ getNetworkOperatorName ] >>> "+tm.getNetworkOperatorName());
-        Log.d(TAG, "망사업자명 : [ getSimOperatorName ] >>> "+tm.getSimOperatorName());
-        Log.d(TAG, "SIM 카드 시리얼넘버 : [ getSimSerialNumber ] >>> "+tm.getSimSerialNumber());
-        Log.d(TAG, "SIM 카드 상태 : [ getSimState ] >>> "+tm.getSimState());
-        Log.d(TAG, "소프트웨어 버전넘버 : [ getDeviceSoftwareVersion ] >>> "+tm.getDeviceSoftwareVersion());
-
-
+        /* IMEI 관련 부분은 비활성화 해두고 나중에 할거
+        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        userIMEI = tm.getImei();
+        println("IMEI:"+userIMEI);
+        userPhoneNumber = tm.getLine1Number();
+        println("Phone:"+userPhoneNumber);
+        if (tm.getSimState() != SIM_STATE_READY) {
+            println("SimState: Sim not ready");
+            finish();
+        }
 
         ActivityResultLauncher<Intent> consentFormLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -81,18 +73,41 @@ public class MainActivity extends AppCompatActivity {
                     if (result.getResultCode() != RESULT_OK) finish();
                 }
         );
-        checkCustomerInfo(consentFormLauncher);
+        //checkCustomerInfo(consentFormLauncher);
         //while (!checkWifiConnection());
-    }
+         */
 
-    public static void setStatusBarTextColor(Context context, Window window, View decorView) {
-        /* 상단바 글자 색상 변경 */
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            (new WindowInsetsControllerCompat(window, decorView)).setAppearanceLightStatusBars(true);
-        } else {
-            // API 23 미만이면 다른 상단바 색상 적용
-            window.setStatusBarColor(context.getResources().getColor(R.color.gray_primary_dark));
-        }
+        qrScanActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        println(Objects.requireNonNull(result.getData()).getStringExtra("value"));
+                        runPasswordActivity();
+                    } else {
+                        println(TAG, "QR 코드 스캔을 취소하였습니다.", true);
+                    }
+                }
+        );
+
+        passwordInputActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    switch (result.getResultCode()) {
+                        case RESULT_OK:
+                            String pw = Objects.requireNonNull(result.getData()).getStringExtra("password");
+                            if (pw != null) {
+                                println("Password: " + pw);
+                            }
+                            break;
+                        case RESULT_CANCELED:
+                            println("Canceled");
+                            break;
+                        case RESULT_INCORRECT:
+                            println("Incorrect password!");
+                            break;
+                    }
+                }
+        );
     }
 
     private boolean checkWifiConnection() {
@@ -110,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences(CONTAINER_NAME, Activity.MODE_PRIVATE);
         if (pref == null) {
-            println("내부 저장소 접근 오류!!");
+            println(TAG, "내부 저장소 접근 오류!!", true);
             finish();
         }
 
@@ -123,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            println("전화 권한이 없습니다!!!! 앱을 종료합니다.");
+            println(TAG, "전화 권한이 없습니다!!!! 앱을 종료합니다.", true);
             finish();
         }
         String currentPhoneNumber = UsimUtil.hyphenFormat(UsimUtil.getPhoneNumber(this).get(0));
@@ -151,15 +166,40 @@ public class MainActivity extends AppCompatActivity {
         } catch (IllegalStateException e) {
             println(e.getMessage());
             showPersonalInfoConsentForm(launcher);
-            ((TextView) findViewById(R.id.customerPhoneNumView)).setText(currentPhoneNumber);
+            ((TextView) findViewById(R.id.main_tv_phone_number)).setText(currentPhoneNumber);
             SharedPreferences.Editor editor = pref.edit();
             editor.putString(PHONE_NUMBER, currentPhoneNumber);
             editor.putString(IMEI, currentIMEI);
             editor.apply();
         }
     }
+
     private void showPersonalInfoConsentForm(ActivityResultLauncher<Intent> launcher) {
         launcher.launch(new Intent(this, PersonalInfoConsentFormActivity.class));
     }
 
+    public void onGuideButtonClicked(View v) {
+        TextView detailedGuide = (TextView) findViewById(R.id.main_bt_detailed_guide);
+        if (detailedGuide.getVisibility() == View.GONE) {
+            detailedGuide.setVisibility(View.VISIBLE);
+        } else {
+            detailedGuide.setVisibility(View.GONE);
+        }
+    }
+
+    public void onNewOrderButtonClicked(View v) {
+        println("New Order");
+        Intent qrIntent = new Intent(this, QrScanActivity.class);
+        qrScanActivityLauncher.launch(qrIntent);
+    }
+
+    public void runPasswordActivity() {
+        Intent passwordIntent = new Intent(this, PasswordInputActivity.class);
+        passwordIntent.putExtra("table_name", "복도측 10번");
+        passwordIntent.putExtra("input_type", InputType.Confirm);
+        passwordIntent.putExtra("repeat_count", 1);
+        passwordIntent.putExtra("signup_password", "123456");
+        println("run Password Activity");
+        passwordInputActivityLauncher.launch(passwordIntent);
+    }
 }
