@@ -6,9 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
@@ -25,7 +30,7 @@ import static io.github.untactorder.androidclient.PasswordInputActivity.RESULT_I
 
 public class MainActivity extends AppCompatActivity {
     String TAG = "UntactOrder.main";
-    boolean __DEBUG = false;
+    boolean __DEBUG = true;
 
     protected void println(String tag, String data, boolean showToast) {
         if (showToast) {
@@ -56,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 })
                 .start();
+
+        /*findViewById(R.id.main_bt_detailed_guide).getLayoutParams().height = size.y
+                - findViewById(R.id.main_iv_linear_logo).getLayoutParams().height
+                - findViewById(R.id.main_tv_phone_number).getLayoutParams().height
+                - findViewById(R.id.main_bt_guide_top_corner).getLayoutParams().height
+                - findViewById(R.id.main_bt_guide_top).getLayoutParams().height;*/
+
         /* IMEI 관련 부분은 비활성화 해두고 나중에 할거
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         userIMEI = tm.getImei();
@@ -108,6 +120,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        fitOrderSeperatorSize();
+        super.onWindowFocusChanged(hasFocus);
     }
 
     private boolean checkWifiConnection() {
@@ -178,13 +196,72 @@ public class MainActivity extends AppCompatActivity {
         launcher.launch(new Intent(this, PersonalInfoConsentFormActivity.class));
     }
 
+    public void fitOrderSeperatorSize() {
+        View bottom = findViewById(R.id.main_container_bottom);
+        View separator = findViewById(R.id.main_line_order_separator);
+
+        int top = findViewById(R.id.main_container_top).getLayoutParams().height;
+        int list = findViewById(R.id.main_list_of_orders).getLayoutParams().height;
+        int newOrder = findViewById(R.id.main_bt_new_order_body).getLayoutParams().height;
+        int total = findViewById(R.id.main_tv_total_price_body).getLayoutParams().height;
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int getDeviceHeight_Pixel = displayMetrics.heightPixels;
+
+        int getDeviceDpi = displayMetrics.densityDpi;
+        int dp = getDeviceHeight_Pixel / (getDeviceDpi / 160);
+        //println(""+dp);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        //println(""+size.y);
+        println(""+top);
+        bottom.getLayoutParams().height = size.y-top;
+        separator.getLayoutParams().height = 300;
+    }
+
+    boolean isGuideShowing = false;
     public void onGuideButtonClicked(View v) {
-        TextView detailedGuide = (TextView) findViewById(R.id.main_bt_detailed_guide);
-        if (detailedGuide.getVisibility() == View.GONE) {
-            detailedGuide.setVisibility(View.VISIBLE);
-        } else {
-            detailedGuide.setVisibility(View.GONE);
-        }
+        View detailedGuide = findViewById(R.id.main_bt_detailed_guide);
+        View container = findViewById(R.id.main_container_bottom);
+
+        Animation anim;
+        if (isGuideShowing) {  // 이미 도움 말이 보이는 경우
+            anim = AnimationUtils.loadAnimation(this, R.anim.translate_fully_down_reverse);
+            setNewOrderButtonEnabled(View.VISIBLE);  // 신규 주문 버턴 활성화
+        } else {  // 도움 말이 가려져 있는 경우
+            anim = AnimationUtils.loadAnimation(this, R.anim.translate_fully_down);
+            detailedGuide.setVisibility(View.VISIBLE);  // 도움말 보이게 하기
+        } isGuideShowing = !isGuideShowing;
+        Animation.AnimationListener listener = new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+            @Override
+            public void onAnimationEnd (Animation animation) {
+                detailedGuide.setEnabled(isGuideShowing);
+                if (isGuideShowing) {
+                    setNewOrderButtonEnabled(View.GONE);
+                } else {
+                    detailedGuide.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        };
+        anim.setAnimationListener(listener);
+        container.startAnimation(anim);
+    }
+
+    protected void setNewOrderButtonEnabled(int status) {
+        View container = findViewById(R.id.main_container_bottom);
+        View body = findViewById(R.id.main_bt_new_order_body);
+        View plus = findViewById(R.id.main_bt_new_order_plus);
+        View msg = findViewById(R.id.main_bt_new_order_msg);
+        boolean enable = status == View.VISIBLE;
+        container.setEnabled(enable); body.setEnabled(enable); plus.setEnabled(enable); msg.setEnabled(enable);
+        container.setVisibility(status); body.setVisibility(status); plus.setVisibility(status); msg.setVisibility(status);
     }
 
     public void onNewOrderButtonClicked(View v) {
