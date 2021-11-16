@@ -14,7 +14,10 @@
     <string name="text_okay">Okay</string>
     <string name="at_main_guide">Guide</string>
     <string name="at_main_guide_msg">Want to know how to use app? ></string>
-    <string name="at_main_detailed_guide_msg">Not Translated</string>
+    <string name="at_main_detailed_guide_msg">
+        \n
+        Not Translated\n
+    </string>
     <string name="at_main_total_price">Total order price</string>
     <string name="krw">won</string>
     <string name="at_main_make_new_order">Make New Order</string>
