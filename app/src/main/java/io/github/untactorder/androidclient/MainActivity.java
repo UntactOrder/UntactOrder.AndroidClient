@@ -93,10 +93,15 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK) {
-                        println(Objects.requireNonNull(result.getData()).getStringExtra("value"));
-                        runPasswordActivity();
+                        String qrData = Objects.requireNonNull(result.getData()).getStringExtra("value");
+                        println(qrData);
+                        if (true /*QR 검사*/) {
+                            runPasswordActivity();
+                        } else {
+                            println(TAG, getString(R.string.at_qrsc_invalid_msg), true);
+                        }
                     } else {
-                        println(TAG, "QR 코드 스캔을 취소하였습니다.", true);
+                        println(TAG, getString(R.string.at_qrsc_cancel_msg), true);
                     }
                 }
         );
