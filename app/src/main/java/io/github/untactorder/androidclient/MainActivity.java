@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -26,9 +28,10 @@ import com.yanzhenjie.permission.runtime.Permission;
 
 import java.util.Objects;
 
+import static com.google.android.material.internal.ViewUtils.removeOnGlobalLayoutListener;
 import static io.github.untactorder.androidclient.PasswordInputActivity.RESULT_INCORRECT;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity<resId> extends AppCompatActivity {
     String TAG = "UntactOrder.main";
     boolean __DEBUG = true;
 
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     String userIMEI, userPhoneNumber;
     ActivityResultLauncher<Intent> qrScanActivityLauncher, passwordInputActivityLauncher;
+    ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +65,6 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 })
                 .start();
-
-        /*findViewById(R.id.main_bt_detailed_guide).getLayoutParams().height = size.y
-                - findViewById(R.id.main_iv_linear_logo).getLayoutParams().height
-                - findViewById(R.id.main_tv_phone_number).getLayoutParams().height
-                - findViewById(R.id.main_bt_guide_top_corner).getLayoutParams().height
-                - findViewById(R.id.main_bt_guide_top).getLayoutParams().height;*/
 
         /* IMEI 관련 부분은 비활성화 해두고 나중에 할거
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -125,12 +123,51 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-    }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        fitOrderSeperatorSize();
-        super.onWindowFocusChanged(hasFocus);
+        findViewById(R.id.main_container_top).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int top = findViewById(R.id.main_container_top).getLayoutParams().height;
+            println(""+top);
+        });
+
+        findViewById(R.id.main_container_bottom).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int bottom = findViewById(R.id.main_container_bottom).getLayoutParams().height;
+            println(""+bottom);
+        });
+
+        findViewById(R.id.main_iv_linear_logo).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int logo = findViewById(R.id.main_iv_linear_logo).getLayoutParams().height;
+            println(""+logo);
+        });
+
+        findViewById(R.id.main_tv_phone_number).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int pNum = findViewById(R.id.main_tv_phone_number).getLayoutParams().height;
+            println(""+pNum);
+        });
+
+        findViewById(R.id.main_bt_guide_top_corner).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int topCorner = findViewById(R.id.main_bt_guide_top_corner).getLayoutParams().height;
+            println(""+topCorner);
+        });
+
+        findViewById(R.id.main_bt_guide_top).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int topGuide = findViewById(R.id.main_bt_guide_top).getLayoutParams().height;
+            println(""+topGuide);
+        });
+
+        findViewById(R.id.main_line_detailed_guide_margin).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int detail = findViewById(R.id.main_line_detailed_guide_margin).getLayoutParams().height;
+            println(""+detail);
+        });
+
+        findViewById(R.id.main_container_bottom).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int bottomContainer = findViewById(R.id.main_container_bottom).getLayoutParams().height;
+            println(""+bottomContainer);
+        });
+
+        findViewById(R.id.main_list_of_orders).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int list = findViewById(R.id.main_list_of_orders).getLayoutParams().height;
+            println(""+list);
+        });
     }
 
     private boolean checkWifiConnection() {
@@ -201,7 +238,8 @@ public class MainActivity extends AppCompatActivity {
         launcher.launch(new Intent(this, PersonalInfoConsentFormActivity.class));
     }
 
-    public void fitOrderSeperatorSize() {
+
+    public void fitOrderSeparatorSize() {
         View bottom = findViewById(R.id.main_container_bottom);
         View separator = findViewById(R.id.main_line_order_separator);
 
@@ -210,20 +248,25 @@ public class MainActivity extends AppCompatActivity {
         int newOrder = findViewById(R.id.main_bt_new_order_body).getLayoutParams().height;
         int total = findViewById(R.id.main_tv_total_price_body).getLayoutParams().height;
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int getDeviceHeight_Pixel = displayMetrics.heightPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+        int dpi = getResources().getDisplayMetrics().densityDpi;
 
-        int getDeviceDpi = displayMetrics.densityDpi;
-        int dp = getDeviceHeight_Pixel / (getDeviceDpi / 160);
-        //println(""+dp);
+        int statusBarHeight = 0;
+        int resId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resId > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resId);
+        }
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        //println(""+size.y);
-        println(""+top);
-        bottom.getLayoutParams().height = size.y-top;
+        int naviId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        int naviBar = (naviId > 0) ? getResources().getDimensionPixelSize(resId) : 0;
+
+        println(""+(height*160/dpi-naviBar));
+        //println(""+top);
+        //println(""+list);
+        //println(""+newOrder);
+        //println(""+total);
+        //println(""+total+top);
+        bottom.getLayoutParams().height = (height*160/dpi-naviBar)-top;
         separator.getLayoutParams().height = 300;
     }
 
