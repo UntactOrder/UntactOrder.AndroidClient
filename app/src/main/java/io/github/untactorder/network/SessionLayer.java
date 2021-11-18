@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 /**
+ * <세션계층>
  * 소켓생성 o
  * 서버연결 o
  * ip, port저장 -> NetworkService
