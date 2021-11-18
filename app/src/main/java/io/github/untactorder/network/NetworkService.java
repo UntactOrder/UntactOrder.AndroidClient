@@ -10,8 +10,16 @@ import android.os.IBinder;
  * ip, 포트번호 지정
  * @author 유채민
  */
-public class NetworkService extends Service {
+public class NetworkService extends Service implements ApplicationLayer {
+    String ip;
+    Integer port;
+
     public NetworkService() {
+    }
+
+    public NetworkService(String ip, Integer port) {
+        this.ip = ip;
+        this.port = port;
     }
 
     @Override
@@ -19,4 +27,15 @@ public class NetworkService extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    //practice
+    public void main(String[] args) {
+        try {
+            send("d");
+            connectToServer(ip,port);
+            recv();
+        } catch (Exception e) {}
+    }
+    //
+
 }
