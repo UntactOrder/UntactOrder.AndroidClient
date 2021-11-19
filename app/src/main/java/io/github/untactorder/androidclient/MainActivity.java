@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 텍스트 뷰 marquee효과는 포커싱이 되어야 흐르게 되어 있으므로 항상 선택된 것 처럼 만들기
         findViewById(R.id.main_tv_total_price_bottom).setSelected(true);
+        findViewById(R.id.main_bt_guide_top).setSelected(true);
 
         // seperator 크기 조정 (람다식으로 하면 리스너 삭제가 제대로 안되네? 흠....)
         View total = findViewById(R.id.main_tv_total_price_body);
