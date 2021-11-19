@@ -115,7 +115,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/main_container_bottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +138,6 @@
                     android:background="@drawable/shape_rect_all_corner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
                     android:backgroundTint="@color/at_main_new_order_body"
                     android:elevation="5dp"
                     android:clickable="true"
@@ -149,7 +148,7 @@
                     android:layout_marginStart="20dp"
                     app:layout_constraintStart_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/main_list_of_orders"
-                    android:layout_marginTop="20dp">
+                    >
 
                 <TextView
                         android:textSize="24sp"
@@ -194,62 +193,66 @@
 
             <View
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="0dp"
                     android:id="@+id/main_line_order_separator"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/main_bt_new_order_body"/>
 
-            <LinearLayout
-                    android:orientation="vertical"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_tv_total_price_body"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_deep"
+                    android:gravity="start|center|top"
+                    android:id="@+id/main_tv_total_price_top"
+                    android:background="@drawable/shape_rect_top_corner"
+                    android:paddingTop="6dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/main_tv_total_price_body"
-                    app:layout_constraintTop_toBottomOf="@id/main_line_order_separator"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    android:text="@string/at_main_total_price"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:elevation="3dp"
+                    android:backgroundTint="@color/at_main_total_price_background"
+                    tools:ignore="TextContrastCheck"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="20dp"/>
 
-                <TextView
-                        android:textSize="16sp"
-                        android:textColor="@color/grey_deep"
-                        android:gravity="start|center|top"
-                        android:id="@+id/main_tv_total_price_top"
-                        android:background="@drawable/shape_rect_top_corner"
-                        android:paddingTop="6dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/at_main_total_price"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:elevation="2dp"
-                        android:backgroundTint="@color/at_main_total_price_background"
-                        tools:ignore="TextContrastCheck"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        />
-
-                <TextView
-                        android:textSize="20sp"
-                        android:textColor="@color/magenta"
-                        android:gravity="end|bottom|center"
-                        android:id="@+id/main_tv_total_price_bottom"
-                        android:background="@drawable/shape_rect_bottom_corner"
-                        android:paddingBottom="12dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/krw"
-                        android:paddingStart="14dp"
-                        android:paddingEnd="14dp"
-                        android:elevation="2dp"
-                        android:backgroundTint="@color/at_main_total_price_background"
-                        tools:ignore="TextContrastCheck"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        tools:layout_marginBottom="20dp"/>
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                    android:textSize="20sp"
+                    android:textColor="@color/magenta"
+                    android:gravity="end|bottom|center"
+                    android:id="@+id/main_tv_total_price_bottom"
+                    android:background="@drawable/shape_rect_bottom_corner"
+                    android:paddingBottom="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/krw"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:elevation="3dp"
+                    android:backgroundTint="@color/at_main_total_price_background"
+                    tools:ignore="TextContrastCheck"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    tools:layout_marginBottom="20dp"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
