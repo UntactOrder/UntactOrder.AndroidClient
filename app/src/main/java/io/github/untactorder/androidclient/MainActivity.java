@@ -211,14 +211,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void fitOrderSeparatorSize() {
-        int heightWithoutStatus = getResources().getDisplayMetrics().heightPixels;
-        int naviId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        int naviBar = (naviId > 0) ? getResources().getDimensionPixelSize(naviId) : 0;
-        int height = heightWithoutStatus - naviBar;
-
         View container = findViewById(R.id.main_container_bottom);
         View separator = findViewById(R.id.main_line_order_separator);
         View total = findViewById(R.id.main_tv_total_price_body);
+        int height = getResources().getDisplayMetrics().heightPixels;
         int top = container.getTop() + separator.getTop();  // getTop()은 부모와의 상대 거리
         println("top: "+top);
         ViewGroup.LayoutParams params = separator.getLayoutParams();
