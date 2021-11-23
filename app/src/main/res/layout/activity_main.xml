@@ -38,16 +38,16 @@
 
             <TextView
                     android:textSize="28sp"
-                    android:typeface="serif"
+                    android:typeface="monospace"
                     android:id="@+id/main_tv_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="010-0000-0000"
                     android:fontFamily="sans-serif-light"
                     tools:ignore="HardcodedText,TextContrastCheck"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:textColor="@color/at_main_new_order_plus_btn"/>
+                    android:textColor="@color/at_main_new_order_plus_btn"
+                    android:text="010-0000-0000"/>
 
             <TextView
                     android:textSize="14sp"
@@ -131,9 +131,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"/>
+                    android:layout_marginTop="10dp"
+                    android:overScrollMode="never"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/main_bt_new_order_body"
@@ -150,7 +151,7 @@
                     android:layout_marginStart="20dp"
                     app:layout_constraintStart_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/main_list_of_orders"
-                    >
+                    android:layout_marginTop="10dp">
 
                 <TextView
                         android:textSize="24sp"
