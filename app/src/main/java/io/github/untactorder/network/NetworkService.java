@@ -29,26 +29,6 @@ public class NetworkService extends Service implements ApplicationLayer {
     protected ServerInfo getServerInfo() {
         return new ServerInfo(ip, port);
     }
-
-    //practice
-    public void main(String[] args) {
-        try {
-            send("d");
-            connectToServer(ip, port);
-            recv();
-        } catch (Exception e) {}
-        JSONObject jsonData = new JSONObject();
-        try {
-            jsonData.put("password", "123");
-            jsonData.put("id", "123");
-        } catch (JSONException e) {
-            System.out.println("Wrong data");
-        }
-        String data = jsonData.toString();
-
-    }
-    //
-
 }
 
 class ServerInfo {

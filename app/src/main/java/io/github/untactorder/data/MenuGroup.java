@@ -2,6 +2,19 @@ package io.github.untactorder.data;
 
 import java.util.ArrayList;
 
+/**
+ * 매뉴그룹 include 메뉴리스트
+ * @author 유채민
+ */
 public class MenuGroup<T extends MenuList> extends ArrayList<MenuList> {
+    ArrayList<MenuList> menuGroup;
+
+    public void addMenuList(MenuList menuList) {
+        menuList.add(menuList);
+    }
+
+    public void getMenu(int i) {
+        menuGroup.get(i);
+    }
 
 }
