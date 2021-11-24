@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,13 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
+import io.github.untactorder.data.Order;
+import io.github.untactorder.data.OrderAdapter;
 
 import java.util.Objects;
 
@@ -43,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     String userIMEI, userPhoneNumber;
     ActivityResultLauncher<Intent> qrScanActivityLauncher, passwordInputActivityLauncher;
+    GridLayoutManager layoutManager = null; int gridSpan = 1; boolean adaptedGridSpan = true;
+    OrderAdapter orderAdapter = new OrderAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 텍스트 뷰 marquee효과는 포커싱이 되어야 흐르게 되어 있으므로 항상 선택된 것 처럼 만들기
         findViewById(R.id.main_tv_total_price_bottom).setSelected(true);
+        findViewById(R.id.main_bt_guide_top).setSelected(true);
 
         // seperator 크기 조정 (람다식으로 하면 리스너 삭제가 제대로 안되네? 흠....)
         View total = findViewById(R.id.main_tv_total_price_body);
@@ -134,6 +143,17 @@ public class MainActivity extends AppCompatActivity {
                 removeOnGlobalLayoutListener(total.getViewTreeObserver(), this);
             }
         });
+
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        gridSpan = (int) Math.max(displayMetrics.widthPixels/(double) displayMetrics.heightPixels+0.5, 1);
+        layoutManager = new GridLayoutManager(this, 1);
+        RecyclerView orderListView = findViewById(R.id.main_list_of_orders);
+        orderListView.setLayoutManager(layoutManager);
+        orderListView.setAdapter(orderAdapter);
+        orderListView.setEnabled(false);
+
+        adaptedGridSpan = false;
+        orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
     }
 
     private static void removeOnGlobalLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
@@ -210,14 +230,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void fitOrderSeparatorSize() {
-        int heightWithoutStatus = getResources().getDisplayMetrics().heightPixels;
-        int naviId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        int naviBar = (naviId > 0) ? getResources().getDimensionPixelSize(naviId) : 0;
-        int height = heightWithoutStatus - naviBar;
-
         View container = findViewById(R.id.main_container_bottom);
         View separator = findViewById(R.id.main_line_order_separator);
         View total = findViewById(R.id.main_tv_total_price_body);
+        int height = getResources().getDisplayMetrics().heightPixels;
         int top = container.getTop() + separator.getTop();  // getTop()은 부모와의 상대 거리
         println("top: "+top);
         ViewGroup.LayoutParams params = separator.getLayoutParams();
@@ -301,18 +317,33 @@ public class MainActivity extends AppCompatActivity {
 
     protected void setNewOrderButtonEnabled(int status) {
         View container = findViewById(R.id.main_container_bottom);
+        View list = findViewById(R.id.main_list_of_orders);
         View body = findViewById(R.id.main_bt_new_order_body);
         View plus = findViewById(R.id.main_bt_new_order_plus);
         View msg = findViewById(R.id.main_bt_new_order_msg);
         boolean enable = status == View.VISIBLE;
         container.setEnabled(enable); body.setEnabled(enable); plus.setEnabled(enable); msg.setEnabled(enable);
-        container.setVisibility(status); body.setVisibility(status); plus.setVisibility(status); msg.setVisibility(status);
+        container.setVisibility(status); body.setVisibility(status); plus.setVisibility(status); msg.setVisibility(status); list.setVisibility(status);
     }
 
     public void onNewOrderButtonClicked(View v) {
         println("New Order");
         Intent qrIntent = new Intent(this, QrScanActivity.class);
         qrScanActivityLauncher.launch(qrIntent);
+
+        if (__DEBUG) {
+            orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
+            if (orderAdapter.getItemCount() == 1) {
+                layoutManager.setSpanCount(1);
+                adaptedGridSpan = false;
+            } else if (!adaptedGridSpan) {
+                layoutManager.setSpanCount(gridSpan);
+                adaptedGridSpan = true;
+            }
+            //https://todaycode.tistory.com/55
+            orderAdapter.notifyDataSetChanged(); // 사용하지 말자
+            fitOrderSeparatorSize();
+        }
     }
 
     public void runPasswordActivity() {
