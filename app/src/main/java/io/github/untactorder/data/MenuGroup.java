@@ -7,14 +7,4 @@ import java.util.ArrayList;
  * @author 유채민
  */
 public class MenuGroup<T extends MenuList> extends ArrayList<MenuList> {
-    ArrayList<MenuList> menuGroup;
-
-    public void addMenuList(MenuList menuList) {
-        menuList.add(menuList);
-    }
-
-    public void getMenu(int i) {
-        menuGroup.get(i);
-    }
-
 }

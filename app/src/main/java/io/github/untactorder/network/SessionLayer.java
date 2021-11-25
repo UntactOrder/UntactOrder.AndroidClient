@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets;
 public interface SessionLayer {
     Socket clientSocket = new Socket();
 
-    default void connectToServer(String ip, Integer port) {
+    default void connect(String ip, Integer port) {
         if (ip != null && port != null) {
             try{
                 System.out.println("<client> connecting to: "+ip+":"+port);
@@ -47,11 +47,9 @@ public interface SessionLayer {
         while (input.available() == 0);
         byte[] byteArray = new byte[input.available()];
         int size = input.read(byteArray);
-
         if (size == -1) {
             throw new IOException("Error: recv() error! (wrong byte array size)");
         }
-
         String recvmsg = new String(byteArray, 0, size, StandardCharsets.UTF_8); // JSON -> String
         System.out.println("receive: "+ recvmsg);
         return recvmsg;

@@ -2,7 +2,6 @@ package io.github.untactorder.network;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 
 /**
@@ -23,10 +22,10 @@ import java.io.IOException;
  * send to server : {"method": "get", "uri": "/data/menu"}
  * recv : respond = {"requested": {"method": "get","uri": "/data/menu"},
  *                   "respond": "{"메인": {"0": {"name": "봉골레 파스타", "price": "12000", "pinned":"true"},
- *                                        "1": {"name": "새우 베이컨 필라프", "price": "13500", "pinned":"true"}
- *                                       }
- *                              }"
- *                  }
+ *                                      }
+ *  *                              }"
+ *  *                                             "1": {"name": "새우 베이컨 필라프", "price": "13500", "pinned":"true"}
+ *              }
  * -> 고른메뉴 보내기(서버로)
  * send to server : {"method": "put", "uri": "new_order", "value": {"메인": {"0": "2", "1": "1", "2": "1"},
  *                                                                  "사이드": {"0": "2", "1": "1", "2": "1"}
@@ -39,18 +38,20 @@ import java.io.IOException;
  */
 public interface ApplicationLayer extends PresentationLayer {
 
-    String tableName = "1"; //임시 tableName
-    default boolean login(JSONObject jsonObject) {
-        //로그인요청
-        sendToServer(jsonObject);
+    default boolean signin(String tableName) {
         try {
+            get(tableName);
             String data = recv();
+
+        } catch (IOException e) {}
+        try {
+
             try{
-                JSONObject json = new JSONObject(data);
+
                 String respond = (String)json.get("respond");
-                if(respond.equals("ok")) {
+                if (respond.equals("ok")) {
                     return true;
-                }else if(respond.equals("none")) {
+                } else if (respond.equals("none")) {
                     return false;
                 }
             } catch (JSONException e) {}
@@ -59,7 +60,7 @@ public interface ApplicationLayer extends PresentationLayer {
     }
 
     default boolean setPassword(JSONObject jsonObject) {
-        sendToServer(jsonObject);
+        //sendToServer(jsonObject);
         try {
             String data = recv();
             try{
@@ -76,7 +77,7 @@ public interface ApplicationLayer extends PresentationLayer {
     }
 
     default String send_recvMenu(JSONObject jsonObject) {
-        sendToServer(jsonObject);
+        //sendToServer(jsonObject);
         try {
             String data = recv();
             try{
@@ -89,7 +90,7 @@ public interface ApplicationLayer extends PresentationLayer {
     }
 
     default String send_recvSelectMenu(JSONObject jsonObject) {
-        sendToServer(jsonObject);
+        //sendToServer(jsonObject);
         try {
             String data = recv();
             try{
@@ -103,13 +104,6 @@ public interface ApplicationLayer extends PresentationLayer {
         return null;
     }
 
-    default void sendToServer(JSONObject jsonObject) {
-        String data = jsonObject.toString();
-        try {
-            send(data);
-            System.out.println("Complete Send!");
-        } catch (IOException e) {System.out.println("ERROR");}
-    }
     /*
     default JSONObject recvFromServer() {
         try {
@@ -121,7 +115,6 @@ public interface ApplicationLayer extends PresentationLayer {
             } catch (IOException e) {}
         } catch (JSONException e) {}
     }
-
      */
 
 }

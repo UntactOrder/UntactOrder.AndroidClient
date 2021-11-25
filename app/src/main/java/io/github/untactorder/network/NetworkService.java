@@ -22,29 +22,13 @@ public class NetworkService extends Service implements ApplicationLayer {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    protected void setServerInfo(ServerInfo info) {
-        ip = info.getIp(); port = info.getPort();
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if(intent == null) {
+            return Service.START_STICKY;
+        } else {
+
+        }
+        return super.onStartCommand(intent, flags, startId);
     }
 
-    protected ServerInfo getServerInfo() {
-        return new ServerInfo(ip, port);
-    }
-}
-
-class ServerInfo {
-    private String ip;
-    private Integer port;
-
-    ServerInfo(String ip, Integer port) {
-        this.ip = ip;
-        this.port = port;
-    }
-
-    String getIp() {
-        return this.ip;
-    }
-
-    Integer getPort() {
-        return this.port;
-    }
 }

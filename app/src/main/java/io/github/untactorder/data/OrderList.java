@@ -7,13 +7,4 @@ import java.util.ArrayList;
  * @author 유채민
  */
 public class OrderList<T extends Order> extends ArrayList<Order> {
-    ArrayList<Order> orderList;
-    /*
-    OrderList(Order order) {
-        orderList.add(order);
-    }
-     */
-    public void addOrderList(Order order) {
-        orderList.add(order);
-    }
 }

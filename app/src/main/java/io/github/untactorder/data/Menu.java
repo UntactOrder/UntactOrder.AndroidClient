@@ -5,14 +5,19 @@ package io.github.untactorder.data;
  * @author 유채민
  */
 public class Menu {
-    String menuName;
-    int menuPrice;
-    boolean pinned = true;
+    final String menuName;
+    final int price;
 
-    Menu(String name, int menuPrice, boolean pinned) {
+    Menu(String name, int price) {
         this.menuName = name;
-        this.menuPrice = menuPrice;
-        this.pinned = pinned;
+        this.price = price;
     }
+     public String getMenuName() {
+        return this.menuName;
+     }
+
+     public String getPrice() {
+        return Integer.toString(this.price);
+     }
 
 }
