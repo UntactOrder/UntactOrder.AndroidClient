@@ -40,7 +40,6 @@ import java.io.IOException;
  */
 public interface ApplicationLayer extends PresentationLayer {
 
-    default boolean signin(String tableName) {
     default String tableCheck(String tableName) {
         connect("127.0.0.1",51103);
         try {
