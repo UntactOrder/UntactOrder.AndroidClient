@@ -42,6 +42,6 @@ dependencies {
 
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.36'  // 유심 관련 라이브러리
     implementation 'com.yanzhenjie:permission:2.0.3'  // 권한 관련 라이브러리 (jcenter())
-    implementation 'com.journeyapps:zxing-android-embedded:4.0.0'  // qr 관련 라이브러리
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'  // qr 관련 라이브러리
     implementation 'com.google.zxing:core:3.2.1'  // qr 관련 라이브러리
 }

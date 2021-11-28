@@ -1,4 +1,4 @@
-package io.github.untactorder.androidclient.order.order;
+package io.github.untactorder.data;
 
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import io.github.untactorder.androidclient.R;
 import java.util.ArrayList;
 
 
-public class Categori_Adapter extends RecyclerView.Adapter<Categori_Adapter.ViewHolder> implements OnCategoriClickListener{
+public class Categori_Adapter extends RecyclerView.Adapter<Categori_Adapter.ViewHolder> implements OnCategoriClickListener {
 
     ArrayList<Categori> items = new ArrayList<>();
 

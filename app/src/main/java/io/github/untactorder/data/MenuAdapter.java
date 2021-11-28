@@ -1,4 +1,4 @@
-package io.github.untactorder.androidclient.order.order;
+package io.github.untactorder.data;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,7 @@ import io.github.untactorder.androidclient.R;
 import java.util.ArrayList;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> implements OnMenuItemClickListener {
+
     ArrayList<Menu> items = new ArrayList<>();
 
     OnMenuItemClickListener listener;
@@ -56,7 +57,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
         }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView menuname;
         TextView menuprice;
         TextView quantity;
@@ -86,7 +87,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
             menuname.setText(item.getMenu());
             menuprice.setText(item.getPrice());
         }
-
     }
 
 

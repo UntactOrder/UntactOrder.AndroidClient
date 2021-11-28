@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     String userIMEI, userPhoneNumber;
-    ActivityResultLauncher<Intent> qrScanActivityLauncher, passwordInputActivityLauncher;
+    ActivityResultLauncher<Intent> qrScanActivityLauncher, passwordInputActivityLauncher, menuSelectActivityLauncher;
     GridLayoutManager layoutManager = null; int gridSpan = 1; boolean adaptedGridSpan = true;
     OrderAdapter orderAdapter = new OrderAdapter();
 
@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                             if (pw != null) {
                                 println("Password: " + pw);
                             }
+                            runMenuSelectActivity();
                             break;
                         case RESULT_CANCELED:
                             println("Canceled");
@@ -127,6 +128,16 @@ public class MainActivity extends AppCompatActivity {
                             println("Incorrect password!");
                             break;
                     }
+                }
+        );
+
+        menuSelectActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == RESULT_OK){
+                        // 주문대기창으로 이동
+                    }
+
                 }
         );
 
@@ -355,5 +366,11 @@ public class MainActivity extends AppCompatActivity {
         passwordIntent.putExtra("signup_password", "123456");
         println("run Password Activity");
         passwordInputActivityLauncher.launch(passwordIntent);
+    }
+
+    private void runMenuSelectActivity() {
+        Intent menuselectIntent = new Intent(this,MenuSelectActivity.class);
+        menuSelectActivityLauncher.launch(menuselectIntent);
+
     }
 }

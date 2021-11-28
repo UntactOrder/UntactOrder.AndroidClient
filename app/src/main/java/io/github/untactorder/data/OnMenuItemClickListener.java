@@ -1,4 +1,4 @@
-package io.github.untactorder.androidclient.order.order;
+package io.github.untactorder.data;
 
 import android.view.View;
 
