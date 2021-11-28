@@ -25,4 +25,12 @@
     <string name="at_qrsc_guide_msg">Please put the QR code in the scan box!</string>
     <string name="at_qrsc_cancel_msg">QR scanner activity  is canceled.</string>
     <string name="at_qrsc_invalid_msg">Invalid QR code!!!</string>
+    <string name="at_categori_item_plus">+</string>
+    <string name="at_categori_item_zero">0</string>
+    <string name="at_categori_item_minus">-</string>
+    <string name="at_option_select_title">Select Menu Option</string>
+    <string name="at_option_select_menuname">menuname</string>
+    <string name="at_option_select_price">price</string>
+    <string name="at_option_select_quantity">quantity</string>
+    <string name="at_option_select_done">done</string>
 </resources>
