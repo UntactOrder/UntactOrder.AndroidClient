@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import io.github.untactorder.androidclient.R;
 import org.jetbrains.annotations.NotNull;
-
+/*
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
     protected final MenuList<Menu> items = new MenuList<>();
 
@@ -31,7 +31,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     static class MenuViewHolder extends RecyclerView.ViewHolder {
         protected TextView menuName;
         protected TextView price;
-
         public MenuViewHolder(View itemView) {
             super(itemView);
 
@@ -44,5 +43,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             price = setText(Integer.toString(menu.price));
         }
 
+
     }
+
 }
+
+ */

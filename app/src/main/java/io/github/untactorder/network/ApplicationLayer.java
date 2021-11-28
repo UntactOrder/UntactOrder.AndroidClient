@@ -1,5 +1,7 @@
 package io.github.untactorder.network;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -42,79 +44,62 @@ public interface ApplicationLayer extends PresentationLayer {
         try {
             get(tableName);
             String data = recv();
-
-        } catch (IOException e) {}
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(data);
+            String respond = element.getAsJsonObject().get("respond").getAsString();
+            if (respond.equals("ok")) {
+                return true;
+            } else if (respond.equals("none")) {
+                return false;
+            } else {
+                return false;
+            }
+        } catch (IOException e) { return false;}
+    }
+    //uri = sign_up/sign_in value = {"id": TABLE_NAME, "pw": PASSWORD}
+    default boolean setPassword(String uri, String value) {
         try {
-
-            try{
-
-                String respond = (String)json.get("respond");
-                if (respond.equals("ok")) {
-                    return true;
-                } else if (respond.equals("none")) {
-                    return false;
-                }
-            } catch (JSONException e) {}
-        } catch (IOException e) {}
-        return false;
+            run(uri,value);
+            String data = recv();
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(data);
+            String respond = element.getAsJsonObject().get("respond").getAsString();
+            if (respond.equals("ok")) {
+                return true;
+            } else if (respond.equals("wrong_pw")) {
+                return false;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {return false;}
     }
 
-    default boolean setPassword(JSONObject jsonObject) {
-        //sendToServer(jsonObject);
+    default String send_recvMenu() {
         try {
+            get("/data/menu");
             String data = recv();
-            try{
-                JSONObject json = new JSONObject(data);
-                String respond = (String)json.get("respond");
-                if(respond.equals("ok")) {
-                    return true;
-                }else if(respond.equals("wrong_pw")) {
-                    return false;
-                }
-            } catch (JSONException e) {}
-        } catch (IOException e) {}
-        return false;
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(data);
+            String respond = element.getAsJsonObject().get("respond").getAsString();
+            return respond;
+        } catch (IOException e) {return null;}
     }
 
-    default String send_recvMenu(JSONObject jsonObject) {
-        //sendToServer(jsonObject);
+    default String send_recvSelectMenu(String value) {
         try {
+            put("new_order",value);
             String data = recv();
-            try{
-                JSONObject json = new JSONObject(data);
-                String respond = (String)json.get("respond");
-                return respond;
-            } catch (JSONException e) {}
-        } catch (IOException e) {}
-        return null;
-    }
-
-    default String send_recvSelectMenu(JSONObject jsonObject) {
-        //sendToServer(jsonObject);
-        try {
-            String data = recv();
-            try{
-                JSONObject json = new JSONObject(data);
-                String respond = (String)json.get("requested");
-                JSONObject json2 = new JSONObject(respond);
-                String date = (String)json2.get("value");
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(data);
+            String respond = element.getAsJsonObject().get("respond").getAsString();
+            if (respond.equals("success")) {
+                String request = element.getAsJsonObject().get("request").getAsString();
+                JsonElement parse = parser.parse(request);
+                String date = element.getAsJsonObject().get("value").getAsString();
                 return date;
-            } catch (JSONException e) {}
-        } catch (IOException e) {}
-        return null;
+            } else {
+                return null;
+            }
+        } catch (IOException e) {return null;}
     }
-
-    /*
-    default JSONObject recvFromServer() {
-        try {
-            try {
-                String data = recv();
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("requested",data);
-                jsonObject.put("respond",data);
-            } catch (IOException e) {}
-        } catch (JSONException e) {}
-    }
-     */
-
 }

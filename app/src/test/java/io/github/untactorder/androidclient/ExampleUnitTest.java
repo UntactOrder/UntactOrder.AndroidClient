@@ -1,5 +1,7 @@
 package io.github.untactorder.androidclient;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -25,10 +27,17 @@ public class ExampleUnitTest extends NetworkService {
         map.put("pw","password");
         Gson gson = new Gson();
         String json = gson.toJson(map);
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(json);
+        String id = element.getAsJsonObject().get("id").getAsString();
+        System.out.println("id = "+id);
         System.out.println(json);
 
         System.out.println(makeJson("run","signin",json));
-
+        String data = makeJson("run","signin",json);
+        JsonElement parse = parser.parse(data);
+        String value = parse.getAsJsonObject().get("value").getAsString();
+        System.out.println("value = "+value);
         //assertEquals(4, 2 + 2);
         /*
         String password = "123456";
