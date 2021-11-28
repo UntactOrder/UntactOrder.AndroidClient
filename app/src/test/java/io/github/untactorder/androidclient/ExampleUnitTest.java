@@ -21,7 +21,15 @@ public class ExampleUnitTest extends NetworkService {
 
     @Test
     public void addition_isCorrect() {
-
+        String check = tableCheck("1");
+        System.out.println(check);
+        String sign = sign_up("{\"id\": 1, \"pw\": \"123456\"}");
+        System.out.println(sign);
+        String srm = send_recvMenu();
+        System.out.println(srm);
+        String date = send_recvSelectMenu("{\"0\": \"2\", \"1\": \"1\", \"2\": \"1\"}");
+        System.out.println(date);
+        /*
         Map<String,String> map = new HashMap<String,String>();
         map.put("id","tableName");
         map.put("pw","password");

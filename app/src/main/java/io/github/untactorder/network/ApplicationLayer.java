@@ -41,6 +41,52 @@ import java.io.IOException;
 public interface ApplicationLayer extends PresentationLayer {
 
     default boolean signin(String tableName) {
+    default String tableCheck(String tableName) {
+        connect("127.0.0.1",51103);
+        try {
+            get("/customer/"+tableName);
+            String data = recv();
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(data);
+            String respond = element.getAsJsonObject().get("respond").getAsString();
+            return respond;
+        } catch (IOException e) {}
+        return null;
+    }
+
+    default String sign_up(String value) {
+        try {
+            run("sign_up", value);
+            String data = recv();
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(data);
+            String respond = element.getAsJsonObject().get("respond").getAsString();
+            if (respond.equals("ok")) {
+                return "ok";
+            } else{
+                return "wrong password";
+            }
+        } catch (IOException e) {}
+        return "Exception";
+    }
+
+    default String sign_in(String value) {
+        try {
+            run("sign_in", value);
+            String data = recv();
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(data);
+            String respond = element.getAsJsonObject().get("respond").getAsString();
+            if (respond.equals("ok")) {
+                return "ok";
+            } else{
+                return "wrong password";
+            }
+        } catch (IOException e) {}
+        return "Exception";
+    }
+    /*
+    default boolean sign_in(String tableName) {
         try {
             get(tableName);
             String data = recv();
@@ -56,6 +102,8 @@ public interface ApplicationLayer extends PresentationLayer {
             }
         } catch (IOException e) { return false;}
     }
+
+     */
     //uri = sign_up/sign_in value = {"id": TABLE_NAME, "pw": PASSWORD}
     default boolean setPassword(String uri, String value) {
         try {
