@@ -24,6 +24,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.github.untactorder.data.MenuGroupAdapter;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 import io.github.untactorder.data.Customer;
@@ -133,13 +134,16 @@ public class MainActivity extends AppCompatActivity {
                                         switch (NetworkService.RESULT_ARRAY.get(0)) {
                                             case "ok":
                                                 println("sign up success");
-                                                break pwinaclc_loop;
+
                                                 runMenuSelectActivity();
+                                                break pwinaclc_loop;
                                             default:
                                                 println("sign up failed");
                                                 Customer.setPw(null);
                                                 break pwinaclc_loop;
                                         }
+                                    } else {
+                                        Thread.yield();
                                     }
                                 }
 
@@ -363,6 +367,7 @@ public class MainActivity extends AppCompatActivity {
                 Customer.setIp(list[0]);
                 Customer.setPort(port);
                 Customer.setId(table);
+                return true;
             } else {
                 throw new Exception();
             }
