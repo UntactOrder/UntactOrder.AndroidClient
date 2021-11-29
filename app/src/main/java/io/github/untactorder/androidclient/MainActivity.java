@@ -22,15 +22,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.runtime.Permission;
-import io.github.untactorder.data.MenuAdapter;
 import io.github.untactorder.data.MenuGroupAdapter;
 import io.github.untactorder.data.Order;
 import io.github.untactorder.data.OrderAdapter;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static io.github.untactorder.androidclient.PasswordInputActivity.RESULT_INCORRECT;
@@ -140,8 +137,9 @@ public class MainActivity extends AppCompatActivity {
         menuSelectActivityLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if(result.getResultCode() == RESULT_OK){
-                        // 주문대기창으로 이동
+                    if (result != null && result.getResultCode() == RESULT_OK) {
+                        Map orderMap = result.getData().getParcelableExtra("orderMap");
+                        println("" + orderMap);
                     }
 
                 }

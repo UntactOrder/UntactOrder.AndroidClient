@@ -2,6 +2,8 @@ package io.github.untactorder.androidclient;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,10 +28,11 @@ public class MenuSelectActivity extends AppCompatActivity {
         menuListView.setAdapter(new MenuAdapter());
         menuGroupView.setAdapter(new MenuGroupAdapter());
     }
-
-    public void finish() {
-        // 메인으로 인텐트 보내기
-        // 보낼때 인텐트에다가 map을 parceable로 바꿔서 보내기
+    public void onProceedOrderButtonClickde(View v) {
         Map<String, String> orderMap = MenuGroupAdapter.makeOrderMap();
+        Intent menuIntent = new Intent(this,MainActivity.class);
+        menuIntent.putExtra("orderMap", (Parcelable) orderMap);
+        startActivity(menuIntent);
+        super.finish();
     }
 }
