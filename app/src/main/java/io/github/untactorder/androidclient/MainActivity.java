@@ -22,10 +22,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.github.untactorder.data.MenuGroupAdapter;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
+import io.github.untactorder.data.Customer;
 import io.github.untactorder.data.Order;
 import io.github.untactorder.data.OrderAdapter;
+import io.github.untactorder.network.NetworkService;
+import io.github.untactorder.network.NetworkService.RequestType;
 
 import java.util.Map;
 import java.util.Objects;
@@ -100,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     if (result.getResultCode() == RESULT_OK) {
                         String qrData = Objects.requireNonNull(result.getData()).getStringExtra("value");
                         println(qrData);
-                        if (true /*QR 검사*/) {
+                        if (qrCodeParser(qrData)) {
                             runPasswordActivity();
                         } else {
                             println(TAG, getString(R.string.at_qrsc_invalid_msg), true);
@@ -120,8 +126,31 @@ public class MainActivity extends AppCompatActivity {
                             String pw = Objects.requireNonNull(result.getData()).getStringExtra("password");
                             if (pw != null) {
                                 println("Password: " + pw);
+
+                                Intent signUpIntent = new Intent(this, NetworkService.class);
+                                signUpIntent.putExtra("command", RequestType.SignUp);
+                                println("run Network Service - SignUp");
+                                startActivity(signUpIntent);
+                                pwinaclc_loop:
+                                while (true) {
+                                    if (NetworkService.RESULT_ARRAY.size() > 0) {
+                                        switch (NetworkService.RESULT_ARRAY.get(0)) {
+                                            case "ok":
+                                                println("sign up success");
+
+                                                runMenuSelectActivity();
+                                                break pwinaclc_loop;
+                                            default:
+                                                println("sign up failed");
+                                                Customer.setPw(null);
+                                                break pwinaclc_loop;
+                                        }
+                                    } else {
+                                        Thread.yield();
+                                    }
+                                }
+
                             }
-                            runMenuSelectActivity();
                             break;
                         case RESULT_CANCELED:
                             println("Canceled");
@@ -138,10 +167,9 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result != null && result.getResultCode() == RESULT_OK) {
-                        Map orderMap = result.getData().getParcelableExtra("orderMap");
+                        Map<String, String> orderMap = Objects.requireNonNull(result.getData()).getParcelableExtra("orderMap");
                         println("" + orderMap);
                     }
-
                 }
         );
 
