@@ -32,6 +32,7 @@ import io.github.untactorder.data.OrderAdapter;
 import io.github.untactorder.network.NetworkService;
 import io.github.untactorder.network.NetworkService.RequestType;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static io.github.untactorder.androidclient.PasswordInputActivity.RESULT_INCORRECT;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     String userIMEI, userPhoneNumber;
-    ActivityResultLauncher<Intent> qrScanActivityLauncher, passwordInputActivityLauncher;
+    ActivityResultLauncher<Intent> qrScanActivityLauncher, passwordInputActivityLauncher, menuSelectActivityLauncher;
     GridLayoutManager layoutManager = null; int gridSpan = 1; boolean adaptedGridSpan = true;
     OrderAdapter orderAdapter = new OrderAdapter();
 
@@ -133,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                                             case "ok":
                                                 println("sign up success");
                                                 break pwinaclc_loop;
+                                                runMenuSelectActivity();
                                             default:
                                                 println("sign up failed");
                                                 Customer.setPw(null);
@@ -149,6 +151,17 @@ public class MainActivity extends AppCompatActivity {
                         case RESULT_INCORRECT:
                             println("Incorrect password!");
                             break;
+                    }
+                }
+        );
+
+        // 메뉴 선택
+        menuSelectActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result != null && result.getResultCode() == RESULT_OK) {
+                        Map<String, String> orderMap = Objects.requireNonNull(result.getData()).getParcelableExtra("orderMap");
+                        println("" + orderMap);
                     }
                 }
         );
@@ -423,5 +436,11 @@ public class MainActivity extends AppCompatActivity {
         passwordIntent.putExtra("signup_password", "123456");
         println("run Password Activity");
         passwordInputActivityLauncher.launch(passwordIntent);
+    }
+
+    private void runMenuSelectActivity() {
+        Intent menuSelectIntent = new Intent(this, MenuSelectActivity.class);
+        println("run Menu Select Activity");
+        menuSelectActivityLauncher.launch(menuSelectIntent);
     }
 }
