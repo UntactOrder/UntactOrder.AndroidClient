@@ -2,9 +2,10 @@ package io.github.untactorder.network;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * <응용계층>
@@ -40,113 +41,46 @@ import java.io.IOException;
  */
 public interface ApplicationLayer extends PresentationLayer {
 
-    default String tableCheck(String tableName) {
-        connect("127.0.0.1",51103);
-        try {
-            get("/customer/"+tableName);
-            String data = recv();
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(data);
-            String respond = element.getAsJsonObject().get("respond").getAsString();
-            return respond;
-        } catch (IOException e) {}
-        return null;
+    default String tableCheck(int tableName, String ip, int port) throws IOException {
+        connect(ip, port);
+
+        get("/customer/"+tableName);
+        return (String) get_respond().get("respond");
     }
 
-    default String sign_up(String value) {
-        try {
-            run("sign_up", value);
-            String data = recv();
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(data);
-            String respond = element.getAsJsonObject().get("respond").getAsString();
-            if (respond.equals("ok")) {
-                return "ok";
-            } else{
-                return "wrong password";
-            }
-        } catch (IOException e) {}
-        return "Exception";
+    default String signUp(int id, String pw) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id); map.put("pw", pw);
+        run("sign_up", map);
+        return (String) get_respond().get("respond");
     }
 
-    default String sign_in(String value) {
-        try {
-            run("sign_in", value);
-            String data = recv();
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(data);
-            String respond = element.getAsJsonObject().get("respond").getAsString();
-            if (respond.equals("ok")) {
-                return "ok";
-            } else{
-                return "wrong password";
-            }
-        } catch (IOException e) {}
-        return "Exception";
-    }
-    /*
-    default boolean sign_in(String tableName) {
-        try {
-            get(tableName);
-            String data = recv();
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(data);
-            String respond = element.getAsJsonObject().get("respond").getAsString();
-            if (respond.equals("ok")) {
-                return true;
-            } else if (respond.equals("none")) {
-                return false;
-            } else {
-                return false;
-            }
-        } catch (IOException e) { return false;}
+    default String signIn(int id, String pw) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id); map.put("pw", pw);
+        run("sign_in", map);
+        return (String) get_respond().get("respond");
     }
 
-     */
-    //uri = sign_up/sign_in value = {"id": TABLE_NAME, "pw": PASSWORD}
-    default boolean setPassword(String uri, String value) {
-        try {
-            run(uri,value);
-            String data = recv();
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(data);
-            String respond = element.getAsJsonObject().get("respond").getAsString();
-            if (respond.equals("ok")) {
-                return true;
-            } else if (respond.equals("wrong_pw")) {
-                return false;
-            } else {
-                return false;
-            }
-        } catch (IOException e) {return false;}
+    default String getMenuList() throws IOException {
+        get("/data/menu");
+        return (String) get_respond().get("respond");
     }
 
-    default String send_recvMenu() {
-        try {
-            get("/data/menu");
-            String data = recv();
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(data);
-            String respond = element.getAsJsonObject().get("respond").getAsString();
-            return respond;
-        } catch (IOException e) {return null;}
+    default String putNewOrder(Map<String, String> order) throws IOException {
+        put("new_order",order);
+
+        Map<String, Object> map = get_respond();
+        if (Objects.equals((String) map.get("respond"), "success")) {
+            Map<String, Object> req = (Map<String, Object>) map.get("requested");
+            return (String) req.get("value");
+        } else {
+            return null;
+        }
     }
 
-    default String send_recvSelectMenu(String value) {
-        try {
-            put("new_order",value);
-            String data = recv();
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(data);
-            String respond = element.getAsJsonObject().get("respond").getAsString();
-            if (respond.equals("success")) {
-                String request = element.getAsJsonObject().get("request").getAsString();
-                JsonElement parse = parser.parse(request);
-                String date = element.getAsJsonObject().get("value").getAsString();
-                return date;
-            } else {
-                return null;
-            }
-        } catch (IOException e) {return null;}
+    default String getOrderList(int tableName) throws IOException {
+        get("/customer/"+tableName+"/orderlist");
+        return (String) get_respond().get("respond");
     }
 }

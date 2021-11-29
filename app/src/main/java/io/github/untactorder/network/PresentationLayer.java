@@ -1,8 +1,8 @@
 package io.github.untactorder.network;
 
 import com.google.gson.Gson;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,8 +17,8 @@ import java.util.Map;
  */
 public interface PresentationLayer extends SessionLayer {
 
-    default String makeJson(String method, String uri, String value) {
-        Map<String, String> map = new HashMap<String, String>();
+    default String makeJson(String method, String uri, Object value) {
+        Map<String, Object> map = new HashMap<>();
         Gson gson = new Gson();
         if (method != null) {
             map.put("method", method);
@@ -30,26 +30,55 @@ public interface PresentationLayer extends SessionLayer {
         } else {
             throw new NullPointerException();
         }
-        if (value != null) map.put("value", value);
+        if (value != null) {
+            map.put("value", value);
+        }
 
-        String json = gson.toJson(map);
-        return json;
+        return gson.toJson(map);
     }
 
     default String makeJson(String method, String uri) {
         return makeJson(method, uri, null);
     }
 
+    default Map<String, Object> makeMap(String jsn) {
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(jsn);
+
+        Map<String, Object> map = new HashMap<>(), reqMap = new HashMap<>(), respMap = new HashMap<>();
+        map.put("requested", reqMap);
+
+        JsonElement request = element.getAsJsonObject().get("requested");
+        JsonElement respond = element.getAsJsonObject().get("respond");
+
+        String method = request.getAsJsonObject().get("method").getAsString();
+        reqMap.put("method", method);
+        String uri = request.getAsJsonObject().get("uri").getAsString();
+        reqMap.put("uri", uri);
+        if (!method.equals("get")) {
+            String value = request.getAsJsonObject().get("value").toString();
+            reqMap.put("requested", value);
+        }
+        /////
+        String resp = respond.getAsString();
+        map.put("respond", resp);
+        return map;
+    }
+
     default void get(String uri) throws IOException {
         send(makeJson("get", uri));
     }
 
-    default void put(String uri, String value) throws IOException {
+    default void put(String uri, Object value) throws IOException {
         send(makeJson("put", uri, value));
     }
 
-    default void run(String uri, String value) throws IOException {
+    default void run(String uri, Object value) throws IOException {
         send(makeJson("run", uri, value));
+    }
+
+    default Map<String, Object> get_respond() throws IOException {
+        return makeMap( recv());
     }
 
 }

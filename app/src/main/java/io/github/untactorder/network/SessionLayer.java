@@ -1,8 +1,5 @@
 package io.github.untactorder.network;
 
-import android.app.Service;
-import org.json.JSONObject;
-
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -20,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 public interface SessionLayer {
     Socket clientSocket = new Socket();
 
-    default void connect(String ip, Integer port) {
+    default void connect(String ip, Integer port) throws IOException {
         if (ip != null && port != null) {
             try{
                 System.out.println("<client> connecting to: "+ip+":"+port);
@@ -28,10 +25,14 @@ public interface SessionLayer {
                 System.out.println("<client> connected to server.");
             } catch (IOException e){
                 e.printStackTrace();
-                System.out.println("<client> connection failed.");
+                String msg = "<client> connection failed.";
+                System.out.println(msg);
+                throw new IOException(msg);
             }
         } else {
-            System.out.println("<client> server address is not composed.");
+            String msg = "<client> server address is not composed.";
+            System.out.println(msg);
+            throw new IOException(msg);
         }
     }
 
