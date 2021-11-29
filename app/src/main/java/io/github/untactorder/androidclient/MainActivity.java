@@ -26,9 +26,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
+import io.github.untactorder.data.Customer;
 import io.github.untactorder.data.Order;
 import io.github.untactorder.data.OrderAdapter;
 import io.github.untactorder.network.NetworkService;
+import io.github.untactorder.network.NetworkService.RequestType;
 
 import java.util.Objects;
 
@@ -119,6 +121,26 @@ public class MainActivity extends AppCompatActivity {
                             String pw = Objects.requireNonNull(result.getData()).getStringExtra("password");
                             if (pw != null) {
                                 println("Password: " + pw);
+
+                                Intent signUpIntent = new Intent(this, NetworkService.class);
+                                signUpIntent.putExtra("command", RequestType.SignUp);
+                                println("run Network Service - SignUp");
+                                startActivity(signUpIntent);
+                                pwinaclc_loop:
+                                while (true) {
+                                    if (NetworkService.RESULT_ARRAY.size() > 0) {
+                                        switch (NetworkService.RESULT_ARRAY.get(0)) {
+                                            case "ok":
+                                                println("sign up success");
+                                                break pwinaclc_loop;
+                                            default:
+                                                println("sign up failed");
+                                                Customer.setPw(null);
+                                                break pwinaclc_loop;
+                                        }
+                                    }
+                                }
+
                             }
                             break;
                         case RESULT_CANCELED:
@@ -325,9 +347,9 @@ public class MainActivity extends AppCompatActivity {
                 int port = Integer.parseInt(list[1]);
                 int table = Integer.parseInt(list[2]);
 
-                NetworkService.IP = list[0];
-                NetworkService.PORT = port;
-                NetworkService.TABLE_NAME = table;
+                Customer.setIp(list[0]);
+                Customer.setPort(port);
+                Customer.setId(table);
             } else {
                 throw new Exception();
             }
@@ -348,8 +370,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onNewOrderButtonClicked(View v) {
-        if (NetworkService.IP != null && NetworkService.PORT != null && NetworkService.TABLE_NAME != null) {
-            if (NetworkService.PASSWORD != null) {
+        if (Customer.getIp() != null && Customer.getPort() != null && Customer.getId() != null) {
+            if (Customer.getPw() != null) {
                 runMenuSelectActivity();
             } else {
                 runPasswordActivity();
@@ -376,8 +398,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void runPasswordActivity() {
+        Intent tableCheckIntent = new Intent(this, NetworkService.class);
+        tableCheckIntent.putExtra("command", RequestType.TableCheck);
+        println("run Network Service - TableCheck");
+        startActivity(tableCheckIntent);
+        while (Customer.getStatus() == null);
+        switch (Customer.getStatus()) {
+            case "multi":
+                println("multi user!!");
+                Customer.setStatus(null);
+                return;
+            case "null":
+                println("non existent table");
+                Customer.reset();
+                return;
+            case "disabled":
+                println("disabled table!!");
+                return;
+        }
+
         Intent passwordIntent = new Intent(this, PasswordInputActivity.class);
-        passwordIntent.putExtra("table_name", "복도측 10번");
         passwordIntent.putExtra("input_type", InputType.Confirm);
         passwordIntent.putExtra("repeat_count", 1);
         passwordIntent.putExtra("signup_password", "123456");

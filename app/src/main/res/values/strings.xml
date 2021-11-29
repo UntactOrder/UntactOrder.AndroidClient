@@ -3,7 +3,7 @@
     <string name="at_pwin_guide">Please input table password</string>
     <string name="at_pwin_del_all">Clear</string>
     <string name="at_pwin_del_one">Remove</string>
-    <string name="at_pwin_table_hint">Table Number</string>
+    <string name="at_pwin_table_name">"Table "</string>
     <string name="at_pwin_guide_new">Please input new table password</string>
     <string name="at_pwin_guide_confirm">Please confirm your password\nIf you enter it incorrectly 3 times, the registration password will be initialized</string>
     <string name="at_pwin_guide_retry">You entered the wrong password\nPlease enter it again</string>

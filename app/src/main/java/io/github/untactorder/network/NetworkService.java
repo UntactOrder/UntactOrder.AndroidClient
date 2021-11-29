@@ -4,11 +4,12 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
+import io.github.untactorder.data.Customer;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,11 +21,10 @@ import java.util.Map;
  */
 public class NetworkService extends Service implements ApplicationLayer {
     private static final String TAG = "NetworkService";
-    public static String IP;
-    public static Integer PORT;
-    public static Integer TABLE_NAME;
-    public static String PASSWORD;
 
+    public enum RequestType {TableCheck, SignUp, SignIn, GetMenuList, PutNewOrder, GetOrderList}
+
+    public static List<String> RESULT_ARRAY = Collections.synchronizedList(new ArrayList<>());
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -44,65 +44,73 @@ public class NetworkService extends Service implements ApplicationLayer {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "onStartCommand() 호출됨.");
-        if(intent == null) {
+        if (intent == null) {
             return Service.START_STICKY;
         } else {
-            Intent showintent = new Intent();
-            String command = intent.getStringExtra("command");
-            switch(command) {
-                case "tableCheck":  {
-                    tableName = Integer.parseInt(intent.getStringExtra("tableName"));
+            Intent resultIntent = new Intent();
+            RequestType command = (RequestType) intent.getSerializableExtra("command");
+            switch (command) {
+                case TableCheck: {
                     try {
-                        String check = tableCheck(tableName,ip,port);
-                        showintent.putExtra("tableCheck",check);
-                    } catch(IOException e) {}
+                        String check = tableCheck(
+                                Customer.getId(),Customer.getIp(),Customer.getPort());
+                        Customer.setStatus(check);
+                        //resultIntent.putExtra("tableCheck", check);
+                    } catch (IOException e) {
+
+                    }
                     break;
                 }
-                case "sign_up": {
-                    int id = Integer.parseInt(intent.getStringExtra("id"));
+                case SignUp: {
+                    try {
+                        String result = signUp(Customer.getId(),Customer.getPw());
+                        //resultIntent.putExtra("sign_up", result);
+                    } catch(IOException e) {
+
+                    }
+                    break;
+                }
+                case SignIn: {
                     String pw = intent.getStringExtra("pw");
-                    try{
-                        String signUp = signUp(id,pw);
-                        showintent.putExtra("sign_up",signUp);
-                    } catch(IOException e) {}
+                    try {
+                        String result = signIn(Customer.getId(),pw);
+                        //resultIntent.putExtra("sign_in", result);
+                    } catch (IOException e) {
+
+                    }
                     break;
                 }
-                case "sign_in": {
-                    int id = Integer.parseInt(intent.getStringExtra("id"));
-                    String pw = intent.getStringExtra("pw");
-                    try{
-                        String signIn = signIn(id,pw);
-                        showintent.putExtra("sign_in",signIn);
-                    } catch(IOException e) {}
-                    break;
-                }
-                case "getMenuList": {
-                    try{
+                case GetMenuList: {
+                    try {
                         String getMenuList = getMenuList();
-                        showintent.putExtra("getMenuList",getMenuList);
-                    } catch(IOException e) {}
+                        resultIntent.putExtra("getMenuList",getMenuList);
+                    } catch (IOException e) {
+
+                    }
                     break;
                 }
-                case "putNewOrder": {
+                case PutNewOrder: {
                     String order = intent.getStringExtra("order");
-                    try{
+                    try {
                         String putNewOrder = putNewOrder(order);
-                        showintent.putExtra("putNewOrder",putNewOrder);
-                    } catch(IOException e) {}
+                        resultIntent.putExtra("putNewOrder",putNewOrder);
+                    } catch (IOException e) {
+
+                    }
                     break;
                 }
-                case "getOrderList": {
-                    tableName = Integer.parseInt(intent.getStringExtra("tableName"));
-                    try{
-                        String getOrderList = getOrderList(tableName);
-                        showintent.putExtra("getOrderList",getOrderList);
-                    } catch(IOException e) {}
+                case GetOrderList: {
+                    try {
+                        Map<String, Object> getOrderList = getOrderList(Customer.getId());
+
+                    } catch (IOException e) {
+
+                    }
                     break;
                 }
             }
-            startActivity(showintent);
+            //startActivity(resultIntent);
         }
         return super.onStartCommand(intent, flags, startId);
     }
-
 }
