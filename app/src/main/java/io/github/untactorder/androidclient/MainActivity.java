@@ -212,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkCustomerInfo(ActivityResultLauncher<Intent> launcher) {
+        // https://m.blog.naver.com/ijoos/221006057960
         final String CONTAINER_NAME = "customer_info";
         final String PHONE_NUMBER = "phone_number";
         final String IMEI = "imei";

@@ -31,4 +31,10 @@
     <string name="at_qrsc_guide_msg">QR코드를 사각형 안에 넣어주세요.!</string>
     <string name="at_qrsc_cancel_msg">QR 코드 스캔을 취소하였습니다.</string>
     <string name="at_qrsc_invalid_msg">올바르지 않은 QR코드입니다!!!</string>
+    <string name="at_menu_select_title">주문 옵션 선택</string>
+    <string name="at_menu_select_menuname">메뉴명</string>
+    <string name="at_menu_select_price">가격</string>
+    <string name="at_menu_select_quantity">수량</string>
+    <string name="at_menu_select_done">완료하기</string>
+    <string name="at_menu_select_category_recm">추천</string>
 </resources>
