@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.github.untactorder.androidclient.R;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
-    protected final OrderList<Order> items = new OrderList<>();
+    protected final ArrayList<Order> items = new ArrayList<>();
 
     @NonNull
     @NotNull
