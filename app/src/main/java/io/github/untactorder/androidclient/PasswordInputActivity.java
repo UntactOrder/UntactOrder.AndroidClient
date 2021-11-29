@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
+import io.github.untactorder.data.Customer;
 
 enum InputType {SignUp, Confirm, SignIn, Retry}
 
@@ -52,8 +53,7 @@ public class PasswordInputActivity extends AppCompatActivity {
         }
 
         TextView tableName = findViewById(R.id.pwin_tv_table_num);
-        tableName.setText(intent.getStringExtra("table_name"));
-        println("테이블 이름 설정 완료");
+        tableName.setText(getResources().getString(R.string.at_pwin_table_name)+Customer.getId());
         TextView guide = findViewById(R.id.pwin_tv_guide_msg);
         inputType = (InputType) intent.getSerializableExtra("input_type");
         switch (inputType) {
