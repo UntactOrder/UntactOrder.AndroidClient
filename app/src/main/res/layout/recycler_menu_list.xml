@@ -42,7 +42,7 @@
                     android:layout_gravity="bottom"
                     android:textStyle="bold"/>
             <TextView
-                    android:text="@string/at_categori_item_minus"
+                    android:text="-"
                     android:layout_margin="6dp"
                     android:textColor="#FFFFFF"
                     android:gravity="center"
@@ -53,7 +53,6 @@
                     android:background="@drawable/shape_circle_plus_minus"
                     />
             <TextView
-                    android:text="@string/at_categori_item_zero"
                     android:layout_margin="6dp"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -64,7 +63,7 @@
                     android:id="@+id/menu_tx_quantity"
                     android:textStyle="bold"/>
             <TextView
-                    android:text="@string/at_categori_item_plus"
+                    android:text="+"
                     android:layout_gravity="center"
                     android:layout_margin="6dp"
                     android:textColor="#FFFFFF"

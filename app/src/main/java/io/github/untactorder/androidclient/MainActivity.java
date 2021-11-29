@@ -26,6 +26,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
+import io.github.untactorder.data.MenuAdapter;
+import io.github.untactorder.data.MenuGroupAdapter;
 import io.github.untactorder.data.Order;
 import io.github.untactorder.data.OrderAdapter;
 
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 메뉴 어뎁터에 추천 카테고리 이름 지정
+        MenuGroupAdapter.setRecmMenuCategoryName(getResources().getString(R.string.at_menu_select_category_recm));
 
         /*
         AndPermission.with(this)
@@ -131,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+        // 메뉴 선택
         menuSelectActivityLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -369,8 +375,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void runMenuSelectActivity() {
-        Intent menuselectIntent = new Intent(this,MenuSelectActivity.class);
-        menuSelectActivityLauncher.launch(menuselectIntent);
-
+        Intent menuSelectIntent = new Intent(this, MenuSelectActivity.class);
+        println("run Menu Select Activity");
+        menuSelectActivityLauncher.launch(menuSelectIntent);
     }
 }

@@ -1,28 +1,44 @@
 package io.github.untactorder.data;
 
 public class Menu {
-        String menu;
-        String price;
-        int quantity=0;
+    protected String id;
+    protected String name;
+    protected int price;
+    protected int quantity = 0;
 
-        public Menu(String menu, String price) {
-            this.menu = menu;
-            this.price = price;
-        }
+    public Menu(String id, String name, int price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 
-        public String getMenu() {
-            return menu;
-        }
+    public String getId() {
+        return id;
+    }
 
-        public void setMenu(String food_Name) {
-            menu = food_Name;
-        }
+    public String getName() {
+       return name;
+    }
 
-        public void setPrice(String price) {
-            price = price;
-        }
+    public int getPrice() {
+        return price;
+    }
 
-        public String getPrice() {
-            return price;
-        }
+    public synchronized int getQuantity() {
+        return quantity;
+    }
+
+    public synchronized int increaseQuantity() {
+        if (quantity != Integer.MAX_VALUE) quantity++;
+        return quantity;
+    }
+
+    public synchronized int decreaseQuantity() {
+        if (quantity != 0) quantity--;
+        return quantity;
+    }
+
+    public synchronized void setQuantityToZero() {
+        quantity = 0;
+    }
 }

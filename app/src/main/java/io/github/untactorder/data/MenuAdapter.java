@@ -10,84 +10,60 @@ import io.github.untactorder.androidclient.R;
 
 import java.util.ArrayList;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> implements OnMenuItemClickListener {
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
+    protected static ArrayList<Menu> currentViewingMenuItems = new ArrayList<>();
+    protected static String currentViewingMenuCategory = "";
 
-    ArrayList<Menu> items = new ArrayList<>();
-
-    OnMenuItemClickListener listener;
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = inflater.inflate(R.layout.activity_menu_item, viewGroup,false);
-        return new ViewHolder(itemView,this);
+        View itemView = inflater.inflate(R.layout.recycler_menu_list, viewGroup,false);
+        return new MenuViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Menu item = items.get(position);
+    public void onBindViewHolder(@NonNull MenuViewHolder viewHolder, int position) {
+        Menu item = currentViewingMenuItems.get(position);
         viewHolder.setItem(item);
+    }
+
+    public static void setCurrentViewingMenuItemList(String category, ArrayList<Menu> itemList) {
+        currentViewingMenuCategory = category;
+        currentViewingMenuItems = itemList;
+    }
+
+    public static String getCurrentViewingMenuCategory() {
+        return currentViewingMenuCategory;
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return currentViewingMenuItems.size();
     }
 
-    public void addItem(Menu item){
-        items.add(item);
-    }
+    public class MenuViewHolder extends RecyclerView.ViewHolder {
+        TextView menuNameView, priceView, quantityView;
 
-    public Menu getItem(int position) {
-        return items.get(position);
-    }
-
-    public void setItem(int position, Menu item) {
-        items.set(position, item);
-    }
-
-    public void setOnItemClickListener(OnMenuItemClickListener listener) {
-        this.listener = listener;
-    }
-
-    @Override
-    public void onItemClick(ViewHolder holder, View view, int position) {
-        if (listener != null) {
-            listener.onItemClick(holder, view, position);
-        }
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView menuname;
-        TextView menuprice;
-        TextView quantity;
-
-        public ViewHolder(View view, final OnMenuItemClickListener listner){
+        public MenuViewHolder(View view){
             super(view);
 
-            menuname = view.findViewById(R.id.menu_tx_name);
-            menuprice = view.findViewById(R.id.menu_tx_price);
-            quantity = view.findViewById(R.id.menu_tx_quantity);
+            menuNameView = view.findViewById(R.id.menu_tx_name);
+            priceView = view.findViewById(R.id.menu_tx_price);
+            quantityView = view.findViewById(R.id.menu_tx_quantity);
 
             view.findViewById(R.id.menu_tx_minus).setOnClickListener(v -> {
-                int count = Integer.parseInt((String) quantity.getText());
-                if (count > 0) {
-                    quantity.setText(""+(count-1));
-                }
+                quantityView.setText(""+currentViewingMenuItems.get(getAdapterPosition()).decreaseQuantity());
             });
             view.findViewById(R.id.menu_tx_plus).setOnClickListener(v -> {
-                int count = Integer.parseInt((String) quantity.getText());
-                if (count < Integer.MAX_VALUE) {
-                    quantity.setText(""+(count+1));
-                }
+                quantityView.setText(""+currentViewingMenuItems.get(getAdapterPosition()).increaseQuantity());
             });
         }
 
-        public void setItem(Menu item){
-            menuname.setText(item.getMenu());
-            menuprice.setText(item.getPrice());
+        public void setItem(Menu item) {
+            menuNameView.setText(item.getName());
+            priceView.setText(""+item.getPrice());
+            quantityView.setText(""+item.getQuantity());
         }
     }
-
-
 }

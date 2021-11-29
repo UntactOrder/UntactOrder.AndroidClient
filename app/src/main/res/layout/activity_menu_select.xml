@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/linearLayout3">
         <TextView
-                android:text="@string/at_option_select_title"
+                android:text="@string/at_menu_select_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
@@ -34,7 +34,7 @@
                 android:weightSum="3"
                 android:layout_height="wrap_content">
             <TextView
-                    android:text="@string/at_option_select_menuname"
+                    android:text="@string/at_menu_select_menuname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/option"
@@ -42,7 +42,7 @@
                     android:textColor="#3A3947"
                     android:gravity="center"/>
             <TextView
-                    android:text="@string/at_option_select_price"
+                    android:text="@string/at_menu_select_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/price"
@@ -51,7 +51,7 @@
                     android:layout_weight="0.3"
             />
             <TextView
-                    android:text="@string/at_option_select_quantity"
+                    android:text="@string/at_menu_select_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/ea"
@@ -67,7 +67,7 @@
         />
     </LinearLayout>
     <TextView
-            android:text="@string/at_option_select_done"
+            android:text="@string/at_menu_select_done"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
