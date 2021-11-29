@@ -20,9 +20,10 @@ import java.util.Map;
  */
 public class NetworkService extends Service implements ApplicationLayer {
     private static final String TAG = "NetworkService";
-    private String ip;
-    private Integer port;
-    private int tableName;
+    public static String IP;
+    public static Integer PORT;
+    public static Integer TABLE_NAME;
+    public static String PASSWORD;
 
 
     @Override

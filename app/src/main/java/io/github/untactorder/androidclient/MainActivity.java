@@ -28,6 +28,7 @@ import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 import io.github.untactorder.data.Order;
 import io.github.untactorder.data.OrderAdapter;
+import io.github.untactorder.network.NetworkService;
 
 import java.util.Objects;
 
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     if (result.getResultCode() == RESULT_OK) {
                         String qrData = Objects.requireNonNull(result.getData()).getStringExtra("value");
                         println(qrData);
-                        if (true /*QR 검사*/) {
+                        if (qrCodeParser(qrData)) {
                             runPasswordActivity();
                         } else {
                             println(TAG, getString(R.string.at_qrsc_invalid_msg), true);
@@ -315,6 +316,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    protected boolean qrCodeParser(String qrData) {
+        // QR 검사 (192.168.0.1,56890,25).split("[,]")
+        try {
+            String[] list = qrData.split("[,]");
+            if (list.length == 3) {
+                if (list[0].split("[.]").length != 4) throw new Exception();
+                int port = Integer.parseInt(list[1]);
+                int table = Integer.parseInt(list[2]);
+
+                NetworkService.IP = list[0];
+                NetworkService.PORT = port;
+                NetworkService.TABLE_NAME = table;
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     protected void setNewOrderButtonEnabled(int status) {
         View container = findViewById(R.id.main_container_bottom);
         View list = findViewById(R.id.main_list_of_orders);
@@ -327,22 +348,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onNewOrderButtonClicked(View v) {
-        println("New Order");
-        Intent qrIntent = new Intent(this, QrScanActivity.class);
-        qrScanActivityLauncher.launch(qrIntent);
-
-        if (__DEBUG) {
-            orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
-            if (orderAdapter.getItemCount() == 1) {
-                layoutManager.setSpanCount(1);
-                adaptedGridSpan = false;
-            } else if (!adaptedGridSpan) {
-                layoutManager.setSpanCount(gridSpan);
-                adaptedGridSpan = true;
+        if (NetworkService.IP != null && NetworkService.PORT != null && NetworkService.TABLE_NAME != null) {
+            if (NetworkService.PASSWORD != null) {
+                runMenuSelectActivity();
+            } else {
+                runPasswordActivity();
             }
-            //https://todaycode.tistory.com/55
-            orderAdapter.notifyDataSetChanged(); // 사용하지 말자
-            fitOrderSeparatorSize();
+        } else {
+            println("New Order");
+            Intent qrIntent = new Intent(this, QrScanActivity.class);
+            qrScanActivityLauncher.launch(qrIntent);
+
+            if (__DEBUG) {
+                orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
+                if (orderAdapter.getItemCount() == 1) {
+                    layoutManager.setSpanCount(1);
+                    adaptedGridSpan = false;
+                } else if (!adaptedGridSpan) {
+                    layoutManager.setSpanCount(gridSpan);
+                    adaptedGridSpan = true;
+                }
+                //https://todaycode.tistory.com/55
+                orderAdapter.notifyDataSetChanged(); // 사용하지 말자
+                fitOrderSeparatorSize();
+            }
         }
     }
 
