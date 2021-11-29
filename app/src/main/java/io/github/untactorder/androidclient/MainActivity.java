@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 메뉴 어뎁터에 추천 카테고리 이름 지정
+        MenuGroupAdapter.setRecmMenuCategoryName(getResources().getString(R.string.at_menu_select_category_recm));
+
         /*
         AndPermission.with(this)
                 .runtime()
