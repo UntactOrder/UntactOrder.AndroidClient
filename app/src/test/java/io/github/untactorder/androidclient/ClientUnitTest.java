@@ -1,9 +1,11 @@
 package io.github.untactorder.androidclient;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 import io.github.untactorder.network.NetworkService;
+import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,9 +16,10 @@ import java.util.Map;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ClientUnitTest extends NetworkService {
     @Test
-    public void addition_isCorrect() {
+    public void test1_addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
 
@@ -32,9 +35,8 @@ public class ClientUnitTest extends NetworkService {
     }
 
     @Test
-    public void signIn_isWorking() throws IOException {
-        String status = tableCheck_isWorking();
-        if (status.equals("none")) {
+    public void test2_signIn_isWorking() throws IOException {
+        if (tableCheck_isWorking().equals("none")) {
             signUp_isWorking();
         } else {
             String result = signIn(tableName, pw);
@@ -48,13 +50,15 @@ public class ClientUnitTest extends NetworkService {
     }
 
     @Test
-    public void getMenuList_isWorking() throws IOException {
-        String menus = getMenuList();
-        System.out.println(menus);
+    public void test3_getMenuList_isWorking() throws IOException {
+        Map<String, Object> menus = getMenuList();
+        menus.forEach((id, val) -> {
+            System.out.println(id+" : "+val);
+        });
     }
 
     @Test
-    public void putNewOrder_isWorking() throws IOException {
+    public void test4_putNewOrder_isWorking() throws IOException {
         Map<String, String> map = new HashMap<>();
         map.put("0", "2");
         map.put("1", "1");
@@ -64,8 +68,15 @@ public class ClientUnitTest extends NetworkService {
     }
 
     @Test
-    public void getOrderList_isWorking() throws IOException {
-        String orders = getOrderList(tableName);
-        System.out.println(orders);
+    public void test5_getOrderList_isWorking() throws IOException {
+        Map<String, Object> orders = getOrderList(tableName);
+        orders.forEach((id, val) -> {
+            System.out.println(id+" : "+val);
+        });
+    }
+
+    @Test
+    public void test6_socketClose() throws IOException {
+        close();
     }
 }

@@ -1,8 +1,6 @@
 package io.github.untactorder.network;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,27 +39,10 @@ public interface PresentationLayer extends SessionLayer {
         return makeJson(method, uri, null);
     }
 
-    default Map<String, Object> makeMap(String jsn) {
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(jsn);
-
-        Map<String, Object> map = new HashMap<>(), reqMap = new HashMap<>(), respMap = new HashMap<>();
-        map.put("requested", reqMap);
-
-        JsonElement request = element.getAsJsonObject().get("requested");
-        JsonElement respond = element.getAsJsonObject().get("respond");
-
-        String method = request.getAsJsonObject().get("method").getAsString();
-        reqMap.put("method", method);
-        String uri = request.getAsJsonObject().get("uri").getAsString();
-        reqMap.put("uri", uri);
-        if (!method.equals("get")) {
-            String value = request.getAsJsonObject().get("value").toString();
-            reqMap.put("requested", value);
-        }
-        /////
-        String resp = respond.getAsString();
-        map.put("respond", resp);
+    default Map<String, Object> getMapFromJson(String jsn) {
+        Gson gson = new Gson();
+        Map<String, Object> map = new HashMap<>();
+        map = (Map<String, Object>) gson.fromJson(jsn, map.getClass());
         return map;
     }
 
@@ -77,8 +58,11 @@ public interface PresentationLayer extends SessionLayer {
         send(makeJson("run", uri, value));
     }
 
-    default Map<String, Object> get_respond() throws IOException {
-        return makeMap( recv());
+    default Map<String, Object> getRespond() throws IOException {
+        return getMapFromJson( recv());
     }
 
+    default Map<String, Object> getRequest() throws IOException {
+        return getMapFromJson( recv());
+    }
 }

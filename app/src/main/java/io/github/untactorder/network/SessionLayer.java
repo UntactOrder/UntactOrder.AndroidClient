@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
  * @author 유채민
  */
 public interface SessionLayer {
+    boolean DEBUG = false;
     Socket clientSocket = new Socket();
 
     default void connect(String ip, Integer port) throws IOException {
@@ -36,6 +37,10 @@ public interface SessionLayer {
         }
     }
 
+    default void close() throws IOException {
+        clientSocket.close();
+    }
+
     default void send(String data) throws IOException {
         OutputStream output = clientSocket.getOutputStream();
         PrintWriter out = new PrintWriter(new OutputStreamWriter(output));
@@ -52,7 +57,7 @@ public interface SessionLayer {
             throw new IOException("Error: recv() error! (wrong byte array size)");
         }
         String recvmsg = new String(byteArray, 0, size, StandardCharsets.UTF_8); // JSON -> String
-        System.out.println("receive: "+ recvmsg);
+        if (DEBUG) System.out.println("receive: "+ recvmsg);
         return recvmsg;
     }
 }

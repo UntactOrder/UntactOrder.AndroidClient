@@ -1,7 +1,5 @@
 package io.github.untactorder.network;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,32 +43,32 @@ public interface ApplicationLayer extends PresentationLayer {
         connect(ip, port);
 
         get("/customer/"+tableName);
-        return (String) get_respond().get("respond");
+        return (String) getRespond().get("respond");
     }
 
     default String signUp(int id, String pw) throws IOException {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id); map.put("pw", pw);
         run("sign_up", map);
-        return (String) get_respond().get("respond");
+        return (String) getRespond().get("respond");
     }
 
     default String signIn(int id, String pw) throws IOException {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id); map.put("pw", pw);
         run("sign_in", map);
-        return (String) get_respond().get("respond");
+        return (String) getRespond().get("respond");
     }
 
-    default String getMenuList() throws IOException {
+    default Map<String, Object> getMenuList() throws IOException {
         get("/data/menu");
-        return (String) get_respond().get("respond");
+        return (Map<String, Object>) getRespond().get("respond");
     }
 
     default String putNewOrder(Map<String, String> order) throws IOException {
         put("new_order",order);
 
-        Map<String, Object> map = get_respond();
+        Map<String, Object> map = getRespond();
         if (Objects.equals((String) map.get("respond"), "success")) {
             Map<String, Object> req = (Map<String, Object>) map.get("requested");
             return (String) req.get("value");
@@ -79,8 +77,8 @@ public interface ApplicationLayer extends PresentationLayer {
         }
     }
 
-    default String getOrderList(int tableName) throws IOException {
+    default Map<String, Object> getOrderList(int tableName) throws IOException {
         get("/customer/"+tableName+"/orderlist");
-        return (String) get_respond().get("respond");
+        return (Map<String, Object>) getRespond().get("respond");
     }
 }
