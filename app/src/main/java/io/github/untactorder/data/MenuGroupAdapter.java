@@ -43,7 +43,7 @@ public class MenuGroupAdapter extends RecyclerView.Adapter<MenuGroupAdapter.Menu
         menuGroup = newMenuGroup;
         categories.clear();
         for (String key: newMenuGroup.keySet()) {
-            if (isRecMCategory(key)) {
+            if (isRecmCategory(key)) {
                 categories.add(0, key);
             } else {
                 categories.add(key);
@@ -51,10 +51,33 @@ public class MenuGroupAdapter extends RecyclerView.Adapter<MenuGroupAdapter.Menu
         }
     }
 
+    public static void setMenuGroupFromMap(Map<String, Map<String, String>> menus) {
+        menuGroup = new HashMap<>();
+        ArrayList<Menu> recm;
+        if (RECM_MENU != null) {
+            recm = new ArrayList<>();
+            addMenuList(RECM_MENU, recm);
+        }
+        menus.forEach((id, obj) -> {
+            String name = obj.get("name");
+            int price = Integer.parseInt(obj.get("price"));
+            String type = obj.get("type");
+            boolean pinned = Integer.parseInt(obj.get("pinned")) == 1;
+            Menu menu = new Menu(id, name, price);
+            if (!menuGroup.containsKey(type)) {
+                addMenuList(type. new ArrayList<Menu>());
+            }
+            if (isRecmCategory(type)) {
+                recm.put(type);
+            }
+            menuGroup.get(type).add(menu);
+        });
+    }
+
     public static void addMenuList(String category, ArrayList<Menu> menuList) {
         if (!menuGroup.containsKey(category)) {
             menuGroup.put(category, menuList);
-            if (isRecMCategory(category)) {
+            if (isRecmCategory(category)) {
                 categories.add(0, category);
             } else {
                 categories.add(category);
@@ -62,7 +85,7 @@ public class MenuGroupAdapter extends RecyclerView.Adapter<MenuGroupAdapter.Menu
         }
     }
 
-    public static boolean isRecMCategory(String key) {
+    public static boolean isRecmCategory(String key) {
         return key.equals(RECM_MENU);
     }
 

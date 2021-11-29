@@ -60,9 +60,9 @@ public interface ApplicationLayer extends PresentationLayer {
         return (String) getRespond().get("respond");
     }
 
-    default Map<String, Object> getMenuList() throws IOException {
+    default Map<String, Map<String, String>> getMenuList() throws IOException {
         get("/data/menu");
-        return (Map<String, Object>) getRespond().get("respond");
+        return (Map<String, Map<String, String>>) getRespond().get("respond");
     }
 
     default String putNewOrder(Map<String, String> order) throws IOException {
@@ -77,8 +77,8 @@ public interface ApplicationLayer extends PresentationLayer {
         }
     }
 
-    default Map<String, Object> getOrderList(int tableName) throws IOException {
+    default Map<String, Map<String, String>> getOrderList(int tableName) throws IOException {
         get("/customer/"+tableName+"/orderlist");
-        return (Map<String, Object>) getRespond().get("respond");
+        return (Map<String, Map<String, String>>) getRespond().get("respond");
     }
 }

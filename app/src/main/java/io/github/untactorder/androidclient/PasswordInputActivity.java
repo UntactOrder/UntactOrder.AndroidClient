@@ -1,5 +1,6 @@
 package io.github.untactorder.androidclient;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class PasswordInputActivity extends AppCompatActivity {
     TextView[] circleView = new TextView[6];
     protected String password = "";
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

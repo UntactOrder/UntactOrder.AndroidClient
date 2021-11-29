@@ -5,15 +5,17 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
+        tools:context=".MenuSelectActivity"
         android:id="@+id/linearLayout2"
         android:backgroundTint="#F1F2F4"
         app:layoutDescription="@xml/permission_file_paths"
         android:background="#8E1111">
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/linearLayout3">
+
         <TextView
                 android:text="@string/at_menu_select_title"
                 android:layout_width="wrap_content"
@@ -23,16 +25,19 @@
                 android:textColor="#878696"
                 android:textSize="30sp"
                 android:layout_marginTop="16dp" android:layout_marginStart="18dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/recyclerView1"
                 android:background="#FFFFFF"/>
+
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:weightSum="3"
                 android:layout_height="wrap_content">
+
             <TextView
                     android:text="@string/at_menu_select_menuname"
                     android:layout_width="wrap_content"
@@ -41,6 +46,7 @@
                     android:layout_weight="0.9"
                     android:textColor="#3A3947"
                     android:gravity="center"/>
+
             <TextView
                     android:text="@string/at_menu_select_price"
                     android:layout_width="wrap_content"
@@ -48,8 +54,8 @@
                     android:id="@+id/price"
                     android:textColor="#3A3947"
                     android:gravity="center"
-                    android:layout_weight="0.3"
-            />
+                    android:layout_weight="0.3"/>
+
             <TextView
                     android:text="@string/at_menu_select_quantity"
                     android:layout_width="wrap_content"
@@ -57,15 +63,15 @@
                     android:id="@+id/ea"
                     android:textColor="#3A3947"
                     android:layout_weight="1.8"
-                    android:gravity="center"
-            />
+                    android:gravity="center"/>
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recyclerView"
-        />
+                android:id="@+id/recyclerView"/>
     </LinearLayout>
+
     <TextView
             android:text="@string/at_menu_select_done"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,8 +88,9 @@
             android:id="@+id/tx_finish"
             android:gravity="center"
             app:layout_constraintVertical_bias="0.93"
-            android:background="@drawable/shape_rect_categori"
-            android:backgroundTint="#FFFFFF"/>
+            android:background="@drawable/shape_rect_category"
+            android:backgroundTint="#FFFFFF"
+            android:onClick="onProceedOrderButtonClicked"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

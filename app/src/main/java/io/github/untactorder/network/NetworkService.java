@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 import io.github.untactorder.data.Customer;
+import io.github.untactorder.data.Menu;
+import io.github.untactorder.data.MenuGroupAdapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,6 +66,7 @@ public class NetworkService extends Service implements ApplicationLayer {
                 case SignUp: {
                     try {
                         String result = signUp(Customer.getId(),Customer.getPw());
+                        RESULT_ARRAY.add(result);
                         //resultIntent.putExtra("sign_up", result);
                     } catch(IOException e) {
 
@@ -74,6 +77,7 @@ public class NetworkService extends Service implements ApplicationLayer {
                     String pw = intent.getStringExtra("pw");
                     try {
                         String result = signIn(Customer.getId(),pw);
+                        RESULT_ARRAY.add(result);
                         //resultIntent.putExtra("sign_in", result);
                     } catch (IOException e) {
 
@@ -82,18 +86,21 @@ public class NetworkService extends Service implements ApplicationLayer {
                 }
                 case GetMenuList: {
                     try {
-                        String getMenuList = getMenuList();
-                        resultIntent.putExtra("getMenuList",getMenuList);
+                        Map<String, ArrayList<Menu>> newMenuGroup = MenuGroupAdapter.makeMenuLists(getMenuList());
+                        MenuGroupAdapter.setMenuGroup(newMenuGroup);
+                        RESULT_ARRAY.add("ok");
+                        //resultIntent.putExtra("getMenuList",getMenuList);
                     } catch (IOException e) {
 
                     }
                     break;
                 }
                 case PutNewOrder: {
-                    String order = intent.getStringExtra("order");
+                    Map<String, String> order = (Map<String, String>) intent.getSerializableExtra("order");
                     try {
-                        String putNewOrder = putNewOrder(order);
-                        resultIntent.putExtra("putNewOrder",putNewOrder);
+                        String result = putNewOrder(order);
+                        RESULT_ARRAY.add(result);
+                        //resultIntent.putExtra("putNewOrder",putNewOrder);
                     } catch (IOException e) {
 
                     }
@@ -101,8 +108,9 @@ public class NetworkService extends Service implements ApplicationLayer {
                 }
                 case GetOrderList: {
                     try {
-                        Map<String, Object> getOrderList = getOrderList(Customer.getId());
-
+                        Map<String, Map<String, String>> orders = getOrderList(Customer.getId());
+                        //
+                        RESULT_ARRAY.add("ok");
                     } catch (IOException e) {
 
                     }

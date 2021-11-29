@@ -28,7 +28,8 @@ public class MenuSelectActivity extends AppCompatActivity {
         menuListView.setAdapter(new MenuAdapter());
         menuGroupView.setAdapter(new MenuGroupAdapter());
     }
-    public void onProceedOrderButtonClickde(View v) {
+
+    public void onProceedOrderButtonClicked(View v) {
         Map<String, String> orderMap = MenuGroupAdapter.makeOrderMap();
         Intent menuIntent = new Intent(this,MainActivity.class);
         menuIntent.putExtra("orderMap", (Parcelable) orderMap);
