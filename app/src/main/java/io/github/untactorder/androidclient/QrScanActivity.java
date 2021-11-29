@@ -15,7 +15,7 @@ public class QrScanActivity extends AppCompatActivity {
 
         IntentIntegrator qrScan = new IntentIntegrator(this);
         qrScan.setOrientationLocked(true);
-        qrScan.setPrompt("QR코드를 사각형 안에 넣어주세요.!");
+        qrScan.setPrompt(getString(R.string.at_qrsc_guide_msg));
         qrScan.initiateScan();
     }
 

@@ -11,6 +11,7 @@
     <color name="gray_primary_light">#FFF1F2F4</color>
     <color name="gray_primary_dark">#FF3B3B42</color>
     <color name="grey_deep">#FF707070</color>
+    <color name="grey_deep_dark">#FF3C3B41</color>
     <color name="magenta">#FFFF7C80</color>
     <color name="yellow">#FFF9BF00</color>
     <color name="purple_deep">#FF9291BE</color>
@@ -28,4 +29,6 @@
     <color name="at_pwin_pw_view_circle_pressed">@color/gray_primary_light</color>
     <color name="at_pwin_pw_view_circle_filled">@color/purple_deep</color>
     <color name="ac_pwin_table_name_background">#FFDBDBDC</color>
+    <!-- recycler_ordr_list -->
+    <color name="rc_ordr_list_order_body">@color/grey_deep_dark</color>
 </resources>
