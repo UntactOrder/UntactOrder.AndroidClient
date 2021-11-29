@@ -11,6 +11,11 @@ import java.util.Map;
 /**
  * <표현계층>
  * JSON 만드는 매서드!
+ * Gson gson = new Gson();
+ *         map.put("id","1");
+ *         map.put("pw","123456");
+ *         String json = gson.toJson(map);
+ *         String sign = sign_up(json);
  * 보안은 나중에..
  * @author 유채민
  * S -> J
