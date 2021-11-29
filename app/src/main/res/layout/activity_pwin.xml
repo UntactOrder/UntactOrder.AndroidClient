@@ -9,6 +9,8 @@
         tools:context=".PasswordInputActivity"
         android:fillViewport="true">
 
+    <!-- SDK26이후 가변 텍스트 사이즈 android:autoSizeTextType 사용 가능 -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -24,7 +26,7 @@
                 android:paddingBottom="10dip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/at_pwin_table_hint"
+                android:hint="@string/at_pwin_table_name"
                 android:paddingStart="15dip"
                 android:paddingEnd="15dip"
                 android:elevation="1.5dip"
@@ -140,8 +142,9 @@
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_7"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="7"
@@ -152,13 +155,13 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
 
                 <Button
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_8"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
@@ -172,14 +175,16 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
 
                 <Button
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_9"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="9"
@@ -190,7 +195,8 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
             </TableRow>
 
             <TableRow
@@ -200,8 +206,9 @@
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_4"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="4"
@@ -212,13 +219,13 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
 
                 <Button
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_5"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
@@ -232,14 +239,16 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
 
                 <Button
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_6"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="6"
@@ -250,7 +259,8 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
             </TableRow>
 
             <TableRow
@@ -261,8 +271,9 @@
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="1"
@@ -273,13 +284,13 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
 
                 <Button
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_2"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
@@ -293,14 +304,16 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
 
                 <Button
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_3"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="3"
@@ -311,7 +324,8 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
             </TableRow>
 
             <TableRow
@@ -319,12 +333,13 @@
                     android:layout_height="wrap_content">
 
                 <Button
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/gray_primary_dark"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_clear_all"
-                        android:layout_width="0sp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="@string/at_pwin_del_all"
                         android:layout_weight="1"
@@ -333,13 +348,15 @@
                         android:layout_marginEnd="6dp"
                         android:elevation="1dp"
                         android:backgroundTint="@color/magenta"
-                        style="?android:buttonBarButtonStyle"/>
+                        style="?android:buttonBarButtonStyle"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:autoSizeTextType="uniform"
+                        tools:targetApi="o"/>
 
                 <Button
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/at_pwin_num_pad_text"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_0"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
@@ -353,14 +370,16 @@
                         android:elevation="1dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"/>
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
 
                 <Button
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/gray_primary_dark"
-                        android:gravity="center"
                         android:id="@+id/pwin_bt_num_pad_clear_one"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="@string/at_pwin_del_one"
@@ -370,7 +389,10 @@
                         android:layout_marginEnd="6dp"
                         android:elevation="1dp"
                         android:backgroundTint="@color/yellow"
-                        style="?android:buttonBarButtonStyle"/>
+                        style="?android:buttonBarButtonStyle"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:autoSizeTextType="uniform"
+                        tools:targetApi="o"/>
             </TableRow>
         </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

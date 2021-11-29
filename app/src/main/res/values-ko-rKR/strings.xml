@@ -4,7 +4,7 @@
     <string name="at_pwin_guide">테이블 주문 비밀번호를 입력해주세요</string>
     <string name="at_pwin_del_all">전체 삭제</string>
     <string name="at_pwin_del_one">하나 삭제</string>
-    <string name="at_pwin_table_hint">테이블 번호</string>
+    <string name="at_pwin_table_name">"테이블 "</string>
     <string name="at_pwin_guide_new">테이블 주문 비밀번호를 새로 등록합니다</string>
     <string name="at_pwin_guide_confirm">등록한 비밀번호를 확인합니다\n3회 잘못 입력시 등록 비밀번호를 초기화합니다</string>
     <string name="at_pwin_guide_retry">비밀번호를 잘못 입력하셨어요\n다시 입력해주세요</string>
@@ -14,12 +14,13 @@
     <string name="text_cancel">취소</string>
     <string name="text_okay">확인</string>
     <string name="at_main_detailed_guide_msg">
+        \n
         0. 언택트 오더는 비대면 주문 어플리케이션 입니다.\n\n
         1. 주문하기 버튼을 누르고 매장 테이블에 비치 된 QR코드를 스캔하면 주문이 가능합니다.\n\n
         2. 주문 시에 비밀번호 6자리가 요구되며, 이 비밀번호로 다른 스마트폰으로도 주문을 확인할 수 있습니다.\n\n
         3. 주문 옵션을 선택한 뒤 완료하기 버튼을 누르면 주문이 완료됩니다.\n\n
         4. 추가 주문은 이전 주문이 확정된 이후에 추가 주문하기 버튼을 누르게 되면 같은 방법으로 가능합니다.\n\n
-        ※ 앱 사용 도중 와이파이 연결이 끊어진 경우에는 앱을 재시작해 주세요!
+        ※ 앱 사용 도중 와이파이 연결이 끊어진 경우에는 앱을 재시작해 주세요!\n
     </string>
     <string name="at_main_guide">도움말</string>
     <string name="at_main_guide_msg">사용 방법이 궁금하신가요? ></string>
@@ -27,4 +28,13 @@
     <string name="at_main_make_additional_order">추가 주문 하러 가기</string>
     <string name="at_main_make_new_order">주문 하러 가기</string>
     <string name="krw">원</string>
+    <string name="at_qrsc_guide_msg">QR코드를 사각형 안에 넣어주세요.!</string>
+    <string name="at_qrsc_cancel_msg">QR 코드 스캔을 취소하였습니다.</string>
+    <string name="at_qrsc_invalid_msg">올바르지 않은 QR코드입니다!!!</string>
+    <string name="at_menu_select_title">주문 옵션 선택</string>
+    <string name="at_menu_select_menuname">메뉴명</string>
+    <string name="at_menu_select_price">가격</string>
+    <string name="at_menu_select_quantity">수량</string>
+    <string name="at_menu_select_done">완료하기</string>
+    <string name="at_menu_select_category_recm">추천</string>
 </resources>
