@@ -8,14 +8,19 @@
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/shape_rect_all_corner.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/shape_rect_bottom_corner.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/shape_rect_top_corner.xml" value="0.1859375" />
+        <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/shape_reverse_triangle.xml" value="0.2851851851851852" />
+        <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/drawable/shape_triangle.xml" value="0.2851851851851852" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout-land/activity_main.xml" value="0.3598290598290598" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout-v26/activity_pwin.xml" value="0.346875" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_main2.xml" value="0.375" />
+        <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_menu_select.xml" value="0.1" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_prsn_inf_consent_form.xml" value="0.34739583333333335" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_pwin.xml" value="0.346875" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_pwin2.xml" value="0.346875" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/activity_qr_scanner.xml" value="0.335" />
+        <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/recycler_menu_group.xml" value="0.1" />
+        <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/recycler_menu_list.xml" value="0.1" />
         <entry key="..\:/Users/IRACK/Desktop/AndroidClient/app/src/main/res/layout/recycler_ordr_list.xml" value="0.346875" />
         <entry key="..\:/Users/PC/Desktop/AndroidClient/app/src/main/res/layout/activity_main.xml" value="0.2203125" />
         <entry key="..\:/Users/yumin/Desktop/UntactOrder.AndroidClient/app/src/main/res/layout/activity_main.xml" value="0.29010416666666666" />

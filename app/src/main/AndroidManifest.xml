@@ -32,6 +32,10 @@
                 android:exported="false">
         </activity>
         <activity
+                android:name=".MenuSelectActivity"
+                android:exported="false">
+        </activity>
+        <activity
                 android:name=".PersonalInfoConsentFormActivity"
                 android:exported="false">
         </activity>
