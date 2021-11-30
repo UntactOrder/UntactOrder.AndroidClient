@@ -82,9 +82,7 @@ public interface ApplicationLayer extends PresentationLayer {
         Map<String, Object> map = getRespond();
         if (Objects.equals((String) map.get("respond"), "success")) {
             Map<String, Object> req = (Map<String, Object>) map.get("requested");
-            String orderId = (String) req.get("value");
-            OrderAdapter.addItem(new Order(orderId, order));
-            return orderId;
+            return (String) req.get("value");
         } else {
             return null;
         }

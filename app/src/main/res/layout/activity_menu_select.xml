@@ -6,15 +6,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MenuSelectActivity"
-        android:id="@+id/linearLayout2"
         android:backgroundTint="#F1F2F4"
-        app:layoutDescription="@xml/permission_file_paths"
         android:background="#8E1111">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/linearLayout3">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
         <TextView
                 android:text="@string/at_menu_select_title"
@@ -24,7 +25,8 @@
                 android:textStyle="bold"
                 android:textColor="#878696"
                 android:textSize="30sp"
-                android:layout_marginTop="16dp" android:layout_marginStart="18dp"/>
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="12dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
@@ -77,7 +79,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/linearLayout2"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -87,10 +89,11 @@
             android:padding="10dp"
             android:id="@+id/tx_finish"
             android:gravity="center"
-            app:layout_constraintVertical_bias="0.93"
+            app:layout_constraintVertical_bias="0.97"
             android:background="@drawable/shape_rect_category"
             android:backgroundTint="#FFFFFF"
-            android:onClick="onProceedOrderButtonClicked"/>
+            android:onClick="onProceedOrderButtonClicked"
+            android:elevation="6dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

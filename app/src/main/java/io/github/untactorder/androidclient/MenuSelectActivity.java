@@ -2,7 +2,7 @@ package io.github.untactorder.androidclient;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +14,8 @@ import java.util.Map;
 
 
 public class MenuSelectActivity extends AppCompatActivity {
+    private static String TAG = "MenuSelectActivity";
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_select);
@@ -32,10 +34,11 @@ public class MenuSelectActivity extends AppCompatActivity {
     }
 
     public void onProceedOrderButtonClicked(View v) {
+        Log.d(TAG, "onProceedOrderButtonClicked");
         Map<String, String> orderMap = MenuGroupAdapter.makeOrderMap();
         Intent menuIntent = new Intent(this,MainActivity.class);
         menuIntent.putExtra("orderMap", (Serializable) orderMap);
-        startActivity(menuIntent);
+        setResult(RESULT_OK, menuIntent);
         super.finish();
     }
 }

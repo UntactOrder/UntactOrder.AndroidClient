@@ -22,14 +22,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.android.volley.Request;
 import io.github.untactorder.data.MenuGroupAdapter;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.runtime.Permission;
 import io.github.untactorder.data.Customer;
-import io.github.untactorder.data.Order;
 import io.github.untactorder.data.OrderAdapter;
 import io.github.untactorder.network.ApplicationLayer;
 import io.github.untactorder.network.NetworkService.RequestType;
@@ -57,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
 
     String userIMEI, userPhoneNumber;
     ActivityResultLauncher<Intent> qrScanActivityLauncher, passwordInputActivityLauncher, menuSelectActivityLauncher;
-    GridLayoutManager layoutManager = null; int gridSpan = 1; boolean adaptedGridSpan = true;
-    OrderAdapter orderAdapter = new OrderAdapter();
 
     LinkedList<RequestType> toNetThread = new LinkedList<>();
     NetworkThread netThread = new NetworkThread();
@@ -74,17 +67,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
         netThread.start();
 
         /*
-        AndPermission.with(this)
-                .runtime()
-                .permission(Permission.READ_PHONE_STATE)
-                .onGranted(permissions -> {
-                    println("허용된 권한 개수 : " + permissions.size());
-                })
-                .onDenied(permissions -> {
-                    println("거부된 권한 개수 : " + permissions.size());
-                    finish();
-                })
-                .start();
+        Permission.READ_PHONE_STATE
         */
         /* IMEI 관련 부분은 비활성화 해두고 나중에 할거
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -129,23 +112,35 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
         passwordInputActivityLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
+                    Intent resIntent = result.getData();
+                    InputType type = (InputType) Objects.requireNonNull(resIntent).getSerializableExtra("input_type");
                     switch (result.getResultCode()) {
                         case RESULT_OK:
-                            String pw = Objects.requireNonNull(result.getData()).getStringExtra("password");
-                            if (pw != null) {
-                                println("Password: " + pw);
-                                Customer.setPw(pw);
+                            String pw = Objects.requireNonNull(resIntent).getStringExtra("password");
+                            println("Password: " + pw);
+                            Customer.setPw(pw);
+
+                            if (type == InputType.SignUp) {
+                                runPasswordActivity(InputType.Confirm, 1);
+                            } else {
                                 println("RequestType.SignIn");
                                 toNetThread.add(RequestType.SignIn);
-                                println("RequestType.GetMenuList");
-                                toNetThread.add(RequestType.GetMenuList);
                             }
                             break;
                         case RESULT_CANCELED:
                             println("Canceled");
+                            Customer.setPw(null);
                             break;
                         case RESULT_INCORRECT:
                             println("Incorrect password!");
+                            if (type == InputType.Confirm) {
+                                int count = resIntent.getIntExtra("repeat_count", 0);
+                                if (3 > count) {
+                                    runPasswordActivity(InputType.Confirm, count+1);
+                                } else {
+                                    Customer.setPw(null);
+                                }
+                            }
                             break;
                     }
                 }
@@ -174,20 +169,21 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
             @Override
             public void onGlobalLayout() {
                 fitOrderSeparatorSize(); println(">> seperator is fitted");
-                removeOnGlobalLayoutListener(total.getViewTreeObserver(), this);
+                //removeOnGlobalLayoutListener(total.getViewTreeObserver(), this);
             }
         });
 
+        // 오더 어댑터 관련
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        gridSpan = (int) Math.max(displayMetrics.widthPixels/(double) displayMetrics.heightPixels+0.5, 1);
-        layoutManager = new GridLayoutManager(this, 1);
+        GridLayoutManager layoutManager = layoutManager = new GridLayoutManager(this, 1);
+        OrderAdapter orderAdapter = new OrderAdapter(
+                findViewById(R.id.main_tv_total_price_bottom), layoutManager,
+                (int) Math.max(displayMetrics.widthPixels/(double) displayMetrics.heightPixels+0.5, 1),
+                getString(R.string.krw));
         RecyclerView orderListView = findViewById(R.id.main_list_of_orders);
         orderListView.setLayoutManager(layoutManager);
         orderListView.setAdapter(orderAdapter);
         orderListView.setEnabled(false);
-
-        //adaptedGridSpan = false;
-        //orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
     }
 
     private static void removeOnGlobalLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
@@ -263,14 +259,14 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
         launcher.launch(new Intent(this, PersonalInfoConsentFormActivity.class));
     }
 
-
     public void fitOrderSeparatorSize() {
         View container = findViewById(R.id.main_container_bottom);
         View separator = findViewById(R.id.main_line_order_separator);
         View total = findViewById(R.id.main_tv_total_price_body);
         int height = getResources().getDisplayMetrics().heightPixels;
+        println("height: "+height);
         int top = container.getTop() + separator.getTop();  // getTop()은 부모와의 상대 거리
-        println("top: "+top);
+        println("top: "+top+" ("+container.getTop()+"+"+separator.getTop()+")");
         ViewGroup.LayoutParams params = separator.getLayoutParams();
         int seperatorHeight = (height < top) ? 0 : height-top;
         println("seperatorHeight: "+seperatorHeight);
@@ -393,28 +389,24 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
             println("New Order");
             Intent qrIntent = new Intent(this, QrScanActivity.class);
             qrScanActivityLauncher.launch(qrIntent);
-
-            /*if (!__DEBUG) {
-                orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
-                if (orderAdapter.getItemCount() == 1) {
-                    layoutManager.setSpanCount(1);
-                    adaptedGridSpan = false;
-                } else if (!adaptedGridSpan) {
-                    layoutManager.setSpanCount(gridSpan);
-                    adaptedGridSpan = true;
-                }
-                //https://todaycode.tistory.com/55
-                orderAdapter.notifyDataSetChanged(); // 사용하지 말자
-                fitOrderSeparatorSize();
-            }*/
         }
     }
 
     public void runPasswordActivity() {
+        runPasswordActivity((Customer.getStatus().equals("none")) ? InputType.SignUp : InputType.SignIn, null);
+    }
+
+    public void runPasswordActivity(InputType type, Integer repeatCount) {
         Intent passwordIntent = new Intent(this, PasswordInputActivity.class);
-        passwordIntent.putExtra("input_type", InputType.Confirm);
-        passwordIntent.putExtra("repeat_count", 1);
-        passwordIntent.putExtra("signup_password", "123456");
+        passwordIntent.putExtra("input_type", type);
+        switch (type) {
+            case Confirm:
+                passwordIntent.putExtra("repeat_count", repeatCount);
+                passwordIntent.putExtra("signup_password", Customer.getPw());
+                break;
+            case Retry:
+                passwordIntent.putExtra("repeat_count", repeatCount);
+        }
         println("run Password Activity");
         passwordInputActivityLauncher.launch(passwordIntent);
     }
@@ -426,17 +418,16 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
     }
 
     class NetworkThread extends Thread {
-        protected Map<String, String> orderMap;
+        protected LinkedList<Map<String, String>> orderMapArray = new LinkedList<>();
+        protected int retryCount = 0;
 
         public synchronized Map<String, String> deliver(Map<String, String> map) {
-            if (map != null) {  // getter
-                Map<String, String> order = orderMap;
-                orderMap = null;
-                return order;
-            } else {  // setter
-                orderMap = map;
-                return null;
+            if (map != null) {  // setter
+                orderMapArray.add(map);
+            } else if (orderMapArray.size() > 0) {  // getter
+                return orderMapArray.poll();
             }
+            return null;
         }
 
         @Override
@@ -448,7 +439,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
                     switch (Objects.requireNonNull(toNetThread.poll())) {
                         case TableCheck: {
                             try {
-                                println("run Network Service - TableCheck");
+                                Log.d(TAG, "run Network Service - TableCheck");
                                 println("ID:"+Customer.getId()+"/IP:"+Customer.getIp()+"/PORT:"+Customer.getPort());
                                 String check = tableCheck(
                                         Customer.getId(),Customer.getIp(),Customer.getPort());
@@ -478,14 +469,26 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
                         case SignIn: {
                             try {
                                 if (Customer.getStatus().equals("none")) {
-                                    println("run Network Service - SignUp");
+                                    Log.d(TAG, "run Network Service - SignUp");
                                     String res = signUp(Customer.getId(),Customer.getPw());
                                 } else if (Customer.getStatus().equals("ok")) {
                                     println("run Network Service - SignIn");
                                     String res = signIn(Customer.getId(),Customer.getPw());
                                     if (!res.equals("ok")) {
-                                        throw new IOException();
+                                        println("SignIn Method failed - Wrong Password");
+                                        if (retryCount < 3) {
+                                            runPasswordActivity(InputType.Retry, ++retryCount);
+                                            break;
+                                        } else {
+                                            throw new IOException();
+                                        }
                                     }
+                                }
+                                println("RequestType.GetMenuList");
+                                toNetThread.add(RequestType.GetMenuList);
+                                if (OrderAdapter.size() == 0) {
+                                    println("RequestType.GetOrderList");
+                                    toNetThread.add(RequestType.GetOrderList);
                                 }
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -509,11 +512,25 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
                             try {
                                 println("run Network Service - PutNewOrder");
                                 if (order != null) {
-                                    String res = putNewOrder(order);
-                                    runOnUiThread(orderAdapter::notifyDataSetChanged);
+                                    println("run Network Service - PutNewOrder "+order+"");
+                                    String orderId = putNewOrder(order);
+                                    runOnUiThread(() -> OrderAdapter.addItemFromMap(orderId, order));
+                                    runOnUiThread(MainActivity.this::fitOrderSeparatorSize);
                                 } else {
                                     throw new IOException();
                                 }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Customer.reset();
+                            }
+                            break;
+                        }
+                        case GetOrderList: {
+                            try {
+                                println("run Network Service - GetOrderList");
+                                Map<String, Map<String, Object>> orders = getOrderList(Customer.getId());
+                                runOnUiThread(() -> OrderAdapter.setOrderListFromMap(orders));
+                                runOnUiThread(MainActivity.this::fitOrderSeparatorSize);
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 Customer.reset();

@@ -133,7 +133,7 @@ public class MenuGroupAdapter extends RecyclerView.Adapter<MenuGroupAdapter.Menu
         menuGroup.forEach((category, list) -> {
             for (Menu menu : list) {
                 if (menu.getQuantity() > 0) {
-                    orderMap.put(menu.getId(), "" + menu.getPrice());
+                    orderMap.put(menu.getId(), "" + menu.getQuantity());
                     menu.setQuantityToZero();
                 }
             }

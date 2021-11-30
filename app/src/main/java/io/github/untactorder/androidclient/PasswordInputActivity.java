@@ -74,7 +74,8 @@ public class PasswordInputActivity extends AppCompatActivity {
                 println("입력 타입 설정 : SignIn");
                 break;
             case Retry:
-                guide.setText(R.string.at_pwin_guide_retry);
+                repeatCount = intent.getIntExtra("repeat_count", 0);
+                guide.setText(getString(R.string.at_pwin_guide_retry)+'('+repeatCount+"/3)");
                 guide.setTextColor(ContextCompat.getColor(this, R.color.magenta));
                 println("입력 타입 설정 : Retry");
                 break;
