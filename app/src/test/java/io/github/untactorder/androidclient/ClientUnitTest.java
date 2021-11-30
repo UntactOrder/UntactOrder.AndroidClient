@@ -25,7 +25,7 @@ public class ClientUnitTest extends NetworkService {
 
     int tableName = 1;
     String pw = "123456";
-    String ip = "127.0.0.1";
+    String ip = "192.168.219.101";
     Integer port = 53321;
 
     public String tableCheck_isWorking() throws IOException {

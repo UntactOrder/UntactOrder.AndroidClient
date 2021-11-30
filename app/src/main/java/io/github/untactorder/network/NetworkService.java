@@ -68,7 +68,7 @@ public class NetworkService extends Service implements ApplicationLayer {
                         String result = signUp(Customer.getId(),Customer.getPw());
                         RESULT_ARRAY.add(result);
                         //resultIntent.putExtra("sign_up", result);
-                    } catch(IOException e) {
+                    } catch (IOException e) {
 
                     }
                     break;
@@ -86,8 +86,7 @@ public class NetworkService extends Service implements ApplicationLayer {
                 }
                 case GetMenuList: {
                     try {
-                        Map<String, ArrayList<Menu>> newMenuGroup = MenuGroupAdapter.makeMenuLists(getMenuList());
-                        MenuGroupAdapter.setMenuGroup(newMenuGroup);
+                        MenuGroupAdapter.setMenuGroupFromMap(getMenuList());
                         RESULT_ARRAY.add("ok");
                         //resultIntent.putExtra("getMenuList",getMenuList);
                     } catch (IOException e) {
@@ -96,7 +95,7 @@ public class NetworkService extends Service implements ApplicationLayer {
                     break;
                 }
                 case PutNewOrder: {
-                    Map<String, String> order = (Map<String, String>) intent.getSerializableExtra("order");
+                    Map<String, String> order = (Map<String, String>) intent.getParcelableExtra("orderMap");
                     try {
                         String result = putNewOrder(order);
                         RESULT_ARRAY.add(result);

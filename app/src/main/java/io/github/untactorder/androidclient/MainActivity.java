@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Parcelable;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -136,11 +137,13 @@ public class MainActivity extends AppCompatActivity {
                                     if (NetworkService.RESULT_ARRAY.size() > 0) {
                                         switch (NetworkService.RESULT_ARRAY.get(0)) {
                                             case "ok":
+                                                NetworkService.RESULT_ARRAY.remove(0);
                                                 println("sign up success");
 
                                                 runMenuSelectActivity();
                                                 break pwinaclc_loop;
                                             default:
+                                                NetworkService.RESULT_ARRAY.remove(0);
                                                 println("sign up failed");
                                                 Customer.setPw(null);
                                                 break pwinaclc_loop;
@@ -149,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
                                         Thread.yield();
                                     }
                                 }
-
                             }
                             break;
                         case RESULT_CANCELED:
@@ -169,6 +171,30 @@ public class MainActivity extends AppCompatActivity {
                     if (result != null && result.getResultCode() == RESULT_OK) {
                         Map<String, String> orderMap = Objects.requireNonNull(result.getData()).getParcelableExtra("orderMap");
                         println("" + orderMap);
+
+                        Intent putNewOrder = new Intent(this, NetworkService.class);
+                        putNewOrder.putExtra("orderMap", (Parcelable) orderMap);
+                        startService(putNewOrder);
+                        menuslectaclc_loop:
+                        while (true) {
+                            if (NetworkService.RESULT_ARRAY.size() > 0) {
+                                switch (NetworkService.RESULT_ARRAY.get(0)) {
+                                    case "ok":
+                                        NetworkService.RESULT_ARRAY.remove(0);
+                                        println("sign up success");
+
+                                        runMenuSelectActivity();
+                                        break menuslectaclc_loop;
+                                    default:
+                                        NetworkService.RESULT_ARRAY.remove(0);
+                                        println("sign up failed");
+                                        Customer.setPw(null);
+                                        break menuslectaclc_loop;
+                                }
+                            } else {
+                                Thread.yield();
+                            }
+                        }
                     }
                 }
         );
@@ -195,8 +221,8 @@ public class MainActivity extends AppCompatActivity {
         orderListView.setAdapter(orderAdapter);
         orderListView.setEnabled(false);
 
-        adaptedGridSpan = false;
-        orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
+        //adaptedGridSpan = false;
+        //orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
     }
 
     private static void removeOnGlobalLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
@@ -403,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
             Intent qrIntent = new Intent(this, QrScanActivity.class);
             qrScanActivityLauncher.launch(qrIntent);
 
-            if (__DEBUG) {
+            if (!__DEBUG) {
                 orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
                 if (orderAdapter.getItemCount() == 1) {
                     layoutManager.setSpanCount(1);

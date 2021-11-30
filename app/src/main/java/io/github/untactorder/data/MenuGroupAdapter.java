@@ -53,10 +53,8 @@ public class MenuGroupAdapter extends RecyclerView.Adapter<MenuGroupAdapter.Menu
 
     public static void setMenuGroupFromMap(Map<String, Map<String, String>> menus) {
         menuGroup = new HashMap<>();
-        ArrayList<Menu> recm;
         if (RECM_MENU != null) {
-            recm = new ArrayList<>();
-            addMenuList(RECM_MENU, recm);
+            addMenuList(RECM_MENU, new ArrayList<>());
         }
         menus.forEach((id, obj) -> {
             String name = obj.get("name");
@@ -65,10 +63,10 @@ public class MenuGroupAdapter extends RecyclerView.Adapter<MenuGroupAdapter.Menu
             boolean pinned = Integer.parseInt(obj.get("pinned")) == 1;
             Menu menu = new Menu(id, name, price);
             if (!menuGroup.containsKey(type)) {
-                addMenuList(type. new ArrayList<Menu>());
+                addMenuList(type, new ArrayList<Menu>());
             }
-            if (isRecmCategory(type)) {
-                recm.put(type);
+            if (RECM_MENU != null && pinned) {
+                menuGroup.get(RECM_MENU).add(menu);
             }
             menuGroup.get(type).add(menu);
         });
