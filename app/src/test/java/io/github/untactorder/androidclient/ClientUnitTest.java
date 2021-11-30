@@ -51,7 +51,7 @@ public class ClientUnitTest extends NetworkService {
 
     @Test
     public void test3_getMenuList_isWorking() throws IOException {
-        Map<String, Map<String, String>> menus = getMenuList();
+        Map<String, Map<String, Object>> menus = getMenuList();
         menus.forEach((id, val) -> {
             System.out.println(id+" : "+val);
         });
@@ -69,7 +69,7 @@ public class ClientUnitTest extends NetworkService {
 
     @Test
     public void test5_getOrderList_isWorking() throws IOException {
-        Map<String, Map<String, String>> orders = getOrderList(tableName);
+        Map<String, Map<String, Object>> orders = getOrderList(tableName);
         orders.forEach((id, val) -> {
             System.out.println(id+" : "+val);
         });

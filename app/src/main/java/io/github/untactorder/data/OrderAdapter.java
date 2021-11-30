@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
-    protected final ArrayList<Order> items = new ArrayList<>();
+    protected static final ArrayList<Order> orderList = new ArrayList<>();
 
     @NonNull
     @NotNull
@@ -28,28 +28,28 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull OrderViewHolder holder, int position) {
-        holder.setItem(items.get(position));
+        holder.setItem(orderList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return orderList.size();
     }
 
-    public void addItem(@NonNull Order order) {
-        items.add(order);
+    public static void addItem(@NonNull Order order) {
+        orderList.add(order);
     }
 
-    public void removeItem(@NonNull Order order) {
-        items.remove(order);
+    public static void removeItem(int index) {
+        orderList.remove(index);
     }
 
-    public void clearItems() {
-        items.clear();
+    public static void clearItems() {
+        orderList.clear();
     }
 
-    public void insertItem(@NonNull Order order, int position) {
-        items.set(position, order);
+    public static void insertItem(@NonNull Order order, int position) {
+        orderList.set(position, order);
     }
 
     static class OrderViewHolder extends RecyclerView.ViewHolder {
@@ -69,7 +69,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         public void setItem(Order order) {
             orderId.setText(order.getOrderId());
-            menu.setText(order.getMenu());
+            menu.setText(order.getOrderMenuList());
             totalPrice.setText("Total: "
                     + (""+order.getTotalPrice()).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")
                     + context.getResources().getString(R.string.krw));

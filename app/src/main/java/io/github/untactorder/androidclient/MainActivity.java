@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Parcelable;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -25,23 +24,26 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.android.volley.Request;
 import io.github.untactorder.data.MenuGroupAdapter;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 import io.github.untactorder.data.Customer;
 import io.github.untactorder.data.Order;
 import io.github.untactorder.data.OrderAdapter;
-import io.github.untactorder.network.NetworkService;
+import io.github.untactorder.network.ApplicationLayer;
 import io.github.untactorder.network.NetworkService.RequestType;
 
+import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Objects;
 
 import static io.github.untactorder.androidclient.PasswordInputActivity.RESULT_INCORRECT;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ApplicationLayer {
     String TAG = "UntactOrder.main";
-    boolean __DEBUG = true;
+    boolean __DEBUG = false;
 
     protected void println(String tag, String data, boolean showToast) {
         if (showToast) {
@@ -58,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     GridLayoutManager layoutManager = null; int gridSpan = 1; boolean adaptedGridSpan = true;
     OrderAdapter orderAdapter = new OrderAdapter();
 
+    LinkedList<RequestType> toNetThread = new LinkedList<>();
+    NetworkThread netThread = new NetworkThread();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 메뉴 어뎁터에 추천 카테고리 이름 지정
         MenuGroupAdapter.setRecmMenuCategoryName(getResources().getString(R.string.at_menu_select_category_recm));
+
+        netThread.start();
 
         /*
         AndPermission.with(this)
@@ -108,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                         String qrData = Objects.requireNonNull(result.getData()).getStringExtra("value");
                         println(qrData);
                         if (qrCodeParser(qrData)) {
-                            runPasswordActivity();
+                            toNetThread.add(RequestType.TableCheck);
                         } else {
                             println(TAG, getString(R.string.at_qrsc_invalid_msg), true);
                         }
@@ -127,31 +134,11 @@ public class MainActivity extends AppCompatActivity {
                             String pw = Objects.requireNonNull(result.getData()).getStringExtra("password");
                             if (pw != null) {
                                 println("Password: " + pw);
-
-                                Intent signUpIntent = new Intent(this, NetworkService.class);
-                                signUpIntent.putExtra("command", RequestType.SignUp);
-                                println("run Network Service - SignUp");
-                                startActivity(signUpIntent);
-                                pwinaclc_loop:
-                                while (true) {
-                                    if (NetworkService.RESULT_ARRAY.size() > 0) {
-                                        switch (NetworkService.RESULT_ARRAY.get(0)) {
-                                            case "ok":
-                                                NetworkService.RESULT_ARRAY.remove(0);
-                                                println("sign up success");
-
-                                                runMenuSelectActivity();
-                                                break pwinaclc_loop;
-                                            default:
-                                                NetworkService.RESULT_ARRAY.remove(0);
-                                                println("sign up failed");
-                                                Customer.setPw(null);
-                                                break pwinaclc_loop;
-                                        }
-                                    } else {
-                                        Thread.yield();
-                                    }
-                                }
+                                Customer.setPw(pw);
+                                println("RequestType.SignIn");
+                                toNetThread.add(RequestType.SignIn);
+                                println("RequestType.GetMenuList");
+                                toNetThread.add(RequestType.GetMenuList);
                             }
                             break;
                         case RESULT_CANCELED:
@@ -169,32 +156,10 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result != null && result.getResultCode() == RESULT_OK) {
-                        Map<String, String> orderMap = Objects.requireNonNull(result.getData()).getParcelableExtra("orderMap");
+                        Map<String, String> orderMap = (Map<String, String>) Objects.requireNonNull(result.getData()).getSerializableExtra("orderMap");
                         println("" + orderMap);
-
-                        Intent putNewOrder = new Intent(this, NetworkService.class);
-                        putNewOrder.putExtra("orderMap", (Parcelable) orderMap);
-                        startService(putNewOrder);
-                        menuslectaclc_loop:
-                        while (true) {
-                            if (NetworkService.RESULT_ARRAY.size() > 0) {
-                                switch (NetworkService.RESULT_ARRAY.get(0)) {
-                                    case "ok":
-                                        NetworkService.RESULT_ARRAY.remove(0);
-                                        println("sign up success");
-
-                                        runMenuSelectActivity();
-                                        break menuslectaclc_loop;
-                                    default:
-                                        NetworkService.RESULT_ARRAY.remove(0);
-                                        println("sign up failed");
-                                        Customer.setPw(null);
-                                        break menuslectaclc_loop;
-                                }
-                            } else {
-                                Thread.yield();
-                            }
-                        }
+                        netThread.deliver(orderMap);
+                        toNetThread.add(RequestType.PutNewOrder);
                     }
                 }
         );
@@ -429,7 +394,7 @@ public class MainActivity extends AppCompatActivity {
             Intent qrIntent = new Intent(this, QrScanActivity.class);
             qrScanActivityLauncher.launch(qrIntent);
 
-            if (!__DEBUG) {
+            /*if (__DEBUG) {
                 orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
                 if (orderAdapter.getItemCount() == 1) {
                     layoutManager.setSpanCount(1);
@@ -441,30 +406,11 @@ public class MainActivity extends AppCompatActivity {
                 //https://todaycode.tistory.com/55
                 orderAdapter.notifyDataSetChanged(); // 사용하지 말자
                 fitOrderSeparatorSize();
-            }
+            }*/
         }
     }
 
     public void runPasswordActivity() {
-        Intent tableCheckIntent = new Intent(this, NetworkService.class);
-        tableCheckIntent.putExtra("command", RequestType.TableCheck);
-        println("run Network Service - TableCheck");
-        startActivity(tableCheckIntent);
-        while (Customer.getStatus() == null);
-        switch (Customer.getStatus()) {
-            case "multi":
-                println("multi user!!");
-                Customer.setStatus(null);
-                return;
-            case "null":
-                println("non existent table");
-                Customer.reset();
-                return;
-            case "disabled":
-                println("disabled table!!");
-                return;
-        }
-
         Intent passwordIntent = new Intent(this, PasswordInputActivity.class);
         passwordIntent.putExtra("input_type", InputType.Confirm);
         passwordIntent.putExtra("repeat_count", 1);
@@ -477,5 +423,108 @@ public class MainActivity extends AppCompatActivity {
         Intent menuSelectIntent = new Intent(this, MenuSelectActivity.class);
         println("run Menu Select Activity");
         menuSelectActivityLauncher.launch(menuSelectIntent);
+    }
+
+    class NetworkThread extends Thread {
+        protected Map<String, String> orderMap;
+
+        public synchronized Map<String, String> deliver(Map<String, String> map) {
+            if (map != null) {  // getter
+                Map<String, String> order = orderMap;
+                orderMap = null;
+                return order;
+            } else {  // setter
+                orderMap = map;
+                return null;
+            }
+        }
+
+        @Override
+        public void run() {
+            super.run();
+
+            while (true) {
+                if (toNetThread.size() > 0) {
+                    switch (Objects.requireNonNull(toNetThread.poll())) {
+                        case TableCheck: {
+                            try {
+                                println("run Network Service - TableCheck");
+                                println("ID:"+Customer.getId()+"/IP:"+Customer.getIp()+"/PORT:"+Customer.getPort());
+                                String check = tableCheck(
+                                        Customer.getId(),Customer.getIp(),Customer.getPort());
+                                println(check);
+                                Customer.setStatus(check);
+                                switch (Customer.getStatus()) {
+                                    case "multi":
+                                        println("multi user!!");
+                                        Customer.setStatus(null);
+                                        break;
+                                    case "null":
+                                        println("non existent table");
+                                        Customer.reset();
+                                        break;
+                                    case "disabled":
+                                        println("disabled table!!");
+                                        Customer.reset();
+                                        break;
+                                    default:
+                                        runOnUiThread(MainActivity.this::runPasswordActivity);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        }
+                        case SignIn: {
+                            try {
+                                if (Customer.getStatus().equals("none")) {
+                                    println("run Network Service - SignUp");
+                                    String res = signUp(Customer.getId(),Customer.getPw());
+                                } else if (Customer.getStatus().equals("ok")) {
+                                    println("run Network Service - SignIn");
+                                    String res = signIn(Customer.getId(),Customer.getPw());
+                                    if (!res.equals("ok")) {
+                                        throw new IOException();
+                                    }
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Customer.reset();
+                            }
+                            break;
+                        }
+                        case GetMenuList: {
+                            try {
+                                println("run Network Service - GetMenuList");
+                                MenuGroupAdapter.setMenuGroupFromMap(getMenuList());
+                                runOnUiThread(MainActivity.this::runMenuSelectActivity);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Customer.reset();
+                            }
+                            break;
+                        }
+                        case PutNewOrder: {
+                            Map<String, String> order = deliver(null);
+                            try {
+                                println("run Network Service - PutNewOrder");
+                                if (order != null) {
+                                    String res = putNewOrder(order);
+                                    runOnUiThread(orderAdapter::notifyDataSetChanged);
+                                } else {
+                                    throw new IOException();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Customer.reset();
+                            }
+                            break;
+                        }
+                    }
+                } else {
+                    Thread.yield();
+                }
+            }
+        }
     }
 }

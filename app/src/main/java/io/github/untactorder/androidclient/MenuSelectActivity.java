@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.github.untactorder.data.*;
 
+import java.io.Serializable;
 import java.util.Map;
 
 
@@ -25,14 +26,15 @@ public class MenuSelectActivity extends AppCompatActivity {
         menuListView.setLayoutManager(menuListLayoutManager);
         menuGroupView.setLayoutManager(menuGroupLayoutManager);
 
-        menuListView.setAdapter(new MenuAdapter());
-        menuGroupView.setAdapter(new MenuGroupAdapter());
+        MenuAdapter menuAdapter = new MenuAdapter();
+        menuListView.setAdapter(menuAdapter);
+        menuGroupView.setAdapter(new MenuGroupAdapter(menuAdapter));
     }
 
     public void onProceedOrderButtonClicked(View v) {
         Map<String, String> orderMap = MenuGroupAdapter.makeOrderMap();
         Intent menuIntent = new Intent(this,MainActivity.class);
-        menuIntent.putExtra("orderMap", (Parcelable) orderMap);
+        menuIntent.putExtra("orderMap", (Serializable) orderMap);
         startActivity(menuIntent);
         super.finish();
     }

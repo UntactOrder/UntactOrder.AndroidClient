@@ -1,41 +1,39 @@
 package io.github.untactorder.data;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 주문
  * @author 유채민
  */
-public class Order {
+public class Order extends HashMap<String, String> {
     protected String orderId;
-    protected String menu;
     protected int totalPrice;
+    protected String orderMenuList;
 
-    public Order(String orderId, String menu, int totalPrice) {
+    public Order(String orderId, Map order) {
+        super((Map<String, String>) order);
         this.orderId = orderId;
-        this.menu = menu;
-        this.totalPrice = totalPrice;
+        this.totalPrice = 0;
+        this.orderMenuList = "";
+        this.forEach((id, val) -> {
+            Menu menu = MenuGroupAdapter.findMenuById(id);
+            this.totalPrice += menu.getPrice() * Integer.parseInt((val));
+            this.orderMenuList += menu.getName() + "  x" + val;
+        });
     }
 
     public String getOrderId() {
         return orderId;
     }
 
-    public String getMenu() {
-        return menu;
-    }
-
     public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public void setMenu(String menu) {
-        this.menu = menu;
-    }
-
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
+    public String getOrderMenuList() {
+        return orderMenuList;
     }
 }

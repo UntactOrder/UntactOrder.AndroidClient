@@ -107,7 +107,7 @@ public class NetworkService extends Service implements ApplicationLayer {
                 }
                 case GetOrderList: {
                     try {
-                        Map<String, Map<String, String>> orders = getOrderList(Customer.getId());
+                        Map<String, Map<String, Object>> orders = getOrderList(Customer.getId());
                         //
                         RESULT_ARRAY.add("ok");
                     } catch (IOException e) {
