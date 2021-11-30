@@ -394,7 +394,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
             Intent qrIntent = new Intent(this, QrScanActivity.class);
             qrScanActivityLauncher.launch(qrIntent);
 
-            /*if (__DEBUG) {
+            /*if (!__DEBUG) {
                 orderAdapter.addItem(new Order("2021.11.11 13:05:20", "봉골레 파스타  x2\n새우 베이컨 필라프  x1\n해물 리조토  x1", 49500));
                 if (orderAdapter.getItemCount() == 1) {
                     layoutManager.setSpanCount(1);
