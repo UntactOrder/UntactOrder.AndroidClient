@@ -19,7 +19,7 @@ public class PasswordInputActivity extends AppCompatActivity {
     public static final int RESULT_INCORRECT = -300;
 
     String TAG = "PwIn";
-    boolean __DEBUG = true;
+    boolean __DEBUG = false;
 
     protected void println(String tag, String data, boolean showToast) {
         if (showToast) {
