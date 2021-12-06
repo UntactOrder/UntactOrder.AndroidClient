@@ -164,14 +164,8 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
         findViewById(R.id.main_bt_guide_top).setSelected(true);
 
         // seperator 크기 조정 (람다식으로 하면 리스너 삭제가 제대로 안되네? 흠....)
-        View total = findViewById(R.id.main_tv_total_price_body);
-        total.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                fitOrderSeparatorSize(); println(">> seperator is fitted");
-                //removeOnGlobalLayoutListener(total.getViewTreeObserver(), this);
-            }
-        });
+        total = findViewById(R.id.main_tv_total_price_body);
+        setOnTotalPriceTextViewGlobalLayoutListener();
 
         // 오더 어댑터 관련
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -186,7 +180,19 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
         orderListView.setEnabled(false);
     }
 
-    private static void removeOnGlobalLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
+    View total;
+    private void setOnTotalPriceTextViewGlobalLayoutListener() {
+        total.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                fitOrderSeparatorSize(); println(">> seperator is fitted");
+                removeOnGlobalLayoutListener(total.getViewTreeObserver(), this);
+            }
+        });
+    }
+
+
+    private void removeOnGlobalLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
         if (observer != null) observer.removeOnGlobalLayoutListener(listener);
     }
 
@@ -515,7 +521,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
                                     println("run Network Service - PutNewOrder "+order+"");
                                     String orderId = putNewOrder(order);
                                     runOnUiThread(() -> OrderAdapter.addItemFromMap(orderId, order));
-                                    runOnUiThread(MainActivity.this::fitOrderSeparatorSize);
+                                    runOnUiThread(MainActivity.this::setOnTotalPriceTextViewGlobalLayoutListener);
                                 } else {
                                     throw new IOException();
                                 }
@@ -530,7 +536,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
                                 println("run Network Service - GetOrderList");
                                 Map<String, Map<String, Object>> orders = getOrderList(Customer.getId());
                                 runOnUiThread(() -> OrderAdapter.setOrderListFromMap(orders));
-                                runOnUiThread(MainActivity.this::fitOrderSeparatorSize);
+                                runOnUiThread(MainActivity.this::setOnTotalPriceTextViewGlobalLayoutListener);
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 Customer.reset();

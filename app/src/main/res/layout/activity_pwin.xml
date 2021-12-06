@@ -22,14 +22,14 @@
                 android:gravity="center"
                 android:id="@+id/pwin_tv_table_num"
                 android:background="@color/ac_pwin_table_name_background"
-                android:paddingTop="10dip"
-                android:paddingBottom="10dip"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/at_pwin_table_name"
-                android:paddingStart="15dip"
-                android:paddingEnd="15dip"
-                android:elevation="1.5dip"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:elevation="5dp"
                 app:layout_constraintBottom_toTopOf="@id/pwin_tv_guide_msg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:textSize="18sp"/>
 
         <LinearLayout
                 android:orientation="horizontal"
@@ -136,140 +137,8 @@
                 app:layout_constraintStart_toStartOf="parent">
 
             <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                <Button
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/at_pwin_num_pad_text"
-                        android:id="@+id/pwin_bt_num_pad_7"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="7"
-                        android:layout_weight="1"
-                        android:onClick="onNumPadClicked"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
-                        android:backgroundTint="@color/at_pwin_num_pad_background"
-                        style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"
-                        android:gravity="center|center_horizontal|center_vertical"/>
-
-                <Button
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/at_pwin_num_pad_text"
-                        android:id="@+id/pwin_bt_num_pad_8"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="8"
-                        android:layout_weight="1"
-                        android:onClick="onNumPadClicked"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
-                        android:backgroundTint="@color/at_pwin_num_pad_background"
-                        style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"
-                        android:gravity="center|center_horizontal|center_vertical"/>
-
-                <Button
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/at_pwin_num_pad_text"
-                        android:id="@+id/pwin_bt_num_pad_9"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="9"
-                        android:layout_weight="1"
-                        android:onClick="onNumPadClicked"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
-                        android:backgroundTint="@color/at_pwin_num_pad_background"
-                        style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"
-                        android:gravity="center|center_horizontal|center_vertical"/>
-            </TableRow>
-
-            <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                <Button
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/at_pwin_num_pad_text"
-                        android:id="@+id/pwin_bt_num_pad_4"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="4"
-                        android:layout_weight="1"
-                        android:onClick="onNumPadClicked"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
-                        android:backgroundTint="@color/at_pwin_num_pad_background"
-                        style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"
-                        android:gravity="center|center_horizontal|center_vertical"/>
-
-                <Button
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/at_pwin_num_pad_text"
-                        android:id="@+id/pwin_bt_num_pad_5"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="5"
-                        android:layout_weight="1"
-                        android:onClick="onNumPadClicked"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
-                        android:backgroundTint="@color/at_pwin_num_pad_background"
-                        style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"
-                        android:gravity="center|center_horizontal|center_vertical"/>
-
-                <Button
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/at_pwin_num_pad_text"
-                        android:id="@+id/pwin_bt_num_pad_6"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="6"
-                        android:layout_weight="1"
-                        android:onClick="onNumPadClicked"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
-                        android:backgroundTint="@color/at_pwin_num_pad_background"
-                        style="?android:buttonBarButtonStyle"
-                        tools:ignore="HardcodedText"
-                        android:gravity="center|center_horizontal|center_vertical"/>
-            </TableRow>
-
-            <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1">
 
                 <Button
@@ -286,7 +155,7 @@
                         android:onClick="onNumPadClicked"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
+                        android:elevation="3dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
                         tools:ignore="HardcodedText"
@@ -306,7 +175,7 @@
                         android:onClick="onNumPadClicked"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
+                        android:elevation="3dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
                         tools:ignore="HardcodedText"
@@ -326,7 +195,139 @@
                         android:onClick="onNumPadClicked"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
+                        android:elevation="3dp"
+                        android:backgroundTint="@color/at_pwin_num_pad_background"
+                        style="?android:buttonBarButtonStyle"
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                <Button
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/at_pwin_num_pad_text"
+                        android:id="@+id/pwin_bt_num_pad_4"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="4"
+                        android:layout_weight="1"
+                        android:onClick="onNumPadClicked"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:elevation="3dp"
+                        android:backgroundTint="@color/at_pwin_num_pad_background"
+                        style="?android:buttonBarButtonStyle"
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
+
+                <Button
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/at_pwin_num_pad_text"
+                        android:id="@+id/pwin_bt_num_pad_5"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="5"
+                        android:layout_weight="1"
+                        android:onClick="onNumPadClicked"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:elevation="3dp"
+                        android:backgroundTint="@color/at_pwin_num_pad_background"
+                        style="?android:buttonBarButtonStyle"
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
+
+                <Button
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/at_pwin_num_pad_text"
+                        android:id="@+id/pwin_bt_num_pad_6"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="6"
+                        android:layout_weight="1"
+                        android:onClick="onNumPadClicked"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:elevation="3dp"
+                        android:backgroundTint="@color/at_pwin_num_pad_background"
+                        style="?android:buttonBarButtonStyle"
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                <Button
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/at_pwin_num_pad_text"
+                        android:id="@+id/pwin_bt_num_pad_7"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="7"
+                        android:layout_weight="1"
+                        android:onClick="onNumPadClicked"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:elevation="3dp"
+                        android:backgroundTint="@color/at_pwin_num_pad_background"
+                        style="?android:buttonBarButtonStyle"
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
+
+                <Button
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/at_pwin_num_pad_text"
+                        android:id="@+id/pwin_bt_num_pad_8"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="8"
+                        android:layout_weight="1"
+                        android:onClick="onNumPadClicked"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:elevation="3dp"
+                        android:backgroundTint="@color/at_pwin_num_pad_background"
+                        style="?android:buttonBarButtonStyle"
+                        tools:ignore="HardcodedText"
+                        android:gravity="center|center_horizontal|center_vertical"/>
+
+                <Button
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/at_pwin_num_pad_text"
+                        android:id="@+id/pwin_bt_num_pad_9"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="9"
+                        android:layout_weight="1"
+                        android:onClick="onNumPadClicked"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:elevation="3dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
                         tools:ignore="HardcodedText"
@@ -352,12 +353,13 @@
                         android:onClick="onClearAllClicked"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
+                        android:elevation="3dp"
                         android:backgroundTint="@color/magenta"
                         style="?android:buttonBarButtonStyle"
                         android:gravity="center|center_horizontal|center_vertical"
                         android:autoSizeTextType="uniform"
-                        tools:targetApi="o"/>
+                        tools:targetApi="o"
+                        tools:ignore="TextContrastCheck"/>
 
                 <Button
                         android:textSize="30sp"
@@ -373,7 +375,7 @@
                         android:onClick="onNumPadClicked"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
+                        android:elevation="3dp"
                         android:backgroundTint="@color/at_pwin_num_pad_background"
                         style="?android:buttonBarButtonStyle"
                         tools:ignore="HardcodedText"
@@ -393,7 +395,7 @@
                         android:onClick="onClearOneClicked"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp"
-                        android:elevation="1dp"
+                        android:elevation="3dp"
                         android:backgroundTint="@color/yellow"
                         style="?android:buttonBarButtonStyle"
                         android:gravity="center|center_horizontal|center_vertical"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">언택트 오더</string>
+    <string name="app_name">언택트오더</string>
     <string name="at_pwin_guide">테이블 주문 비밀번호를 입력해주세요</string>
     <string name="at_pwin_del_all">전체 삭제</string>
     <string name="at_pwin_del_one">하나 삭제</string>

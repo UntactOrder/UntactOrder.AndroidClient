@@ -9,7 +9,7 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/shape_rect_top_corner"
             android:backgroundTint="@color/rc_ordr_list_order_body"
             android:elevation="5.4dp"
@@ -40,7 +40,7 @@
 
     <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/ordr_list_tv_menu"
             android:background="@color/rc_ordr_list_order_body"
             android:textColor="@color/white"
@@ -50,8 +50,7 @@
             android:elevation="5.4dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:gravity="start|top"
-            android:layout_weight="1"/>
+            android:gravity="start|top"/>
 
     <TextView
             android:layout_width="match_parent"
