@@ -40,7 +40,7 @@
 
     <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:id="@+id/ordr_list_tv_menu"
             android:background="@color/rc_ordr_list_order_body"
             android:textColor="@color/white"
@@ -50,7 +50,8 @@
             android:elevation="5.4dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:gravity="start|top"/>
+            android:gravity="start|top"
+            android:layout_weight="1"/>
 
     <TextView
             android:layout_width="match_parent"
