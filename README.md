@@ -19,13 +19,14 @@
 
 # 설치법
 ## 유의사항
-아직 없다.
+- 프로젝트 경로에 한글 끼워넣지 말자 (계정명이 한글이면... 드라이브 최상위에 클론 해서 빌드 해보고 안되면 ㅠㅠ)
+- 그래들이 . 붙어 있는 경로에서 빌드가 안되는거 같으니 레포 클론할 때 as AndroidClientApps 빼먹지 말자
 
 ### [빌드 전 사전 작업]
 <pre>(1). 개발 환경 세팅 필요 (상단 개발 환경 설명된 부분 참고)</pre>
 <pre>(2). git clone
 
-git clone https://github.com/UntactOrder/UntactOrder.AndroidClientApps.git
+git clone https://github.com/UntactOrder/UntactOrder.AndroidClientApps.git as AndroidClientApps
 </pre>
 <pre>(3). git branch(분기) 변경 - main/beta/dev </pre>
 <pre>(4). 프로젝트 루트에 local.properties 생성
