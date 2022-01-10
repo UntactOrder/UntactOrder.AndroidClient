@@ -5,9 +5,10 @@
 ![로고1](/app/src/main/res_ac/mipmap-xxxhdpi/ic_launcher.png)
 
 ### 개발 환경
-* IntelliJ IDEA with Android Extention
-* Gradle 7 (or up)
-* Android 11
+* IntelliJ IDEA 2021.3 with Android Extention (or up)
+* Gradle 7.3.3 (or up)
+* Android Gradle Plugin 7.0.4 (or up)
+* Android 11 (Android API 31 Platform JetBrains Runtime) (or up)
 
 ### 사용 언어
 * Java/Kotlin
