@@ -47,25 +47,27 @@ android {
             // that dimension.
             dimension "version"
             applicationIdSuffix ".androidclient"
+            namespace "io.github.untactorder.androidclient"
         }
         orderAssistant {
             dimension "version"
             applicationIdSuffix ".orderassistant"
+            namespace "io.github.untactorder.orderassistant"
         }
     }
 
     sourceSets {
         androidClient {
             // AndroidClient - UntactOrder
-            manifest.srcFile "src/AndroidManifest_AC.xml"
-            java.srcDirs = ['src/java']
-            res.srcDirs = ['src/res_ac']
+            manifest.srcFile "src/main/AndroidManifest_AC.xml"
+            java.srcDirs = ["src/main/java"]
+            res.srcDirs = ["src/main/res_ac"]
         }
         orderAssistant {
             // OrderAssistant - UntactOrder
-            manifest.srcFile "src/AndroidManifest_OA.xml"
-            java.srcDirs = ['src/java']
-            res.srcDirs = ['src/res_oa']
+            manifest.srcFile "src/main/AndroidManifest_OA.xml"
+            java.srcDirs = ["src/main/java"]
+            res.srcDirs = ["src/main/res_oa"]
         }
     }
 
