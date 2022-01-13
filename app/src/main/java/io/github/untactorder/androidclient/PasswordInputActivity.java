@@ -1,5 +1,6 @@
 package io.github.untactorder.androidclient;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class PasswordInputActivity extends AppCompatActivity {
     TextView[] circleView = new TextView[6];
     protected String password = "";
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +74,8 @@ public class PasswordInputActivity extends AppCompatActivity {
                 println("입력 타입 설정 : SignIn");
                 break;
             case Retry:
-                guide.setText(R.string.at_pwin_guide_retry);
+                repeatCount = intent.getIntExtra("repeat_count", 0);
+                guide.setText(getString(R.string.at_pwin_guide_retry)+'('+repeatCount+"/3)");
                 guide.setTextColor(ContextCompat.getColor(this, R.color.magenta));
                 println("입력 타입 설정 : Retry");
                 break;

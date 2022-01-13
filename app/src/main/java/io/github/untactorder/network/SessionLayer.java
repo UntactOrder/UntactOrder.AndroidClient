@@ -51,6 +51,9 @@ public interface SessionLayer {
     default String recv() throws IOException {
         InputStream input = clientSocket.getInputStream();
         while (input.available() == 0);
+        try {
+            Thread.sleep(100);  // 임시로 지연 시간 추가 (근본적으로는 바이트 크기를 헤더에 넣어야 할 듯)
+        } catch (InterruptedException ignored) {}
         byte[] byteArray = new byte[input.available()];
         int size = input.read(byteArray);
         if (size == -1) {
