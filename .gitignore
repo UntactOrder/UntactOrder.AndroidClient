@@ -3,7 +3,8 @@
 /local.properties
 /.idea/caches
 /.idea/libraries
-/.idea/modules.xml
+#/.idea/modules.xml
+/.idea/misc.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
@@ -15,3 +16,6 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# Firebase SDK
+/app/google-services.json

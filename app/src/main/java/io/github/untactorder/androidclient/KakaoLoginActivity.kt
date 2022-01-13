@@ -8,9 +8,29 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.common.util.Utility
 
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
+//import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import java.util.concurrent.TimeUnit
+
 class KakaoLoginActivity : AppCompatActivity() {
     private val TAG = "KakaoLoginActivity"
     private val DEBUG = true
+
+    // [START declare_auth]
+    private lateinit var auth: FirebaseAuth
+    // [END declare_auth]
+
+    private var storedVerificationId: String? = ""
+    private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +46,7 @@ class KakaoLoginActivity : AppCompatActivity() {
             if (error != null) {
                 Log.e(TAG, "로그인 실패", error)
                 Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-            }
-            else if (token != null) {
+            } else if (token != null) {
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
             }
@@ -40,4 +59,6 @@ class KakaoLoginActivity : AppCompatActivity() {
             UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
         }
     }
+
+
 }

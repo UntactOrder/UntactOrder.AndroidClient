@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.github.untactorder.androidclient.UsimUtil;
 import io.github.untactorder.data.MenuGroupAdapter;
 import io.github.untactorder.data.Customer;
 import io.github.untactorder.data.OrderAdapter;
