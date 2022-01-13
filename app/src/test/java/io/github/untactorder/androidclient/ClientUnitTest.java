@@ -25,7 +25,7 @@ public class ClientUnitTest extends NetworkService {
 
     int tableName = 1;
     String pw = "123456";
-    String ip = "127.0.0.1";
+    String ip = "192.168.219.101";
     Integer port = 53321;
 
     public String tableCheck_isWorking() throws IOException {
@@ -51,7 +51,7 @@ public class ClientUnitTest extends NetworkService {
 
     @Test
     public void test3_getMenuList_isWorking() throws IOException {
-        Map<String, Object> menus = getMenuList();
+        Map<String, Map<String, Object>> menus = getMenuList();
         menus.forEach((id, val) -> {
             System.out.println(id+" : "+val);
         });
@@ -69,7 +69,7 @@ public class ClientUnitTest extends NetworkService {
 
     @Test
     public void test5_getOrderList_isWorking() throws IOException {
-        Map<String, Object> orders = getOrderList(tableName);
+        Map<String, Map<String, Object>> orders = getOrderList(tableName);
         orders.forEach((id, val) -> {
             System.out.println(id+" : "+val);
         });

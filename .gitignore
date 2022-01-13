@@ -3,13 +3,19 @@
 /local.properties
 /.idea/caches
 /.idea/libraries
-/.idea/modules.xml
+#/.idea/modules.xml
+/.idea/misc.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
 /build
+/release
+/app/build
+/app/release
 /captures
 .externalNativeBuild
 .cxx
-local.properties
+
+# Firebase SDK
+/app/google-services.json

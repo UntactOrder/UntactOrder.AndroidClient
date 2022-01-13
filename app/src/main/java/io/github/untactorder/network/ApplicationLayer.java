@@ -1,5 +1,9 @@
 package io.github.untactorder.network;
 
+import android.util.Log;
+import io.github.untactorder.data.Order;
+import io.github.untactorder.data.OrderAdapter;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,31 +42,38 @@ import java.util.Objects;
  * * @author 유채민
  */
 public interface ApplicationLayer extends PresentationLayer {
+    String TAG = "ApplicationLayer";
 
     default String tableCheck(int tableName, String ip, int port) throws IOException {
+        Log.d(TAG, "Try to Connect");
         connect(ip, port);
 
+        Log.d(TAG, "Try to TableCheck");
         get("/customer/"+tableName);
         return (String) getRespond().get("respond");
     }
 
     default String signUp(int id, String pw) throws IOException {
+        Log.d(TAG, "signUp Method");
         Map<String, Object> map = new HashMap<>();
         map.put("id", id); map.put("pw", pw);
+        Log.d(TAG, "id:"+id+"/pw:"+pw);
         run("sign_up", map);
         return (String) getRespond().get("respond");
     }
 
     default String signIn(int id, String pw) throws IOException {
+        Log.d(TAG, "signIn Method");
         Map<String, Object> map = new HashMap<>();
         map.put("id", id); map.put("pw", pw);
+        Log.d(TAG, "id:"+id+"/pw:"+pw);
         run("sign_in", map);
         return (String) getRespond().get("respond");
     }
 
-    default Map<String, Object> getMenuList() throws IOException {
+    default Map<String, Map<String, Object>> getMenuList() throws IOException {
         get("/data/menu");
-        return (Map<String, Object>) getRespond().get("respond");
+        return (Map<String, Map<String, Object>>) getRespond().get("respond");
     }
 
     default String putNewOrder(Map<String, String> order) throws IOException {
@@ -77,8 +88,8 @@ public interface ApplicationLayer extends PresentationLayer {
         }
     }
 
-    default Map<String, Object> getOrderList(int tableName) throws IOException {
+    default Map<String, Map<String, Object>> getOrderList(int tableName) throws IOException {
         get("/customer/"+tableName+"/orderlist");
-        return (Map<String, Object>) getRespond().get("respond");
+        return (Map<String, Map<String, Object>>) getRespond().get("respond");
     }
 }

@@ -1,5 +1,6 @@
 package io.github.untactorder.data;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,9 +43,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         return currentViewingMenuItems.size();
     }
 
-    public class MenuViewHolder extends RecyclerView.ViewHolder {
+    public static class MenuViewHolder extends RecyclerView.ViewHolder {
         TextView menuNameView, priceView, quantityView;
 
+        @SuppressLint("SetTextI18n")
         public MenuViewHolder(View view){
             super(view);
 
@@ -52,14 +54,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             priceView = view.findViewById(R.id.menu_tx_price);
             quantityView = view.findViewById(R.id.menu_tx_quantity);
 
-            view.findViewById(R.id.menu_tx_minus).setOnClickListener(v -> {
-                quantityView.setText(""+currentViewingMenuItems.get(getAdapterPosition()).decreaseQuantity());
-            });
-            view.findViewById(R.id.menu_tx_plus).setOnClickListener(v -> {
-                quantityView.setText(""+currentViewingMenuItems.get(getAdapterPosition()).increaseQuantity());
-            });
+            view.findViewById(R.id.menu_tx_minus).setOnClickListener(v ->
+                    quantityView.setText(""+currentViewingMenuItems.get(getAdapterPosition()).decreaseQuantity()));
+            view.findViewById(R.id.menu_tx_plus).setOnClickListener(v ->
+                    quantityView.setText(""+currentViewingMenuItems.get(getAdapterPosition()).increaseQuantity()));
         }
 
+        @SuppressLint("SetTextI18n")
         public void setItem(Menu item) {
             menuNameView.setText(item.getName());
             priceView.setText(""+item.getPrice());
