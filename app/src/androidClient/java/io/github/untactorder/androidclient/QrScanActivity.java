@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import io.github.untactorder.R;
 
 public class QrScanActivity extends AppCompatActivity {
     String barcodeValue, barcodeType;

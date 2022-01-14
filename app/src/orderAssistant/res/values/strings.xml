@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UntactOrder</string>
+    <string name="app_name">OrderAssistant</string>
     <string name="at_pwin_guide">Please input table password</string>
     <string name="at_pwin_del_all">Clear</string>
     <string name="at_pwin_del_one">Remove</string>

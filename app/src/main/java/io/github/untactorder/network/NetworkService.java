@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 import io.github.untactorder.data.Customer;
-import io.github.untactorder.data.Menu;
 import io.github.untactorder.data.MenuGroupAdapter;
 
 import java.io.IOException;

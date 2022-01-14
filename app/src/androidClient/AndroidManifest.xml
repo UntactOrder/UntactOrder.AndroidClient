@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="io.github.untactorder.androidclient">
+          package="io.github.untactorder">
 
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".KakaoLoginActivity"
+                android:name=".androidclient.KakaoLoginActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -46,21 +46,15 @@
             </intent-filter>
         </activity>
 
-        <service
-                android:name="io.github.untactorder.network.NetworkService"
-                android:enabled="true"
-                android:exported="false">
-        </service>
-
         <activity
-                android:name=".QrScanActivity"
+                android:name=".androidclient.QrScanActivity"
                 android:exported="false"/>
         <activity
-                android:name=".PasswordInputActivity"
+                android:name=".androidclient.PasswordInputActivity"
                 android:exported="false">
         </activity>
         <activity
-                android:name=".MenuSelectActivity"
+                android:name=".androidclient.MenuSelectActivity"
                 android:exported="false">
         </activity>
         <activity
@@ -68,20 +62,15 @@
                 android:exported="false">
         </activity>
         <activity
-                android:name=".MainActivity"
+                android:name=".androidclient.MainActivity"
                 android:exported="true">
         </activity>
-        <service
-                android:name="io.github.untactorder.network.NetworkService"
-                android:enabled="true"
-                android:exported="false">
-        </service>
         <activity
                 android:name="com.journeyapps.barcodescanner.CaptureActivity"
                 android:screenOrientation="fullSensor"
                 tools:replace="screenOrientation"/>
         <activity
-                android:name=".qr.CaptureActivityAnyOrientation"
+                android:name=".androidclient.qr.CaptureActivityAnyOrientation"
                 android:screenOrientation="fullSensor"
                 android:stateNotNeeded="true"
                 android:theme="@style/zxing_CaptureTheme"

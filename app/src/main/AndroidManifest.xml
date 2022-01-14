@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="io.github.untactorder.androidclient">
+          package="io.github.untactorder">
 
     <application
             android:allowBackup="true"
             tools:ignore="AllowBackup">
 
         <service
-                android:name="io.github.untactorder.network.NetworkService"
+                android:name=".network.NetworkService"
                 android:enabled="true"
                 android:exported="false">
         </service>
