@@ -1,8 +1,13 @@
 # [EN]Untact Order: Non-Contact Order<br/>[KO]언택트 오더: 비대면 주문
 > UntactOrder Android Client(주문 고객용 안드로이드 클라이언트 앱) <TargetSDK 31, MinSDK 24>
+> 
+![AC로고](/app/src/androidClient/ic_launcher-playstore.png)
+![AC로고1](/app/src/androidClient/res/mipmap-xxxhdpi/ic_launcher.png)
 
-![로고](/app/src/main/ic_launcher-playstore.png)
-![로고1](/app/src/main/res_ac/mipmap-xxxhdpi/ic_launcher.png)
+> UntactOrder Order Assistant(자영업자용 주문 관리 클라이언트 앱) <TargetSDK 31, MinSDK 24>
+> 
+![OA로고](/app/src/orderAssistant/ic_launcher-playstore.png)
+![OA로고1](/app/src/orderAssistant/res/mipmap-xxxhdpi/ic_launcher.png)
 
 ### 개발 환경
 * IntelliJ IDEA 2021.3 with Android Extention (or up)
@@ -16,18 +21,18 @@
 * etc
 
 ### 필요 모듈
-* etc...
+* etc... (build.gradle 참조)
 
 # 설치법
 ## 유의사항
 - 프로젝트 경로에 한글 끼워넣지 말자 (계정명이 한글이면... 드라이브 최상위에 클론 해서 빌드 해보고 안되면 ㅠㅠ)
-- 그래들이 . 붙어 있는 경로에서 빌드가 안되는거 같으니 레포 클론할 때 as AndroidClientApps 빼먹지 말자
+- 그래들이 . 붙어 있는 경로에서 빌드가 안되는거 같으니 레포 클론할 때 AndroidClientApps로 폴더명 바꾸는거 잊지 말자
 
 ### [빌드 전 사전 작업]
 <pre>(1). 개발 환경 세팅 필요 (상단 개발 환경 설명된 부분 참고)</pre>
 <pre>(2). git clone
 
-git clone https://github.com/UntactOrder/UntactOrder.AndroidClientApps.git as AndroidClientApps
+git clone https://github.com/UntactOrder/UntactOrder.AndroidClientApps.git AndroidClientApps
 </pre>
 <pre>(3). git branch(분기) 변경 - main/beta/dev </pre>
 <pre>(4). 프로젝트 루트에 local.properties 생성
@@ -47,6 +52,7 @@ sdk.dir=C\:\\Users\\__YOUR_WINDOWS_USER_NAME__\\AppData\\Local\\Android\\Sdk
 kakao.sdk.native_app_key=__YOUR_KAKAO_SDK_NATIVE_APP_KEY__
 
 </pre>
+<pre>(5). firebase 프로젝트 설정 페이지에서 google-services.json 파일 받아 app 모듈 루트에 집어넣기 </pre>
 
 
 ### 1. ??
