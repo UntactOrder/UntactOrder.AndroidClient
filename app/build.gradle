@@ -19,11 +19,8 @@ android {
     buildToolsVersion "31.0.0"
 
     defaultConfig {
-        applicationId "io.github.untactorder.androidclient"
         minSdkVersion 24
         targetSdkVersion 31
-        versionCode 5
-        versionName "1.0.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -39,21 +36,23 @@ android {
 
     // Specifies one flavor dimension.
     // 참고 : https://developer.android.com/studio/build/build-variants#build-types
-    /*flavorDimensions "version"
+    flavorDimensions "version"
+    // Assigns this product flavor to the "version" flavor dimension.
+    // If you are using only one dimension, this property is optional,
+    // and the plugin automatically assigns all the module's flavors to
+    // that dimension.
     productFlavors {
         androidClient {
-            // Assigns this product flavor to the "version" flavor dimension.
-            // If you are using only one dimension, this property is optional,
-            // and the plugin automatically assigns all the module's flavors to
-            // that dimension.
             dimension "version"
-            applicationIdSuffix ".androidclient"
-            namespace "io.github.untactorder.androidclient"
+            applicationId "io.github.untactorder.androidclient"
+            versionCode 5
+            versionName "1.0.0.3"
         }
         orderAssistant {
             dimension "version"
-            applicationIdSuffix ".orderassistant"
-            namespace "io.github.untactorder.orderassistant"
+            applicationId "io.github.untactorder.orderassistant"
+            versionCode 1
+            versionName "1.0.0.0"
         }
     }
 
@@ -61,16 +60,16 @@ android {
         androidClient {
             // AndroidClient - UntactOrder
             manifest.srcFile "src/androidClient/AndroidManifest.xml"
-            java.srcDirs += "src/androidClient/java"
-            res.srcDirs += "src/androidClient/res"
+            java.srcDirs = ["src/common/java", "src/androidClient/java", "src/common/kotlin", "src/androidClient/kotlin"]
+            res.srcDirs = ["src/common/res", "src/androidClient/res"]
         }
         orderAssistant {
             // OrderAssistant - UntactOrder
             manifest.srcFile "src/orderAssistant/AndroidManifest.xml"
-            java.srcDirs += "src/orderAssistant/java"
-            res.srcDirs += "src/orderAssistant/res"
+            java.srcDirs = ["src/common/java", "src/orderAssistant/java", "src/common/kotlin", "src/orderAssistant/kotlin"]
+            res.srcDirs = ["src/common/res", "src/orderAssistant/res"]
         }
-    }*/
+    }
 
     buildTypes {
         debug {

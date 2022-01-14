@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle">
+
+    <solid android:color="@color/at_main_total_price_background"/>
+    <size
+            android:height="10dp"
+            android:width="10dp"/>
+    <corners
+            android:bottomLeftRadius="24dp"
+            android:bottomRightRadius="24dp"
+            android:topLeftRadius="24dp"
+            android:topRightRadius="24dp"/>
+</shape>
