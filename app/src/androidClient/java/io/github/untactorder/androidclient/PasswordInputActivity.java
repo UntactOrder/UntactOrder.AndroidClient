@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
+import io.github.untactorder.R;
 import io.github.untactorder.data.Customer;
 
 enum InputType {SignUp, Confirm, SignIn, Retry}

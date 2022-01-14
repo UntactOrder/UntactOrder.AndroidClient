@@ -1,8 +1,6 @@
 package io.github.untactorder.network;
 
 import android.util.Log;
-import io.github.untactorder.data.Order;
-import io.github.untactorder.data.OrderAdapter;
 
 import java.io.IOException;
 import java.util.HashMap;

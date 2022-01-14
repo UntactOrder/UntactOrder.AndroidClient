@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-import io.github.untactorder.androidclient.R;
+import io.github.untactorder.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

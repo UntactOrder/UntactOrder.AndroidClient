@@ -18,6 +18,7 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 //import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import io.github.untactorder.R
 import java.util.concurrent.TimeUnit
 
 class KakaoLoginActivity : AppCompatActivity() {

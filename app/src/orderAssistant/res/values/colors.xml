@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="gray_primary_light">#FFF1F2F4</color>
+    <color name="gray_primary_dark">#FF3B3B42</color>
+    <color name="grey_deep">#FF707070</color>
+    <color name="grey_deep_dark">#FF3C3B41</color>
+    <color name="magenta">#FFFF7C80</color>
+    <color name="yellow">#FFF9BF00</color>
+    <color name="purple_deep">#FF9291BE</color>
+
+    <!-- 액티비티 레이아웃별 색상 지정 -->
+    <!-- activity_main -->
+    <color name="at_main_new_order_body">#FF878696</color>
+    <color name="at_main_new_order_plus_btn">@color/gray_primary_dark</color>
+    <color name="at_main_new_order_text">@color/gray_primary_light</color>
+    <color name="at_main_total_price_background">#FFF4F4F4</color>
+    <!-- activity_pwin -->
+    <color name="at_pwin_num_pad_text">@color/grey_deep</color>
+    <color name="at_pwin_num_pad_background">@color/white</color>
+    <color name="at_pwin_pw_view_circle_ordinal">@color/white</color>
+    <color name="at_pwin_pw_view_circle_pressed">@color/gray_primary_light</color>
+    <color name="at_pwin_pw_view_circle_filled">@color/purple_deep</color>
+    <color name="ac_pwin_table_name_background">#FFDBDBDC</color>
+    <!-- recycler_ordr_list -->
+    <color name="rc_ordr_list_order_body">@color/grey_deep_dark</color>
+</resources>
