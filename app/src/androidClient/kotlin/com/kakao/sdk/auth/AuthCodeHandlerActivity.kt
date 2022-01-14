@@ -2,7 +2,7 @@ package com.kakao.sdk.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import io.github.untactorder.androidclient.R
+import io.github.untactorder.R
 
 class AuthCodeHandlerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

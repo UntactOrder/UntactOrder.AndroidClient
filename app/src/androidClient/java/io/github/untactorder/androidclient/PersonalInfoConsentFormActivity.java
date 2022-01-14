@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.Window;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import io.github.untactorder.R;
 
 public class PersonalInfoConsentFormActivity extends AppCompatActivity {
 

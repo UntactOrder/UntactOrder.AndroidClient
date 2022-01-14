@@ -19,11 +19,9 @@ android {
     buildToolsVersion "31.0.0"
 
     defaultConfig {
-        applicationId "io.github.untactorder.androidclient"
+        applicationId "io.github.untactorder"
         minSdkVersion 24
         targetSdkVersion 31
-        versionCode 5
-        versionName "1.0.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -39,21 +37,23 @@ android {
 
     // Specifies one flavor dimension.
     // 참고 : https://developer.android.com/studio/build/build-variants#build-types
-    /*flavorDimensions "version"
+    flavorDimensions "version"
+    // Assigns this product flavor to the "version" flavor dimension.
+    // If you are using only one dimension, this property is optional,
+    // and the plugin automatically assigns all the module's flavors to
+    // that dimension.
     productFlavors {
         androidClient {
-            // Assigns this product flavor to the "version" flavor dimension.
-            // If you are using only one dimension, this property is optional,
-            // and the plugin automatically assigns all the module's flavors to
-            // that dimension.
             dimension "version"
             applicationIdSuffix ".androidclient"
-            namespace "io.github.untactorder.androidclient"
+            versionCode 5
+            versionName "1.0.0.3"
         }
         orderAssistant {
             dimension "version"
             applicationIdSuffix ".orderassistant"
-            namespace "io.github.untactorder.orderassistant"
+            versionCode 1
+            versionName "1.0.0.0"
         }
     }
 
@@ -61,16 +61,16 @@ android {
         androidClient {
             // AndroidClient - UntactOrder
             manifest.srcFile "src/androidClient/AndroidManifest.xml"
-            java.srcDirs += "src/androidClient/java"
-            res.srcDirs += "src/androidClient/res"
+            java.srcDirs = ["src/androidClient/java", "src/main/java", "src/androidClient/kotlin", "src/main/kotlin"]
+            res.srcDirs = ["src/androidClient/res", "src/main/res"]
         }
         orderAssistant {
             // OrderAssistant - UntactOrder
             manifest.srcFile "src/orderAssistant/AndroidManifest.xml"
-            java.srcDirs += "src/orderAssistant/java"
-            res.srcDirs += "src/orderAssistant/res"
+            java.srcDirs = ["src/orderAssistant/kotlin", "src/main/kotlin"]
+            res.srcDirs = ["src/orderAssistant/res", "src/main/res"]
         }
-    }*/
+    }
 
     buildTypes {
         debug {
@@ -110,26 +110,26 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     // Kakao SDK 사용을 위한 의존성 모듈 | API 21: Android 5.0(Lollipop) 이상이어야 함
-    implementation "com.kakao.sdk:v2-user:2.8.4" // 카카오 로그인
-    //implementation "com.kakao.sdk:v2-talk:2.8.4" // 친구, 메시지(카카오톡)
-    //implementation "com.kakao.sdk:v2-link:2.8.4" // 메시지(카카오링크)
-    //implementation "com.kakao.sdk:v2-navi:2.8.4" // 카카오내비
-    //implementation "com.kakao.sdk:v2-story:2.8.4" // 카카오스토리
+    androidClientImplementation "com.kakao.sdk:v2-user:2.8.4" // 카카오 로그인
+    //androidClientImplementation "com.kakao.sdk:v2-talk:2.8.4" // 친구, 메시지(카카오톡)
+    //androidClientImplementation "com.kakao.sdk:v2-link:2.8.4" // 메시지(카카오링크)
+    //androidClientImplementation "com.kakao.sdk:v2-navi:2.8.4" // 카카오내비
+    //androidClientImplementation "com.kakao.sdk:v2-story:2.8.4" // 카카오스토리
 
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     // Add the dependency for the Firebase SDK for Google Analytics
     // When using the BoM, don't specify versions in Firebase dependencies
-    implementation 'com.google.firebase:firebase-analytics-ktx'
+    androidClientImplementation 'com.google.firebase:firebase-analytics-ktx'
     // Declare the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-auth'
+    androidClientImplementation 'com.google.firebase:firebase-auth'
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 
     // 기타 모듈
-    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.40'  // 유심 관련 라이브러리
-    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'  // qr 관련 라이브러리
-    implementation 'com.google.zxing:core:3.4.1'  // qr 관련 라이브러리
+    androidClientImplementation 'com.googlecode.libphonenumber:libphonenumber:8.12.41'  // 유심 관련 라이브러리
+    androidClientImplementation 'com.journeyapps:zxing-android-embedded:4.3.0'  // qr 관련 라이브러리
+    androidClientImplementation 'com.google.zxing:core:3.4.1'  // qr 관련 라이브러리
     implementation 'com.google.code.gson:gson:2.8.9'  // json 관련 라이브러리
 }

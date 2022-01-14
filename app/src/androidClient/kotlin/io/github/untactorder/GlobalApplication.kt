@@ -2,7 +2,7 @@ package io.github.untactorder
 
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
-import io.github.untactorder.androidclient.BuildConfig
+import io.github.untactorder.BuildConfig
 
 class GlobalApplication : Application() {
     override fun onCreate() {

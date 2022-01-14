@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import io.github.untactorder.androidclient.R;
+import io.github.untactorder.R;
 
 import java.util.ArrayList;
 
