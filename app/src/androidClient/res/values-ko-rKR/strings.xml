@@ -37,4 +37,19 @@
     <string name="at_menu_select_quantity">수량</string>
     <string name="at_menu_select_done">완료하기</string>
     <string name="at_menu_select_category_recm">추천</string>
+
+    <string name="at_main_footer_msg">언택트오더 안드로이드 클라이언트\nby UntactOrder Developers – An OpenSource Organization</string>
+    <string name="at_main_userinfo_title_msg">내 정보</string>
+    <string name="at_main_userinfo_guide_msg">자세한 계정 정보를 보려면\n여기를 누르세요!</string>
+    <string name="at_main_userinfo_profile_content_description">사용자 계정 프로필 사진</string>
+    <string name="at_main_userinfo_history_title_msg">최근 30일 주문 내역</string>
+    <string name="at_main_userinfo_history_count_msg">주문 건</string>
+    <string name="at_main_userinfo_history_storecount_msg">가맹점</string>
+    <string name="at_main_ordermenu_title_msg">매장 주문하기</string>
+    <string name="at_main_ordermenu_guide_msg">설명서가 다시 필요하시면\n여기를 누르세요!</string>
+    <string name="at_main_ordermenu_store_msg">연결된 매장이 없습니다.</string>
+    <string name="at_main_ordermenu_orderplacement_msg">QR 스캔해서 매장 연결하기</string>
+    <string name="at_main_ordermenu_location_title_msg">가맹점 위치 살펴보기</string>
+    <string name="at_main_ordermenu_location_map_msg">지도에서 위치 살펴보기</string>
+    <string name="at_main_ordermenu_location_list_msg">거리순으로 알아보기</string>
 </resources>

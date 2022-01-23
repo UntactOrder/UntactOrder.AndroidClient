@@ -1,19 +1,19 @@
 # [EN]Untact Order: Non-Contact Order<br/>[KO]언택트 오더: 비대면 주문
-> UntactOrder Android Client(주문 고객용 안드로이드 클라이언트 앱) <TargetSDK 31, MinSDK 24>
+> UntactOrder Android Client(주문 고객용 안드로이드 클라이언트 앱) <TargetSDK 32, MinSDK 24>
 > 
 ![AC로고](/app/src/androidClient/ic_launcher-playstore.png)
 ![AC로고1](/app/src/androidClient/res/mipmap-xxxhdpi/ic_launcher.png)
 
-> UntactOrder Order Assistant(자영업자용 주문 관리 클라이언트 앱) <TargetSDK 31, MinSDK 24>
+> UntactOrder Order Assistant(자영업자용 주문 관리 클라이언트 앱) <TargetSDK 32, MinSDK 24>
 > 
 ![OA로고](/app/src/orderAssistant/ic_launcher-playstore.png)
 ![OA로고1](/app/src/orderAssistant/res/mipmap-xxxhdpi/ic_launcher.png)
 
 ### 개발 환경
 * IntelliJ IDEA 2021.3 with Android Extention (or up)
-* Gradle 7.3.3 (or up)
-* Android Gradle Plugin 7.0.4 (or up)
-* Android 11 (Android API 31 Platform JetBrains Runtime) (or up)
+* Gradle 7.4-rc-1 (or up)
+* Android Gradle Plugin 7.1.0-alpha05 (or up)
+* Android 12L (Android API 32 Platform JetBrains Runtime) (or up)
 
 ### 사용 언어
 * Java/Kotlin

@@ -5,8 +5,8 @@
           android:fillType="evenOdd">
       <aapt:attr name="android:fillColor">
         <gradient android:gradientRadius="38.63098" android:centerX="46.606167" android:centerY="52.82228" android:type="radial" android:tileMode="clamp">
-          <item android:offset="0" android:color="#3F3B3838"/>
-          <item android:offset="0.39" android:color="#3F3B3838"/>
+          <item android:offset="0" android:color="#303B3838"/>
+          <item android:offset="0.39" android:color="#303B3838"/>
           <item android:offset="0.65" android:color="#00EDEDED"/>
           <item android:offset="1" android:color="#00EDEDED"/>
         </gradient>
@@ -16,7 +16,7 @@
           android:fillType="evenOdd">
       <aapt:attr name="android:fillColor">
         <gradient android:gradientRadius="14.252234" android:centerX="33.95062" android:centerY="41.439636" android:type="radial" android:tileMode="clamp">
-          <item android:offset="0" android:color="#333B3838"/>
+          <item android:offset="0" android:color="#303B3838"/>
           <item android:offset="0.55" android:color="#00EDEDED"/>
           <item android:offset="1" android:color="#00EDEDED"/>
         </gradient>
@@ -26,8 +26,8 @@
           android:fillType="evenOdd">
       <aapt:attr name="android:fillColor">
         <gradient android:gradientRadius="25.638914" android:centerX="70.75437" android:centerY="61.98936" android:type="radial" android:tileMode="clamp">
-          <item android:offset="0" android:color="#3F767171"/>
-          <item android:offset="0.26" android:color="#3F767171"/>
+          <item android:offset="0" android:color="#30767171"/>
+          <item android:offset="0.26" android:color="#30767171"/>
           <item android:offset="0.6" android:color="#00EDEDED"/>
           <item android:offset="1" android:color="#00EDEDED"/>
         </gradient>
@@ -47,7 +47,7 @@
           android:fillType="evenOdd">
       <aapt:attr name="android:fillColor">
         <gradient android:gradientRadius="15.049427" android:centerX="46.609524" android:centerY="54.986507" android:type="radial" android:tileMode="clamp">
-          <item android:offset="0" android:color="#26000000"/>
+          <item android:offset="0" android:color="#20000000"/>
           <item android:offset="0.45" android:color="#00EDEDED"/>
           <item android:offset="1" android:color="#00EDEDED"/>
         </gradient>
@@ -57,7 +57,7 @@
           android:fillType="evenOdd">
       <aapt:attr name="android:fillColor">
         <gradient android:gradientRadius="14.252268" android:centerX="59.132366" android:centerY="41.4396" android:type="radial" android:tileMode="clamp">
-          <item android:offset="0" android:color="#333B3838"/>
+          <item android:offset="0" android:color="#303B3838"/>
           <item android:offset="0.55" android:color="#00EDEDED"/>
           <item android:offset="1" android:color="#00EDEDED"/>
         </gradient>
@@ -100,8 +100,8 @@
           android:fillType="evenOdd">
       <aapt:attr name="android:fillColor">
         <gradient android:gradientRadius="1.3722897" android:type="radial" android:tileMode="clamp">
-          <item android:offset="0" android:color="#3F767171"/>
-          <item android:offset="0.08" android:color="#3F767171"/>
+          <item android:offset="0" android:color="#30767171"/>
+          <item android:offset="0.08" android:color="#30767171"/>
           <item android:offset="0.64" android:color="#00EDEDED"/>
           <item android:offset="1" android:color="#00EDEDED"/>
         </gradient>

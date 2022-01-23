@@ -1,0 +1,44 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.UntactOrder" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/signature_red</item>
+        <item name="colorPrimaryVariant">@color/signature_red</item>
+        <item name="colorOnPrimary">@color/signature_text</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/signature_yellow</item>
+        <item name="colorSecondaryVariant">@color/signature_yellow</item>
+        <item name="colorOnSecondary">@color/signature_text</item>
+        <!-- Status/Navi bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <!-- Display Cutout Mode --> <!-- default, shortEdges, never -->
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">shortEdges</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/signature_background</item>
+    </style>
+
+    <!-- SplashScreen theme. -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen.IconBackground">
+        // Set the splash screen background, animated icon, and animation duration.
+        <item name="windowSplashScreenBackground">@color/signature_background</item>
+
+        // Use windowSplashScreenAnimatedIcon to add either a drawable or an
+        // animated drawable. One of these is required.
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/splash_screen_icon_background_color</item>
+        <item name="windowSplashScreenAnimationDuration">0</item>  # Required for animated icons
+
+        // 스플래시 화면의 브랜드 이미지 지정은 디자인 가이드에서 권장되지 않음. 또한, 안드로이드 12 이상부터만 표시됨.
+        // 텍스트를 띄우려고 하는데 방법(api가 drawable 파일만 받아가는거 같은데...)이 없어서
+        // png로 저장한 후 https://image.online-convert.com/convert-to-svg 에서 svg로 변환하여 사용했음.
+        // 다크 모드 적용은 쉬운데, 언어는 xml 따로 또 만들어야 해서 귀찮으니 그냥 한글로만 하는걸로.
+        // 영어 알파벳 이미지도 굳이 넣고 싶다면 themex.xml을 언어별 values에 넣으면 될듯.
+        <item name="android:windowSplashScreenBrandingImage" tools:targetApi="s">@drawable/ic_splash_brand</item>
+
+        // Set the theme of the Activity that directly follows your splash screen.
+        <item name="postSplashScreenTheme">@style/Theme.UntactOrder</item>  # Required.
+    </style>
+</resources>

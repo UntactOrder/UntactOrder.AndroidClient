@@ -21,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.github.untactorder.R;
@@ -37,7 +38,7 @@ import java.util.Objects;
 
 import static io.github.untactorder.androidclient.PasswordInputActivity.RESULT_INCORRECT;
 
-public class MainActivity extends AppCompatActivity implements ApplicationLayer {
+public class MainActivity2 extends AppCompatActivity implements ApplicationLayer {
     String TAG = "UntactOrder.main";
     boolean __DEBUG = false;
 
@@ -60,9 +61,13 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        // 메뉴 어뎁터에 추천 카테고리 이름 지정
+        // Handle the splash screen transition.
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
+
+        setContentView(R.layout.activity_main2);
+
+        // 메뉴 어댑터에 추천 카테고리 이름 지정
         MenuGroupAdapter.setRecmMenuCategoryName(getResources().getString(R.string.at_menu_select_category_recm));
 
         netThread.start();
@@ -466,7 +471,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
                                         Customer.reset();
                                         break;
                                     default:
-                                        runOnUiThread(MainActivity.this::runPasswordActivity);
+                                        runOnUiThread(MainActivity2.this::runPasswordActivity);
                                 }
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -507,7 +512,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
                             try {
                                 println("run Network Service - GetMenuList");
                                 MenuGroupAdapter.setMenuGroupFromMap(getMenuList());
-                                runOnUiThread(MainActivity.this::runMenuSelectActivity);
+                                runOnUiThread(MainActivity2.this::runMenuSelectActivity);
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 Customer.reset();
@@ -522,7 +527,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
                                     println("run Network Service - PutNewOrder "+order+"");
                                     String orderId = putNewOrder(order);
                                     runOnUiThread(() -> OrderAdapter.addItemFromMap(orderId, order));
-                                    runOnUiThread(MainActivity.this::setOnTotalPriceTextViewGlobalLayoutListener);
+                                    runOnUiThread(MainActivity2.this::setOnTotalPriceTextViewGlobalLayoutListener);
                                 } else {
                                     throw new IOException();
                                 }
@@ -537,7 +542,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationLayer 
                                 println("run Network Service - GetOrderList");
                                 Map<String, Map<String, Object>> orders = getOrderList(Customer.getId());
                                 runOnUiThread(() -> OrderAdapter.setOrderListFromMap(orders));
-                                runOnUiThread(MainActivity.this::setOnTotalPriceTextViewGlobalLayoutListener);
+                                runOnUiThread(MainActivity2.this::setOnTotalPriceTextViewGlobalLayoutListener);
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 Customer.reset();
