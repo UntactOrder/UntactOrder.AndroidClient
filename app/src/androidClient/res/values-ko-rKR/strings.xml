@@ -48,8 +48,8 @@
     <string name="at_main_ordermenu_title_msg">매장 주문하기</string>
     <string name="at_main_ordermenu_guide_msg">설명서가 다시 필요하시면\n여기를 누르세요!</string>
     <string name="at_main_ordermenu_store_msg">연결된 매장이 없습니다.</string>
-    <string name="at_main_ordermenu_orderplacement_msg">QR 스캔해서 매장 연결하기</string>
+    <string name="at_main_ordermenu_orderplacement_msg">QR 스캔해서\n매장 연결하기</string>
     <string name="at_main_ordermenu_location_title_msg">가맹점 위치 살펴보기</string>
-    <string name="at_main_ordermenu_location_map_msg">지도에서 위치 살펴보기</string>
+    <string name="at_main_ordermenu_location_map_msg">지도에서 살펴보기</string>
     <string name="at_main_ordermenu_location_list_msg">거리순으로 알아보기</string>
 </resources>

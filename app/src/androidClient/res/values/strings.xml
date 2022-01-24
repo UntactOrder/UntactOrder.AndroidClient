@@ -41,9 +41,9 @@
     <string name="at_main_userinfo_history_storecount_msg">stores</string>
     <string name="at_main_ordermenu_title_msg">Order placing</string>
     <string name="at_main_ordermenu_guide_msg">Tab here to read\nthe instructions again!</string>
-    <string name="at_main_ordermenu_store_msg">None of stores was connected.</string>
-    <string name="at_main_ordermenu_orderplacement_msg">Connect to a store by scanning QR.</string>
-    <string name="at_main_ordermenu_location_title_msg">Explore the locations of the chain stores.</string>
-    <string name="at_main_ordermenu_location_map_msg">Find the location on the map.</string>
-    <string name="at_main_ordermenu_location_list_msg">Search by distance.</string>
+    <string name="at_main_ordermenu_store_msg">None of stores was connected</string>
+    <string name="at_main_ordermenu_orderplacement_msg">Connect to a store\nby scanning QR</string>
+    <string name="at_main_ordermenu_location_title_msg">Chain stores\' location</string>
+    <string name="at_main_ordermenu_location_map_msg">Find on the map</string>
+    <string name="at_main_ordermenu_location_list_msg">Search by distance</string>
 </resources>

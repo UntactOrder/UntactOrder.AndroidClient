@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import io.github.untactorder.BuildConfig
 import io.github.untactorder.R
 import io.github.untactorder.databinding.ActivityMainBinding
 
@@ -28,7 +29,9 @@ class MainActivity : AppCompatActivity() {
 
         // Set Activity Guideline position.
         val displayMetrics = resources.displayMetrics
-        println("Display Metrics: " + displayMetrics.widthPixels + "x" + displayMetrics.heightPixels)
+        if (BuildConfig.DEBUG) {
+            println("Display Metrics: " + displayMetrics.widthPixels + "x" + displayMetrics.heightPixels)
+        }
         if (displayMetrics.widthPixels / displayMetrics.heightPixels.toDouble() >= 0.85) {
             // toggle table mode variable
             isTabletMode = true
@@ -44,13 +47,25 @@ class MainActivity : AppCompatActivity() {
             // stretch ordermenu container - 이거 layout_constrainedHeight_min = wrap이 작동 안해서 한거
             // https://github.com/androidx/constraintlayout/issues/376
             // WRAP_CONTENT로 되어 있는 것을 전부 MATCH_CONSTRAINT로 변경해야 함
+            // 단, MATCH_CONSTRAINT로 해서 정상적으로 출력되려면 매장 주문하기의 높이가 커지는 방향으로만 변해야 함.
             layout.mainContainerOrdermenu.layoutParams.height = ConstraintLayout.LayoutParams.MATCH_CONSTRAINT
+            layout.mainWidgetOrdermenuOrderplacement.layoutParams.height = ConstraintLayout.LayoutParams.MATCH_CONSTRAINT
+            layout.mainDivOrdermenuOrderplacementCenter.visibility = View.VISIBLE
+            layout.mainListOrdermenuOrderlist.visibility = View.VISIBLE
             // fit margins
             var ordermenuParams = layout.mainContainerOrdermenu.layoutParams as ConstraintLayout.LayoutParams
             ordermenuParams.topMargin = dpToPixel(20)
             ordermenuParams.bottomMargin = dpToPixel(14)
             ordermenuParams.leftMargin = dpToPixel(10)
             (layout.mainContainerUserinfo.layoutParams as ConstraintLayout.LayoutParams).rightMargin = dpToPixel(10)
+            setOnGlobalLayoutListener(layout.mainBody, fun() {
+                if (layout.mainBody.top - layout.mainHeader.bottom > 1) {
+                    val thinSlogan = layout.mainTvSloganThin
+                    thinSlogan.setPadding(thinSlogan.paddingLeft,
+                        thinSlogan.paddingTop + layout.mainBody.top - layout.mainHeader.bottom,
+                        thinSlogan.paddingRight, thinSlogan.paddingBottom)
+                }
+            })
         }
     }
 
