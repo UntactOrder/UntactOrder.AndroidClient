@@ -90,7 +90,7 @@
             android:id="@+id/tx_finish"
             android:gravity="center"
             app:layout_constraintVertical_bias="0.97"
-            android:background="@drawable/shape_rect_category"
+            android:background="@drawable/shape_rect_all_corner_with_stroke_24"
             android:backgroundTint="#FFFFFF"
             android:onClick="onProceedOrderButtonClicked"
             android:elevation="6dp"/>

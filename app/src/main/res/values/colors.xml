@@ -25,5 +25,6 @@
     <color name="signature_white">@color/white</color>
     <color name="signature_grey">#FFEAEAEA</color>
     <color name="signature_text">@color/black</color>
+    <color name="signature_ripple">#FF949090</color>
     <color name="signature_background">#FFF7F7F7</color>
 </resources>

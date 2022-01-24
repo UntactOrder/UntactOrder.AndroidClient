@@ -57,7 +57,10 @@
                     android:paddingEnd="20dp"
                     android:paddingBottom="10dp"
                     android:textColor="@color/signature_text"
-                    app:layout_constrainedWidth="true"/>
+                    app:layout_constrainedWidth="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -130,7 +133,7 @@
                     android:id="@+id/main_container_ordermenu"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/main_guideline_start"
-                    android:background="@drawable/shape_rect_all_corner"
+                    android:background="@drawable/ripple_rect_all_corner_24"
                     android:backgroundTint="@color/signature_grey"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -139,7 +142,9 @@
                     app:layout_constraintBottom_toTopOf="@+id/main_container_userinfo"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    app:layout_constraintHeight_min="wrap">
+                    android:clickable="true"
+                    android:focusable="true"
+                    >
 
                 <TextView
                         android:text="@string/at_main_ordermenu_title_msg"
@@ -173,14 +178,15 @@
                         app:layout_constrainedWidth="true"
                         app:layout_constraintBottom_toBottomOf="@+id/main_tv_ordermenu_title"
                         android:gravity="center_vertical|end"
-                        tools:ignore="TextContrastCheck"/>
+                        tools:ignore="TextContrastCheck"
+                        android:padding="4dp"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="16dp"
-                        android:background="@drawable/shape_rect_all_corner"
+                        android:background="@drawable/ripple_rect_all_corner_24"
                         android:backgroundTint="@color/signature_purple"
                         android:elevation="5dp"
                         android:id="@+id/main_widget_ordermenu_storeinfo"
@@ -188,7 +194,9 @@
                         android:layout_marginTop="6dp"
                         app:layout_constraintWidth_percent="0.3"
                         app:layout_constraintBottom_toTopOf="@+id/main_widget_ordermenu_location"
-                        android:layout_marginBottom="16dp">
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                     <TextView
                             android:text="@string/at_main_ordermenu_store_msg"
@@ -219,7 +227,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/shape_rect_all_corner"
+                        android:background="@drawable/ripple_rect_all_corner_24"
                         android:backgroundTint="@color/signature_green"
                         android:elevation="5dp"
                         android:id="@+id/main_widget_ordermenu_orderplacement"
@@ -230,7 +238,10 @@
                         app:layout_constraintHorizontal_bias="1.0"
                         android:paddingBottom="12dp"
                         app:layout_constraintBottom_toTopOf="@+id/main_widget_ordermenu_location"
-                        android:layout_marginBottom="16dp">
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        >
 
                     <ImageView
                             android:layout_width="0dp"
@@ -247,7 +258,8 @@
                             android:layout_marginEnd="12dp"
                             android:tint="@color/white"
                             android:scaleType="fitCenter"
-                            app:layout_constraintHeight_min="50dp"/>
+                            app:layout_constraintHeight_min="50dp"
+                            />
 
                     <TextView
                             android:text="@string/at_main_ordermenu_orderplacement_msg"
@@ -318,7 +330,10 @@
                             android:visibility="gone"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintTop_toBottomOf="@id/main_tv_ordermenu_orderlist_title"
-                            android:layout_marginTop="12dp"/>
+                            android:layout_marginTop="12dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -329,14 +344,15 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/shape_rect_all_corner"
+                        android:background="@drawable/shape_rect_all_corner_24"
                         android:backgroundTint="@color/signature_red"
                         android:elevation="5dp"
                         android:id="@+id/main_widget_ordermenu_location"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:padding="12dp"
                         android:layout_marginBottom="16dp"
-                        >
+                        android:clickable="true"
+                        android:focusable="true">
 
                     <TextView
                             android:text="@string/at_main_ordermenu_location_title_msg"
@@ -367,7 +383,10 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/main_bt_ordermenu_location_map"
                             android:layout_weight="5"
-                            android:layout_gravity="center">
+                            android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground">
 
                         <ImageView
                                 android:layout_width="wrap_content"
@@ -432,6 +451,9 @@
                             android:id="@+id/main_bt_ordermenu_location_list"
                             android:layout_weight="5"
                             android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
                             >
 
                         <ImageView
@@ -447,7 +469,8 @@
                                 android:scaleType="fitCenter"
                                 android:layout_gravity="center"
                                 android:minHeight="50dp"
-                                android:minWidth="50dp"/>
+                                android:minWidth="50dp"
+                                android:elevation="5dp"/>
 
                         <TextView
                                 android:text="@string/at_main_ordermenu_location_list_msg"
@@ -476,7 +499,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/main_container_userinfo"
-                    android:background="@drawable/shape_rect_all_corner"
+                    android:background="@drawable/ripple_rect_all_corner_24"
                     android:backgroundTint="@color/signature_grey"
                     android:elevation="5dp"
                     app:layout_constraintEnd_toStartOf="@+id/main_guideline_end"
@@ -485,6 +508,8 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="14dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     >
 
                 <TextView
@@ -527,7 +552,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/shape_rect_all_corner"
+                        android:background="@drawable/shape_rect_all_corner_24"
                         android:backgroundTint="@color/signature_yellow"
                         android:elevation="5dp"
                         android:id="@+id/main_widget_userinfo_common"
@@ -599,7 +624,7 @@
                             android:layout_height="0dp"
                             app:layout_constraintDimensionRatio="H,1:1"
                             android:id="@+id/main_iv_userinfo_profile"
-                            android:background="@drawable/shape_circle"
+                            android:background="@drawable/shape_circle_25"
                             app:layout_constraintStart_toStartOf="parent"
                             android:layout_marginStart="12dp"
                             app:srcCompat="@drawable/ic_baseline_account_circle_24"
@@ -614,7 +639,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/shape_rect_all_corner"
+                        android:background="@drawable/shape_rect_all_corner_24"
                         android:backgroundTint="@color/signature_white"
                         android:elevation="5dp"
                         android:id="@+id/main_widget_userinfo_history"
@@ -747,7 +772,7 @@
                             android:tint="@color/white"
                             android:layout_weight="2"
                             android:layout_gravity="center_horizontal|fill_horizontal|center_vertical|fill_vertical"
-                            android:background="@drawable/shape_rect_all_corner"
+                            android:background="@drawable/shape_rect_all_corner_24"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="@+id/main_tv_userinfo_history_body"
                             app:layout_constraintTop_toTopOf="@+id/main_tv_userinfo_history_title"

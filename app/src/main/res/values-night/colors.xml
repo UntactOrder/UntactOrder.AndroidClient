@@ -9,5 +9,6 @@
     <color name="signature_white">#FFD0CECE</color>
     <color name="signature_grey">#FF646060</color>
     <color name="signature_text">@color/white</color>
+    <color name="signature_ripple">#FFDADADA</color>
     <color name="signature_background">#FF353333</color>
 </resources>
