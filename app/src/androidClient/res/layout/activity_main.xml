@@ -345,13 +345,14 @@
                             android:id="@+id/main_tv_ordermenu_location_title"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:fontFamily="@font/nanumbarungothic"
                             android:textColor="@color/white"
                             android:gravity="center|fill_vertical"
-                            android:layout_weight="5"
+                            android:layout_weight="5.2"
                             tools:ignore="TextContrastCheck"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:layout_marginStart="4dp"/>
 
                     <View
                             android:layout_width="0dp"
@@ -666,12 +667,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/main_tv_userinfo_history_count_value"
-                                android:textSize="36sp"
+                                android:textSize="30sp"
                                 android:fontFamily="@font/nanumbarungothicbold"
                                 android:textColor="@color/signature_yellow"
                                 android:gravity="start|center_vertical"
                                 tools:ignore="HardcodedText,TextContrastCheck"
-                                android:layout_marginStart="10dp"
                                 android:textAlignment="textEnd"
                                 android:layout_gravity="bottom"/>
 
@@ -711,7 +711,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/main_tv_userinfo_history_storecount_value"
-                                android:textSize="36sp"
+                                android:textSize="30sp"
                                 android:fontFamily="@font/nanumbarungothicbold"
                                 android:textColor="@color/signature_yellow"
                                 android:gravity="start|center_vertical"
@@ -742,7 +742,7 @@
                             android:layout_height="0dp"
                             android:id="@+id/main_iv_userinfo_history_icon"
                             app:srcCompat="@drawable/ic_baseline_history_edu_24"
-                            android:scaleType="centerCrop"
+                            android:scaleType="fitCenter"
                             android:contentDescription="@string/at_main_userinfo_profile_content_description"
                             android:tint="@color/white"
                             android:layout_weight="2"
@@ -754,7 +754,7 @@
                             android:layout_marginStart="12dp"
                             android:backgroundTint="@color/signature_yellow"
                             android:padding="4dp"
-                            app:layout_constraintDimensionRatio="H,1:1"
+                            app:layout_constraintDimensionRatio="H,1:1.35"
                             android:elevation="5dp"
                             tools:ignore="ImageContrastCheck"/>
 
