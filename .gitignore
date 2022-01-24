@@ -13,6 +13,8 @@
 /release
 /app/build
 /app/release
+/app/androidClient
+/app/orderAssistant
 /captures
 .externalNativeBuild
 .cxx

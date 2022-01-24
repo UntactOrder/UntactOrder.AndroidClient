@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         layout = ActivityMainBinding.inflate(layoutInflater)
         setContentView(layout.root)
 
-        // Set Activity Guideline position.
+        // Set Activity Guideline/Widget position.
         val displayMetrics = resources.displayMetrics
         if (BuildConfig.DEBUG) {
             println("Display Metrics: " + displayMetrics.widthPixels + "x" + displayMetrics.heightPixels)
