@@ -153,7 +153,8 @@
                         android:textSize="20sp"
                         android:fontFamily="@font/nanumbarungothic"
                         android:textColor="@color/signature_text"
-                        android:gravity="clip_vertical|start"/>
+                        android:gravity="clip_vertical|start"
+                        tools:ignore="TextContrastCheck"/>
 
                 <TextView
                         android:text="@string/at_main_ordermenu_guide_msg"
@@ -171,7 +172,8 @@
                         android:layout_marginEnd="16dp"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintBottom_toBottomOf="@+id/main_tv_ordermenu_title"
-                        android:gravity="center_vertical|end"/>
+                        android:gravity="center_vertical|end"
+                        tools:ignore="TextContrastCheck"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
@@ -185,7 +187,8 @@
                         app:layout_constraintTop_toBottomOf="@+id/main_tv_ordermenu_guide"
                         android:layout_marginTop="6dp"
                         app:layout_constraintWidth_percent="0.3"
-                        >
+                        app:layout_constraintBottom_toTopOf="@+id/main_widget_ordermenu_location"
+                        android:layout_marginBottom="16dp">
 
                     <TextView
                             android:text="@string/at_main_ordermenu_store_msg"
@@ -213,7 +216,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="16dp"
                         android:background="@drawable/shape_rect_all_corner"
@@ -226,7 +229,8 @@
                         android:layout_marginStart="16dp"
                         app:layout_constraintHorizontal_bias="1.0"
                         android:paddingBottom="12dp"
-                        >
+                        app:layout_constraintBottom_toTopOf="@+id/main_widget_ordermenu_location"
+                        android:layout_marginBottom="16dp">
 
                     <ImageView
                             android:layout_width="0dp"
@@ -280,9 +284,31 @@
                             app:layout_constraintTop_toBottomOf="@+id/main_tv_ordermenu_orderplacement"
                             android:layout_marginTop="12dp"/>
 
+                    <TextView
+                            android:text="@string/at_main_ordermenu_orderlist_title_msg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/main_tv_ordermenu_orderlist_title"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/nanumbarungothic"
+                            android:textColor="@color/white"
+                            android:gravity="center|fill_vertical"
+                            android:layout_gravity="center"
+                            app:layout_constraintTop_toBottomOf="@+id/main_div_ordermenu_orderplacement_center"
+                            tools:ignore="TextContrastCheck"
+                            app:layout_constrainedHeight="true"
+                            app:layout_constrainedWidth="true"
+                            android:layout_marginEnd="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="12dp"
+                            app:layout_goneMarginBottom="12dp"
+                            android:visibility="gone"/>
+
                     <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="0dp"
-                            android:layout_height="0dp"
+                            android:layout_height="wrap_content"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_marginEnd="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -291,7 +317,7 @@
                             android:id="@+id/main_list_ordermenu_orderlist"
                             android:visibility="gone"
                             app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintTop_toBottomOf="@+id/main_tv_ordermenu_orderplacement"
+                            app:layout_constraintTop_toBottomOf="@id/main_tv_ordermenu_orderlist_title"
                             android:layout_marginTop="12dp"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -325,14 +351,14 @@
                             android:gravity="center|fill_vertical"
                             android:layout_weight="5"
                             tools:ignore="TextContrastCheck"
-                            />
+                            android:layout_gravity="center"/>
 
                     <View
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:id="@+id/main_div_ordermenu_location_middle"
                             android:layout_weight="0.2"
-                            />
+                            android:layout_gravity="center"/>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -340,7 +366,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/main_bt_ordermenu_location_map"
                             android:layout_weight="5"
-                            >
+                            android:layout_gravity="center">
 
                         <ImageView
                                 android:layout_width="wrap_content"
@@ -378,24 +404,25 @@
 
                     <View
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:id="@+id/main_div_ordermenu_location_start"
                             android:layout_weight="0.1"
-                            />
+                            android:layout_gravity="center"/>
 
                     <View
                             android:id="@+id/main_div_ordermenu_location_divider"
                             android:layout_width="1dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="?android:attr/listDivider"
-                            android:layout_weight="0"/>
+                            android:layout_weight="0"
+                            android:layout_gravity="center"/>
 
                     <View
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:id="@+id/main_div_ordermenu_location_end"
                             android:layout_weight="0.1"
-                            />
+                            android:layout_gravity="center"/>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -403,6 +430,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/main_bt_ordermenu_location_list"
                             android:layout_weight="5"
+                            android:layout_gravity="center"
                             >
 
                         <ImageView
