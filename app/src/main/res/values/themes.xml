@@ -21,7 +21,7 @@
     </style>
 
     <!-- SplashScreen theme. -->
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen.IconBackground">
+    <style name="Theme.UntactOrder.Starting" parent="Theme.SplashScreen.IconBackground">
         // Set the splash screen background, animated icon, and animation duration.
         <item name="windowSplashScreenBackground">@color/signature_background</item>
 

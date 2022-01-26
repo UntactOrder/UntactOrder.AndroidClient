@@ -7,10 +7,9 @@ import io.github.untactorder.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         // Handle the splash screen transition.
         val splashScreen = installSplashScreen()
+        super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
     }

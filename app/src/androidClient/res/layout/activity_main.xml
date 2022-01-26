@@ -245,7 +245,7 @@
 
                     <ImageView
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             app:srcCompat="@drawable/ic_outline_qr_code_24"
                             android:id="@+id/main_iv_ordermenu_orderplacement_icon"
                             app:layout_constraintTop_toTopOf="parent"
@@ -259,7 +259,8 @@
                             android:tint="@color/white"
                             android:scaleType="fitCenter"
                             app:layout_constraintHeight_min="50dp"
-                            />
+                            android:minHeight="50dp"
+                            android:minWidth="50dp"/>
 
                     <TextView
                             android:text="@string/at_main_ordermenu_orderplacement_msg"
@@ -698,7 +699,8 @@
                                 android:gravity="start|center_vertical"
                                 tools:ignore="HardcodedText,TextContrastCheck"
                                 android:textAlignment="textEnd"
-                                android:layout_gravity="bottom"/>
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="10dp"/>
 
                         <TextView
                                 android:text="@string/at_main_userinfo_history_count_msg"
@@ -758,7 +760,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:id="@+id/main_div_userinfo_history_foot"
-                                android:layout_weight="2"/>
+                                android:layout_weight="4"/>
 
                     </LinearLayout>
 

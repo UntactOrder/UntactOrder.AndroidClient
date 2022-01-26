@@ -18,10 +18,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var layout: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         // Handle the splash screen transition.
         installSplashScreen()
+        super.onCreate(savedInstanceState)
 
         // Layout binding.
         layout = ActivityMainBinding.inflate(layoutInflater)
@@ -61,6 +60,10 @@ class MainActivity : AppCompatActivity() {
                 thinSlogan.setPadding(thinSlogan.paddingLeft,
                     thinSlogan.paddingTop + layout.mainBody.top - layout.mainHeader.bottom,
                     thinSlogan.paddingRight, thinSlogan.paddingBottom)
+            })
+        } else {
+            setOnGlobalLayoutListener(layout.mainWidgetOrdermenuOrderplacement, fun() {
+                layout.mainWidgetOrdermenuOrderplacement.minHeight = layout.mainWidgetOrdermenuOrderplacement.height + layout.mainBody.top - layout.mainHeader.bottom
             })
         }
     }
