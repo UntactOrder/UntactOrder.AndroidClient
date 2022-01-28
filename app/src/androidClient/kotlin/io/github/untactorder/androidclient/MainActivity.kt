@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // Handle the splash screen transition.
         installSplashScreen()
+        checkKeySignValidation()
         super.onCreate(savedInstanceState)
 
         // Layout binding.
@@ -55,9 +56,8 @@ class MainActivity : AppCompatActivity() {
         }
         //// if there's some space left above the slogan, make the orderlist(recycler) visible.
         setOnGlobalLayoutListener(layout.mainBody, fun() {
-            /* stretch ordermenu container - 이거 layout_constrainedHeight_min = wrap이 작동 안해서 한거
-             * https://github.com/androidx/constraintlayout/issues/376
-             */
+            // stretch ordermenu container - 이거 layout_constrainedHeight_min = wrap이 작동 안해서 한거
+            // https://github.com/androidx/constraintlayout/issues/376
 
             // expand ordermenu orderlist
             layout.mainListOrdermenuOrderlist.minimumHeight = layout.mainBody.top - layout.mainHeader.bottom
@@ -78,5 +78,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun removeOnGlobalLayoutListener(observer: ViewTreeObserver?, listener: OnGlobalLayoutListener) {
         observer?.removeOnGlobalLayoutListener(listener)
+    }
+
+    private fun checkKeySignValidation() {
+        if (intent.getBooleanExtra("key_error", false)) {
+            finish()
+        }
     }
 }

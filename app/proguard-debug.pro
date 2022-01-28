@@ -21,6 +21,9 @@
 #-renamesourcefileattribute SourceFile
 
 
-## Kakao SDK Proguard exceptions
--keep class com.kakao.sdk.**.model.* { <fields>; }
--keep class * extends com.google.gson.TypeAdapter
+# Begin: Debug Proguard rules
+
+-dontobfuscate                               # disable obfuscation(난독화 사용안함)
+-keepattributes SoureFile, LineNumberTable   # keep line source file & number information
+
+# End: Debug ProGuard rules

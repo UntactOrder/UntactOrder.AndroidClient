@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">언택트오더</string>
+    <string name="krw">원</string>
+    <string name="error_not_downloaded_from_playstore">플레이스토어에서 다운받은 앱이 아닙니다. 앱을 삭제한 뒤 플레이스토어에서 재설치해주세요!</string>
+
     <string name="at_pwin_guide">테이블 주문 비밀번호를 입력해주세요</string>
     <string name="at_pwin_del_all">전체 삭제</string>
     <string name="at_pwin_del_one">하나 삭제</string>
@@ -27,7 +30,6 @@
     <string name="at_main_total_price">총 주문 금액</string>
     <string name="at_main_make_additional_order">추가 주문 하러 가기</string>
     <string name="at_main_make_new_order">주문 하러 가기</string>
-    <string name="krw">원</string>
     <string name="at_qrsc_guide_msg">QR코드를 사각형 안에 넣어주세요.!</string>
     <string name="at_qrsc_cancel_msg">QR 코드 스캔을 취소하였습니다.</string>
     <string name="at_qrsc_invalid_msg">올바르지 않은 QR코드입니다!!!</string>
