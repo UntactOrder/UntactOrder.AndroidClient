@@ -14,7 +14,7 @@ import io.github.untactorder.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-    public var isTabletMode: Boolean = false
+    private var isTabletMode: Boolean = false
     private lateinit var layout: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,11 +26,12 @@ class MainActivity : AppCompatActivity() {
         layout = ActivityMainBinding.inflate(layoutInflater)
         setContentView(layout.root)
 
-        // Set Activity Guideline/Widget position.
+        // Set Activity Guideline & Widget size and position.
         val displayMetrics = resources.displayMetrics
         if (BuildConfig.DEBUG) {
             println("Display Metrics: " + displayMetrics.widthPixels + "x" + displayMetrics.heightPixels)
         }
+        //// if tablet mode, set guideline to half of the screen width.
         if (displayMetrics.widthPixels / displayMetrics.heightPixels.toDouble() >= 0.85) {
             // toggle table mode variable
             isTabletMode = true
@@ -42,30 +43,25 @@ class MainActivity : AppCompatActivity() {
             constraintSet.clone(layout.mainBody)
             constraintSet.connect(R.id.main_container_ordermenu, ConstraintSet.TOP, R.id.main_body, ConstraintSet.TOP)
             constraintSet.connect(R.id.main_container_ordermenu, ConstraintSet.BOTTOM, R.id.main_body, ConstraintSet.BOTTOM)
+            //// let the slogan stay stuck to the user information container through the code below.
+            constraintSet.setVerticalBias(R.id.main_container_slogan, 1.0f);
             constraintSet.applyTo(layout.mainBody)
-            // stretch ordermenu container - 이거 layout_constrainedHeight_min = wrap이 작동 안해서 한거
-            // https://github.com/androidx/constraintlayout/issues/376
-            layout.mainDivOrdermenuOrderplacementCenter.visibility = View.VISIBLE
-            layout.mainTvOrdermenuOrderlistTitle.visibility = View.VISIBLE
-            layout.mainListOrdermenuOrderlist.visibility = View.VISIBLE
             // fit margins
             var ordermenuParams = layout.mainContainerOrdermenu.layoutParams as ConstraintLayout.LayoutParams
             ordermenuParams.topMargin = dpToPixel(10)
             ordermenuParams.bottomMargin = dpToPixel(14)
             ordermenuParams.leftMargin = dpToPixel(10)
             (layout.mainContainerUserinfo.layoutParams as ConstraintLayout.LayoutParams).rightMargin = dpToPixel(10)
-            setOnGlobalLayoutListener(layout.mainBody, fun() {
-                layout.mainListOrdermenuOrderlist.minimumHeight = layout.mainBody.top - layout.mainHeader.bottom
-                val thinSlogan = layout.mainTvSloganThin
-                thinSlogan.setPadding(thinSlogan.paddingLeft,
-                    thinSlogan.paddingTop + layout.mainBody.top - layout.mainHeader.bottom,
-                    thinSlogan.paddingRight, thinSlogan.paddingBottom)
-            })
-        } else {
-            setOnGlobalLayoutListener(layout.mainWidgetOrdermenuOrderplacement, fun() {
-                layout.mainWidgetOrdermenuOrderplacement.minHeight = layout.mainWidgetOrdermenuOrderplacement.height + layout.mainBody.top - layout.mainHeader.bottom
-            })
         }
+        //// if there's some space left above the slogan, make the orderlist(recycler) visible.
+        setOnGlobalLayoutListener(layout.mainBody, fun() {
+            /* stretch ordermenu container - 이거 layout_constrainedHeight_min = wrap이 작동 안해서 한거
+             * https://github.com/androidx/constraintlayout/issues/376
+             */
+
+            // expand ordermenu orderlist
+            layout.mainListOrdermenuOrderlist.minimumHeight = layout.mainBody.top - layout.mainHeader.bottom
+        })
     }
 
     fun dpToPixel(dp: Int): Int =

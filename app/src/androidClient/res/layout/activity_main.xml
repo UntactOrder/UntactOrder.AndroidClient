@@ -85,8 +85,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintBottom_toTopOf="@+id/main_container_userinfo"
-                    android:layout_marginBottom="20dp"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintVertical_bias="0.0"
+                    android:layout_marginBottom="20dp">
 
 
                 <TextView
@@ -258,9 +258,8 @@
                             android:layout_marginEnd="12dp"
                             android:tint="@color/white"
                             android:scaleType="fitCenter"
-                            app:layout_constraintHeight_min="50dp"
-                            android:minHeight="50dp"
-                            android:minWidth="50dp"/>
+                            app:layout_constraintHeight_min="60dp"
+                            />
 
                     <TextView
                             android:text="@string/at_main_ordermenu_orderplacement_msg"
@@ -268,7 +267,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/main_tv_ordermenu_orderplacement"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:textSize="20sp"
+                            android:textSize="22sp"
                             android:fontFamily="@font/nanumbarungothic"
                             android:textColor="@color/white"
                             android:gravity="center|fill_vertical"
@@ -293,9 +292,9 @@
                             app:layout_constraintStart_toStartOf="parent"
                             android:layout_marginStart="12dp"
                             android:layout_marginEnd="12dp"
-                            android:visibility="gone"
                             app:layout_constraintTop_toBottomOf="@+id/main_tv_ordermenu_orderplacement"
-                            android:layout_marginTop="12dp"/>
+                            android:layout_marginTop="12dp"
+                            android:visibility="visible"/>
 
                     <TextView
                             android:text="@string/at_main_ordermenu_orderlist_title_msg"
@@ -316,8 +315,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginTop="10dp"
                             android:layout_marginStart="12dp"
-                            app:layout_goneMarginBottom="12dp"
-                            android:visibility="gone"/>
+                            />
 
                     <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="0dp"
@@ -328,7 +326,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             android:layout_marginStart="12dp"
                             android:id="@+id/main_list_ordermenu_orderlist"
-                            android:visibility="gone"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintTop_toBottomOf="@id/main_tv_ordermenu_orderlist_title"
                             android:layout_marginTop="12dp"
