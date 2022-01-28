@@ -49,7 +49,17 @@ __________________________________________________________
 # For customization when using a Version Control System, please read the
 # header note.
 sdk.dir=C\:\\Users\\__YOUR_WINDOWS_USER_NAME__\\AppData\\Local\\Android\\Sdk
+#
+# Apk Key-Signing Configurations
+sign_key_config.debug.key_store.dir=__YOUR_SIGNKEY_KEYSTORE_DIR__
+sign_key_config.debug.key_store.password=__YOUR_SIGNKEY_KEYSTORE_PW__
+sign_key_config.debug.key.alias=__YOUR_SIGNKEY_KEY_ALIAS__
+sign_key_config.debug.key.password=__YOUR_SIGNKEY_KEY_PW__
+#
+# SSO SDK Keys
 kakao.sdk.native_app_key=__YOUR_KAKAO_SDK_NATIVE_APP_KEY__
+naver.sdk.client_id=__YOUR_NAVER_SDK_CLIENT_ID__
+naver.sdk.client_secret=__YOUR_NAVER_SDK_CLIENT_SECRET__
 
 </pre>
 <pre>(5). firebase 프로젝트 설정 페이지에서 google-services.json 파일 받아 app 모듈 루트에 집어넣기 </pre>
