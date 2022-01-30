@@ -1,37 +1,80 @@
 package io.github.untactorder.androidclient
 
+import android.app.ActivityManager
 import android.os.Bundle
-import android.view.View
-import android.view.ViewTreeObserver
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import io.github.untactorder.BuildConfig
-import io.github.untactorder.R
+import io.github.untactorder.*
+import io.github.untactorder.auth.UsimUtil.Companion.isUsimPermissionGranted
+import io.github.untactorder.auth.UsimUtil.Companion.requestUsimPermission
 import io.github.untactorder.databinding.ActivityMainBinding
+import kotlin.system.exitProcess
 
 
+/**
+ * MainActivity
+ *
+ * @author irack000
+ */
 class MainActivity : AppCompatActivity() {
     private var isTabletMode: Boolean = false
     private lateinit var layout: ActivityMainBinding
 
+    private val TAG = "MainActivity"
+    private val REQUEST_CODE_USIM_PERMISSION = 3519016
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Handle the splash screen transition.
         installSplashScreen()
-        checkKeySignValidation()
         super.onCreate(savedInstanceState)
+
+        // Request Permissions.
+        showPermissionRequestDialog()
 
         // Layout binding.
         layout = ActivityMainBinding.inflate(layoutInflater)
         setContentView(layout.root)
 
         // Set Activity Guideline & Widget size and position.
-        val displayMetrics = resources.displayMetrics
-        if (BuildConfig.DEBUG) {
-            println("Display Metrics: " + displayMetrics.widthPixels + "x" + displayMetrics.heightPixels)
+        adjustUiObjectAttributes()
+
+        layout.mainTvUserinfoPhone.text = GlobalApplication.PHONE_NUMBER
+    }
+
+    private fun showPermissionRequestDialog() {
+        if (!isUsimPermissionGranted()) {
+            printLog(TAG, "Permission is not granted")
+            printLog(TAG, "Request Usim Permission")
+            requestUsimPermission(REQUEST_CODE_USIM_PERMISSION)
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_USIM_PERMISSION) {
+            if (!isUsimPermissionGranted()) {
+                printLog(TAG, getString(R.string.error_usim_permission_not_allowed), true);
+                clearApplicationDataNQuit()
+            } else {
+                printLog(TAG, "Permission is granted")
+                restartApplication()  // 전화번호가 바뀐 경우에 잘 작동하는지 확인이 필요함
+            }
+        }
+    }
+
+    /**
+     * adjust the UI object attributes.
+     */
+    private fun adjustUiObjectAttributes() {
+        val displayMetrics = resources.displayMetrics
+        printLog("Display Metrics", "" + displayMetrics.widthPixels + "x" + displayMetrics.heightPixels)
         //// if tablet mode, set guideline to half of the screen width.
         if (displayMetrics.widthPixels / displayMetrics.heightPixels.toDouble() >= 0.85) {
             // toggle table mode variable
@@ -62,27 +105,5 @@ class MainActivity : AppCompatActivity() {
             // expand ordermenu orderlist
             layout.mainListOrdermenuOrderlist.minimumHeight = layout.mainBody.top - layout.mainHeader.bottom
         })
-    }
-
-    fun dpToPixel(dp: Int): Int =
-        (dp * resources.displayMetrics.density).toInt()
-
-    private fun setOnGlobalLayoutListener(view: View, operation: () -> Unit) {
-        view.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                operation()
-                removeOnGlobalLayoutListener(view.viewTreeObserver, this)
-            }
-        })
-    }
-
-    private fun removeOnGlobalLayoutListener(observer: ViewTreeObserver?, listener: OnGlobalLayoutListener) {
-        observer?.removeOnGlobalLayoutListener(listener)
-    }
-
-    private fun checkKeySignValidation() {
-        if (intent.getBooleanExtra("key_error", false)) {
-            finish()
-        }
     }
 }

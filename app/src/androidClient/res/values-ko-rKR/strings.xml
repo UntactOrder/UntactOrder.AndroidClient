@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">언택트오더</string>
     <string name="krw">원</string>
-    <string name="error_not_downloaded_from_playstore">플레이스토어에서 다운받은 앱이 아닙니다. 앱을 삭제한 뒤 플레이스토어에서 재설치해주세요!</string>
 
     <string name="at_pwin_guide">테이블 주문 비밀번호를 입력해주세요</string>
     <string name="at_pwin_del_all">전체 삭제</string>

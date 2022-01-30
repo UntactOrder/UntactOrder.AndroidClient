@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">UntactOrder</string>
     <string name="krw">won</string>
-    <string name="error_not_downloaded_from_playstore">This app was not downloaded from the PlayStore. Please uninstall this app and reinstall UntactOrder client on PlayStore!</string>
 
     <string name="at_pwin_guide">Please input table password</string>
     <string name="at_pwin_del_all">Clear</string>

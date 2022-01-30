@@ -1,4 +1,8 @@
 <resources>
+    <string name="error_not_downloaded_from_playstore">This app wasn\'t downloaded from the PlayStore. Please reinstall app on PlayStore!</string>
+    <string name="error_usim_permission_not_allowed">The app cannot be started because phone permission is not allowed.</string>
+    <string name="error_usim_info_changed">Initialize the app because the SIM information or phone number has changed.</string>
+
     <string name="at_main_logo_guide_msg">If you\'re curious about the\nUntactOrder Project, tab here!</string>
     <string name="at_main_slogan_thin_msg">New life style leader</string>
     <string name="at_main_slogan_msg">UntactOrder</string>
