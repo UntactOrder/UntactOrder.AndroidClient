@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private var isTabletMode: Boolean = false
     private lateinit var layout: ActivityMainBinding
 
-    private val TAG = "MainActivity"
+    private val TAG = javaClass.simpleName
     private val REQUEST_CODE_USIM_PERMISSION = 3519016
 
     override fun onCreate(savedInstanceState: Bundle?) {

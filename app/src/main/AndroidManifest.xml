@@ -32,6 +32,22 @@
             </intent-filter>
         </activity>
 
+        <activity
+                android:name=".auth.FirebaseLoginActivity"
+                android:exported="false"/>
+
+        <activity
+                android:name=".auth.FirebasePhoneAuthActivity"
+                android:exported="false"/>
+
+        <activity
+                android:name=".auth.SocialLoginActivity"
+                android:exported="false"/>
+
+        <activity
+                android:name=".manual.ManualDisplayActivity"
+                android:exported="false"/>
+
         <service
                 android:name=".network.NetworkService"
                 android:enabled="true"

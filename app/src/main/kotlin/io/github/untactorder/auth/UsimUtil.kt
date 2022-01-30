@@ -24,7 +24,7 @@ import kotlin.collections.ArrayList
  * @see "https://it-highjune.tistory.com/18"
  */
 class UsimUtil(val context: Context) {
-    private val TAG = "UsimUtil"
+    private val TAG = javaClass.simpleName
 
     /**
      * getting permission

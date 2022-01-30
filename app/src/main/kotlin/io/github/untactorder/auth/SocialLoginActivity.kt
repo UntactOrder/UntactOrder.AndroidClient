@@ -1,28 +1,21 @@
-package io.github.untactorder.androidclient
+package io.github.untactorder.auth
 
-import androidx.appcompat.app.AppCompatActivity
+//import com.google.firebase.auth.ktx.auth
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.user.UserApiClient
-import com.kakao.sdk.common.util.Utility
-
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-//import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import io.github.untactorder.R
-import java.util.concurrent.TimeUnit
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.util.Utility
+import com.kakao.sdk.user.UserApiClient
+import io.github.untactorder.databinding.ActivitySocialLoginBinding
 
-class KakaoLoginActivity : AppCompatActivity() {
-    private val TAG = "KakaoLoginActivity"
+class SocialLoginActivity : AppCompatActivity() {
+    private lateinit var layout: ActivitySocialLoginBinding
+
+    private val TAG = javaClass.simpleName
     private val DEBUG = true
 
     // [START declare_auth]
@@ -35,7 +28,10 @@ class KakaoLoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kakao_login)
+
+        // Layout binding.
+        layout = ActivitySocialLoginBinding.inflate(layoutInflater)
+        setContentView(layout.root)
 
         // Kakao SDK를 이용하여 디버그, 릴리즈 키 해시 확인
         var keyHash = Utility.getKeyHash(this)

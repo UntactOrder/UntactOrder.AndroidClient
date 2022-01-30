@@ -35,7 +35,7 @@ class GlobalApplication : Application() {
     private val USIM_STATUS_KEY = "usim_status"
     private val PHONE_NUMBER_KEY = "phone_number"
 
-    private val TAG = "GlobalApplication"
+    private val TAG = javaClass.simpleName
 
     override fun onCreate() {
         super.onCreate()
