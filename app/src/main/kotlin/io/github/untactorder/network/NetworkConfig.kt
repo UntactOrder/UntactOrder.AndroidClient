@@ -93,24 +93,3 @@ fun findPosServerAtThisNetwork(callback: (found: Boolean, data: String) -> Unit)
         }
     }.start()
 }
-
-/**
- * AES128 복호화 (AES/CBC/PKCS5PADDING 방식)
- * 초등학생들의 무책임한 dos 공격을 방지하기 위한 공인 IP 암호화 (적당한 귀차니즘을 유발하는) - 실효성은 없음
- * @see "https://louisdev.tistory.com/52"
- */
-fun decryptAESCBC(key: String, iv: String, encrypted: String): String {
-    val keySpec = SecretKeySpec(key.toByteArray(charset("UTF-8")), "AES")
-    val ivSpec = IvParameterSpec(iv.toByteArray(charset("UTF-8")))
-    val cipher = javax.crypto.Cipher.getInstance("AES/CBC/PKCS5Padding")
-    cipher.init(javax.crypto.Cipher.DECRYPT_MODE, keySpec, ivSpec)
-    return cipher.doFinal(Base64.decode(encrypted, Base64.DEFAULT)).toString(charset("UTF-8"))
-}
-
-fun encryptAESCBC(key: String, iv: String, plain: String): String {
-    val keySpec = SecretKeySpec(key.toByteArray(charset("UTF-8")), "AES")
-    val ivSpec = IvParameterSpec(iv.toByteArray(charset("UTF-8")))
-    val cipher = javax.crypto.Cipher.getInstance("AES/CBC/PKCS5Padding")
-    cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, keySpec, ivSpec)
-    return Base64.encodeToString(cipher.doFinal(plain.toByteArray(charset("UTF-8"))), Base64.DEFAULT)
-}
