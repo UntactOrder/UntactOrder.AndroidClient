@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- UntactOrder Project Signature Colors (Dark Mode) -->
+    <color name="signature_red">#FFDD5168</color>
+    <color name="signature_yellow">#FFEBAC0F</color>
+    <color name="signature_green">#FF27AF85</color>
+    <color name="signature_blue">#FF2984C9</color>
+    <color name="signature_purple">#FF8453E7</color>
+    <color name="signature_white">#FFD0CECE</color>
+    <color name="signature_grey">#FF646060</color>
+    <color name="signature_text">@color/white</color>
+    <color name="signature_ripple">#FFDADADA</color>
+    <color name="signature_background">#FF353333</color>
+</resources>

@@ -1,19 +1,19 @@
 # [EN]UntactOrder: Non-Contact Order<br/>[KO]언택트오더: 비대면 주문
-> UntactOrder Android Client(주문 고객용 안드로이드 클라이언트 앱) <TargetSDK 31, MinSDK 24>
+> UntactOrder Android Client(주문 고객용 안드로이드 클라이언트 앱) <TargetSDK 32, MinSDK 24>
 > 
 ![AC로고](/app/src/androidClient/ic_launcher-playstore.png)
 ![AC로고1](/app/src/androidClient/res/mipmap-xxxhdpi/ic_launcher.png)
 
-> UntactOrder Order Assistant(자영업자용 주문 관리 클라이언트 앱) <TargetSDK 31, MinSDK 24>
+> UntactOrder Order Assistant(자영업자용 주문 관리 클라이언트 앱) <TargetSDK 32, MinSDK 24>
 > 
 ![OA로고](/app/src/orderAssistant/ic_launcher-playstore.png)
 ![OA로고1](/app/src/orderAssistant/res/mipmap-xxxhdpi/ic_launcher.png)
 
 ### 개발 환경
 * IntelliJ IDEA 2021.3 with Android Extention (or up)
-* Gradle 7.3.3 (or up)
+* Gradle 7.4-rc-1 (or up)
 * Android Gradle Plugin 7.0.4 (or up)
-* Android 11 (Android API 31 Platform JetBrains Runtime) (or up)
+* Android 12L (Android API 32 Platform JetBrains Runtime) (or up)
 
 ### 사용 언어
 * Java/Kotlin
@@ -49,7 +49,17 @@ __________________________________________________________
 # For customization when using a Version Control System, please read the
 # header note.
 sdk.dir=C\:\\Users\\__YOUR_WINDOWS_USER_NAME__\\AppData\\Local\\Android\\Sdk
+#
+# Apk Key-Signing Configurations
+sign_key_config.debug.key_store.dir=__YOUR_SIGNKEY_KEYSTORE_DIR__
+sign_key_config.debug.key_store.password=__YOUR_SIGNKEY_KEYSTORE_PW__
+sign_key_config.debug.key.alias=__YOUR_SIGNKEY_KEY_ALIAS__
+sign_key_config.debug.key.password=__YOUR_SIGNKEY_KEY_PW__
+#
+# SSO SDK Keys
 kakao.sdk.native_app_key=__YOUR_KAKAO_SDK_NATIVE_APP_KEY__
+naver.sdk.client_id=__YOUR_NAVER_SDK_CLIENT_ID__
+naver.sdk.client_secret=__YOUR_NAVER_SDK_CLIENT_SECRET__
 
 </pre>
 <pre>(5). firebase 프로젝트 설정 페이지에서 google-services.json 파일 받아 app 모듈 루트에 집어넣기 </pre>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_not_downloaded_from_playstore">플레이스토어에서 다운받은 앱이 아닙니다. 플레이스토어에서 재설치해주세요!</string>
+    <string name="error_usim_permission_not_allowed">전화 권한이 허용되지 않아 앱을 시작할 수 없습니다.</string>
+    <string name="error_usim_info_changed">유심 정보 혹은 전화변호가 변동되어 앱을 초기화합니다.</string>
+
+
+    <string name="at_main_logo_guide_msg">언택트오더 프로젝트에 대해\n궁금하시다면 여기를 누르세요!</string>
+    <string name="at_main_slogan_thin_msg">새로운 라이프스타일 리더</string>
+    <string name="at_main_slogan_msg">언택트오더</string>
+</resources>

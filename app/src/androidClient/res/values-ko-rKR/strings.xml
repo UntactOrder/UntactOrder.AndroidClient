@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">언택트오더</string>
+    <string name="krw">원</string>
+
     <string name="at_pwin_guide">테이블 주문 비밀번호를 입력해주세요</string>
     <string name="at_pwin_del_all">전체 삭제</string>
     <string name="at_pwin_del_one">하나 삭제</string>
@@ -27,7 +29,6 @@
     <string name="at_main_total_price">총 주문 금액</string>
     <string name="at_main_make_additional_order">추가 주문 하러 가기</string>
     <string name="at_main_make_new_order">주문 하러 가기</string>
-    <string name="krw">원</string>
     <string name="at_qrsc_guide_msg">QR코드를 사각형 안에 넣어주세요.!</string>
     <string name="at_qrsc_cancel_msg">QR 코드 스캔을 취소하였습니다.</string>
     <string name="at_qrsc_invalid_msg">올바르지 않은 QR코드입니다!!!</string>
@@ -37,4 +38,20 @@
     <string name="at_menu_select_quantity">수량</string>
     <string name="at_menu_select_done">완료하기</string>
     <string name="at_menu_select_category_recm">추천</string>
+
+    <string name="at_main_footer_msg">언택트오더 안드로이드 클라이언트\nby UntactOrder Developers – An OpenSource Organization</string>
+    <string name="at_main_userinfo_title_msg">내 정보</string>
+    <string name="at_main_userinfo_guide_msg">자세한 계정 정보를 보려면\n여기를 누르세요!</string>
+    <string name="at_main_userinfo_profile_content_description">사용자 계정 프로필 사진</string>
+    <string name="at_main_userinfo_history_title_msg">최근 30일 주문 내역</string>
+    <string name="at_main_userinfo_history_count_msg">주문 건</string>
+    <string name="at_main_userinfo_history_storecount_msg">가맹점</string>
+    <string name="at_main_ordermenu_title_msg">매장 주문하기</string>
+    <string name="at_main_ordermenu_guide_msg">설명서가 다시 필요하시면\n여기를 누르세요!</string>
+    <string name="at_main_ordermenu_store_msg">연결된 매장이 없습니다.</string>
+    <string name="at_main_ordermenu_orderplacement_msg">QR 스캔해서\n매장 연결하기</string>
+    <string name="at_main_ordermenu_orderlist_title_msg">진행 중인 주문내역</string>
+    <string name="at_main_ordermenu_location_title_msg">가맹점 위치 살펴보기</string>
+    <string name="at_main_ordermenu_location_map_msg">지도에서 살펴보기</string>
+    <string name="at_main_ordermenu_location_list_msg">거리순으로 알아보기</string>
 </resources>

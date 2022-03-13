@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">UntactOrder</string>
+    <string name="krw">won</string>
+
     <string name="at_pwin_guide">Please input table password</string>
     <string name="at_pwin_del_all">Clear</string>
     <string name="at_pwin_del_one">Remove</string>
@@ -19,7 +21,6 @@
         Not Translated\n
     </string>
     <string name="at_main_total_price">Total order price</string>
-    <string name="krw">won</string>
     <string name="at_main_make_new_order">Make New Order</string>
     <string name="at_main_make_additional_order">Make Additional Order</string>
     <string name="at_qrsc_guide_msg">Please put the QR code in the scan box!</string>
@@ -31,4 +32,20 @@
     <string name="at_menu_select_quantity">quantity</string>
     <string name="at_menu_select_done">Done</string>
     <string name="at_menu_select_category_recm">Hot</string>
+
+    <string name="at_main_footer_msg">UntactOrder Android Client\nby UntactOrder Developers – An OpenSource Organization</string>
+    <string name="at_main_userinfo_title_msg">User Info</string>
+    <string name="at_main_userinfo_guide_msg">Tap here for more\naccount information!</string>
+    <string name="at_main_userinfo_profile_content_description">user profile image</string>
+    <string name="at_main_userinfo_history_title_msg">Order history (last 30 days)</string>
+    <string name="at_main_userinfo_history_count_msg">orders</string>
+    <string name="at_main_userinfo_history_storecount_msg">stores</string>
+    <string name="at_main_ordermenu_title_msg">Order placing</string>
+    <string name="at_main_ordermenu_guide_msg">Tab here to read\nthe instructions again!</string>
+    <string name="at_main_ordermenu_store_msg">None of stores was connected</string>
+    <string name="at_main_ordermenu_orderplacement_msg">Connect to a store\nby scanning QR</string>
+    <string name="at_main_ordermenu_orderlist_title_msg">Ongoing order list</string>
+    <string name="at_main_ordermenu_location_title_msg">Chain stores\' location</string>
+    <string name="at_main_ordermenu_location_map_msg">Find on the map</string>
+    <string name="at_main_ordermenu_location_list_msg">Search by distance</string>
 </resources>
