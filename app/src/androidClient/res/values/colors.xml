@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
-    <color name="gray_primary_light">#FFF1F2F4</color>
-    <color name="gray_primary_dark">#FF3B3B42</color>
-    <color name="grey_deep">#FF707070</color>
-    <color name="grey_deep_dark">#FF3C3B41</color>
-    <color name="magenta">#FFFF7C80</color>
-    <color name="yellow">#FFF9BF00</color>
-    <color name="purple_deep">#FF9291BE</color>
+    <!-- SplashScreen Icon Background Color -->
+    <color name="splash_screen_icon_background_color">#FFEAEAEA</color>
 
     <!-- 액티비티 레이아웃별 색상 지정 -->
     <!-- activity_main -->
@@ -22,6 +9,8 @@
     <color name="at_main_new_order_plus_btn">@color/gray_primary_dark</color>
     <color name="at_main_new_order_text">@color/gray_primary_light</color>
     <color name="at_main_total_price_background">#FFF4F4F4</color>
+
+    <color name="at_main_userinfo_common_text">#FF332803</color>
     <!-- activity_pwin -->
     <color name="at_pwin_num_pad_text">@color/grey_deep</color>
     <color name="at_pwin_num_pad_background">@color/white</color>

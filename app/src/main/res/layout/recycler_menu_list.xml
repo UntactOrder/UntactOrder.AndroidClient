@@ -62,7 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/menu_tx_minus"
-                        android:background="@drawable/shape_circle_plus_minus"
+                        android:background="@drawable/shape_circle_plus_minus_25"
                         android:layout_margin="4dp"/>
 
                 <TextView
@@ -84,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/menu_tx_plus"
-                        android:background="@drawable/shape_circle_plus_minus"
+                        android:background="@drawable/shape_circle_plus_minus_25"
                         android:layout_margin="4dp"/>
             </LinearLayout>
         </LinearLayout>
