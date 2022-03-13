@@ -60,7 +60,8 @@
                     app:layout_constrainedWidth="true"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"/>
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="onProjectDetailButtonClicked"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

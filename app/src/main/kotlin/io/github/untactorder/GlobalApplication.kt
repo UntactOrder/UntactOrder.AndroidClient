@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.kakao.sdk.common.KakaoSdk
+import com.navercorp.nid.NaverIdLoginSDK
 import io.github.untactorder.androidclient.MainActivity
 import io.github.untactorder.auth.UsimUtil
 import java.io.File
@@ -179,16 +180,21 @@ fun removeOnGlobalLayoutListener(observer: ViewTreeObserver?, listener: ViewTree
  * @see "https://www.examplefiles.net/cs/59563"
  */
 fun Context.clearApplicationCache() {
-    val cacheDirectory: File = cacheDir
-    val applicationDirectory = File(cacheDirectory.parent)
-    if (applicationDirectory.exists()) {
-        val fileNames = applicationDirectory.list()
-        for (fileName in fileNames) {
-            if (fileName != "lib") {
-                deleteFile(File(applicationDirectory, fileName))
+    val cache: String? = cacheDir.parent
+    if (cache != null) {
+        val applicationDirectory = File(cache)
+        if (applicationDirectory.exists()) {
+            val fileNames = applicationDirectory.list()
+            if (fileNames != null) {
+                for (fileName in fileNames) {
+                    if (fileName != "lib") {
+                        deleteFile(File(applicationDirectory, fileName))
+                    }
+                }
             }
         }
     }
+
 }
 
 fun deleteFile(file: File?): Boolean {
@@ -196,8 +202,10 @@ fun deleteFile(file: File?): Boolean {
     if (file != null) {
         if (file.isDirectory) {
             val children = file.list()
-            for (i in children.indices) {
-                deletedAll = deleteFile(File(file, children[i])) && deletedAll
+            if (children != null) {
+                for (child in children) {
+                    deletedAll = deleteFile(File(file, child)) && deletedAll
+                }
             }
         } else {
             deletedAll = file.delete()
@@ -221,10 +229,10 @@ fun Context.clearApplicationDataNQuit(usePackageManager: Boolean = true) {
  * @see "https://stackoverflow.com/questions/6609414/how-do-i-programmatically-restart-an-android-app"
  */
 fun Activity.restartApplication() {
-    val restartIntent = packageManager.getLaunchIntentForPackage(packageName);
+    val restartIntent = packageManager.getLaunchIntentForPackage(packageName)
     finishAffinity()                  // Finishes all activities.
-    startActivity(restartIntent);     // Start the launch activity
-    exitProcess(1);           // System finishes and automatically relaunches us.
+    startActivity(restartIntent)      // Start the launch activity
+    exitProcess(1)            // System finishes and automatically relaunches us.
 }
 
 /**

@@ -1,17 +1,24 @@
 package io.github.untactorder.androidclient
 
-import android.app.ActivityManager
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import io.github.untactorder.*
 import io.github.untactorder.auth.UsimUtil.Companion.isUsimPermissionGranted
 import io.github.untactorder.auth.UsimUtil.Companion.requestUsimPermission
+import io.github.untactorder.data.Customer
 import io.github.untactorder.databinding.ActivityMainBinding
-import kotlin.system.exitProcess
+import io.github.untactorder.manual.ManualDisplayActivity
+import io.github.untactorder.manual.ProjectDetailViewActivity
+import io.github.untactorder.network.findPosServerAtThisNetwork
+import java.util.*
 
 
 /**
@@ -22,6 +29,7 @@ import kotlin.system.exitProcess
 class MainActivity : AppCompatActivity() {
     private var isTabletMode: Boolean = false
     private lateinit var layout: ActivityMainBinding
+    private lateinit var qrScanActivityLauncher: ActivityResultLauncher<Intent>
 
     private val TAG = javaClass.simpleName
     private val REQUEST_CODE_USIM_PERMISSION = 3519016
@@ -41,7 +49,36 @@ class MainActivity : AppCompatActivity() {
         // Set Activity Guideline & Widget size and position.
         adjustUiObjectAttributes()
 
+        // Get Customer Phone number.
         layout.mainTvUserinfoPhone.text = GlobalApplication.PHONE_NUMBER
+
+        // Set QR Code Scanner Activity Launcher.
+        qrScanActivityLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val qrData = result.data?.getStringExtra("value")
+                if (qrData != null) {
+                    printLog(TAG, qrData)
+                    if (qrCodeParser(qrData)) {
+                        //toNetThread.add(RequestType.TableCheck)
+                    } else {
+                        printLog(TAG, getString(R.string.at_qrsc_invalid_msg), true)
+                    }
+                }
+            } else {
+                printLog(TAG, getString(R.string.at_qrsc_cancel_msg), true)
+            }
+        }
+
+        findPosServerAtThisNetwork(fun(found: Boolean, data: String) {
+            if (found) {
+                printLog(TAG, "POS Server found at this network.")
+                printLog(TAG, "POS Server INFO: $data")
+            } else if (data.isNotEmpty()) {
+                printLog(TAG, "An error($data) occurred.")
+            } else {
+                printLog(TAG, "POS Server not found.")
+            }
+        })
     }
 
     private fun showPermissionRequestDialog() {
@@ -106,4 +143,52 @@ class MainActivity : AppCompatActivity() {
             layout.mainListOrdermenuOrderlist.minimumHeight = layout.mainBody.top - layout.mainHeader.bottom
         })
     }
+
+    /**
+     * show project information.
+     */
+    fun onProjectDetailButtonClicked(view: View) {
+        startActivity(Intent(this, ProjectDetailViewActivity::class.java))
+    }
+
+    /**
+     * show app manual information.
+     */
+    fun onManualButtonClicked(view: View) {
+        startActivity(Intent(this, ManualDisplayActivity::class.java))
+    }
+
+    /**
+     * show connected store information.
+     */
+    fun onStoreInfoWidgetClicked(view: View) {
+        //startActivity(Intent(this, ConnectedStoreInformationActivity::class.java))
+    }
+
+    /**
+     * show connected store information.
+     */
+    fun onMakeOrderButtonClicked(view: View) {
+        //startActivity(Intent(this, OrderListActivity::class.java))
+    }
+
+    /**
+     * parse qr code
+     */
+    fun qrCodeParser(qrData: String): Boolean {
+        val list = qrData.split(",")
+        if (list.size == 3) {
+            if (list[0].split("[.]").toTypedArray().size != 4) throw Exception()
+            val port = list[1].toInt()
+            val table = list[2].toInt()
+            true
+        } else {
+            false
+        }
+    }
+
+
+
+
+
 }
