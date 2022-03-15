@@ -4,22 +4,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
-import android.util.Base64
 import io.github.untactorder.BuildConfig
 import io.github.untactorder.printLog
 import java.io.FileNotFoundException
 import java.io.IOException
-import java.io.UnsupportedEncodingException
 import java.net.MalformedURLException
 import java.net.URL
-import java.security.InvalidAlgorithmParameterException
-import java.security.InvalidKeyException
-import java.security.NoSuchAlgorithmException
-import javax.crypto.BadPaddingException
-import javax.crypto.IllegalBlockSizeException
-import javax.crypto.NoSuchPaddingException
-import javax.crypto.spec.IvParameterSpec
-import javax.crypto.spec.SecretKeySpec
 
 
 val storeNetworkCallback = object : ConnectivityManager.NetworkCallback() {
@@ -58,7 +48,7 @@ fun Context.unregisterNetworkCallback(networkCallback: ConnectivityManager.Netwo
  */
 fun findPosServerAtThisNetwork(callback: (found: Boolean, data: String) -> Unit) {
     val ipifyUrl = URL(BuildConfig.NETCONFIG_PUBLIC_IP_API)
-    val listUrl = URL(BuildConfig.NETCONFIG_REGISTERED_POS_LIST)
+    //val listUrl = URL(BuildConfig.NETCONFIG_REGISTERED_POS_LIST)
 
     object : Thread() {
         override fun run() {
@@ -67,7 +57,7 @@ fun findPosServerAtThisNetwork(callback: (found: Boolean, data: String) -> Unit)
             try {
                 publicIp = ipifyUrl.readText()
                 printLog("Public Ip", publicIp)
-                list = listUrl.readText().replace("\r".toRegex(), "").split("\n")
+                //list = listUrl.readText().replace("\r".toRegex(), "").split("\n")
             } catch (e: Exception) {
                 e.printStackTrace()
                 when (e) {
@@ -75,18 +65,6 @@ fun findPosServerAtThisNetwork(callback: (found: Boolean, data: String) -> Unit)
                     is FileNotFoundException -> callback(false, "FileNotFoundException")
                     is IOException -> callback(false, "IOException")
                     else -> callback(false, "Unknown Exception")
-                }
-            }
-            val aesKey = BuildConfig.NETCONFIG_AES128CBC_KEY
-            val aesIv = BuildConfig.NETCONFIG_AES128CBC_IV
-            for (line in list.subList(1, list.size)) {
-                val columns = line.split(",")
-                if (columns.size == 3 && columns[0] == publicIp.split(".")[3]) {
-                    val public = decryptAESCBC(aesKey, aesIv, columns[1])
-                    if (public == publicIp) {
-                        callback(true, decryptAESCBC(aesKey, aesIv, columns[2]))
-                        return
-                    }
                 }
             }
             callback(false, "")

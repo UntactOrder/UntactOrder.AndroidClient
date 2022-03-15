@@ -181,9 +181,9 @@ class MainActivity : AppCompatActivity() {
             if (list[0].split("[.]").toTypedArray().size != 4) throw Exception()
             val port = list[1].toInt()
             val table = list[2].toInt()
-            true
+            return true
         } else {
-            false
+            return false
         }
     }
 
