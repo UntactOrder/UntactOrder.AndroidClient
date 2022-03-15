@@ -4,22 +4,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
-import android.util.Base64
 import io.github.untactorder.BuildConfig
 import io.github.untactorder.printLog
 import java.io.FileNotFoundException
 import java.io.IOException
-import java.io.UnsupportedEncodingException
 import java.net.MalformedURLException
 import java.net.URL
-import java.security.InvalidAlgorithmParameterException
-import java.security.InvalidKeyException
-import java.security.NoSuchAlgorithmException
-import javax.crypto.BadPaddingException
-import javax.crypto.IllegalBlockSizeException
-import javax.crypto.NoSuchPaddingException
-import javax.crypto.spec.IvParameterSpec
-import javax.crypto.spec.SecretKeySpec
 
 
 val storeNetworkCallback = object : ConnectivityManager.NetworkCallback() {

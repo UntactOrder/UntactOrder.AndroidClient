@@ -18,7 +18,7 @@ import kotlin.collections.ArrayList
 
 
 /**
- * 아래 블로그 출처, Android ADK 24 이상에서 동작함
+ * 아래 블로그 출처, Android SDK 24 이상에서 동작함
  * @see "https://gooners0304.tistory.com/entry/USIM-%EA%B4%80%EB%A6%AC-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%B4%9D%EC%A0%95%EB%A6%AC%EC%9C%A0%EC%8B%AC-%EC%B2%B4%ED%81%AC-%EB%B2%88%ED%98%B8-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0-%EB%B2%88%ED%98%B8-%ED%8F%AC%EB%A7%B7-%ED%86%B5%EC%9D%BC"
  * @see "https://codechacha.com/ko/android-how-to-get-phone-number/"
  * @see "https://it-highjune.tistory.com/18"
