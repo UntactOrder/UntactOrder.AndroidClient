@@ -1,12 +1,6 @@
 package io.github.untactorder.androidclient;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -14,18 +8,15 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.github.untactorder.R;
-import io.github.untactorder.auth.UsimUtil;
 import io.github.untactorder.data.MenuGroupAdapter;
 import io.github.untactorder.data.Customer;
 import io.github.untactorder.data.OrderAdapter;
@@ -39,7 +30,7 @@ import java.util.Objects;
 
 import static io.github.untactorder.androidclient.PasswordInputActivity.RESULT_INCORRECT;
 
-public class MainActivity2 extends AppCompatActivity implements ApplicationLayer {
+public class OrderListActivity extends AppCompatActivity implements ApplicationLayer {
     String TAG = "UntactOrder.main";
     boolean __DEBUG = false;
 
@@ -66,7 +57,7 @@ public class MainActivity2 extends AppCompatActivity implements ApplicationLayer
         // Handle the splash screen transition.
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
 
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_orderlist);
 
         // 메뉴 어댑터에 추천 카테고리 이름 지정
         MenuGroupAdapter.setRecmMenuCategoryName(getResources().getString(R.string.at_menu_select_category_recm));
@@ -415,7 +406,7 @@ public class MainActivity2 extends AppCompatActivity implements ApplicationLayer
                                         Customer.reset();
                                         break;
                                     default:
-                                        runOnUiThread(MainActivity2.this::runPasswordActivity);
+                                        runOnUiThread(OrderListActivity.this::runPasswordActivity);
                                 }
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -456,7 +447,7 @@ public class MainActivity2 extends AppCompatActivity implements ApplicationLayer
                             try {
                                 println("run Network Service - GetMenuList");
                                 MenuGroupAdapter.setMenuGroupFromMap(getMenuList());
-                                runOnUiThread(MainActivity2.this::runMenuSelectActivity);
+                                runOnUiThread(OrderListActivity.this::runMenuSelectActivity);
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 Customer.reset();
@@ -471,7 +462,7 @@ public class MainActivity2 extends AppCompatActivity implements ApplicationLayer
                                     println("run Network Service - PutNewOrder "+order+"");
                                     String orderId = putNewOrder(order);
                                     runOnUiThread(() -> OrderAdapter.addItemFromMap(orderId, order));
-                                    runOnUiThread(MainActivity2.this::setOnTotalPriceTextViewGlobalLayoutListener);
+                                    runOnUiThread(OrderListActivity.this::setOnTotalPriceTextViewGlobalLayoutListener);
                                 } else {
                                     throw new IOException();
                                 }
@@ -486,7 +477,7 @@ public class MainActivity2 extends AppCompatActivity implements ApplicationLayer
                                 println("run Network Service - GetOrderList");
                                 Map<String, Map<String, Object>> orders = getOrderList(Customer.getId());
                                 runOnUiThread(() -> OrderAdapter.setOrderListFromMap(orders));
-                                runOnUiThread(MainActivity2.this::setOnTotalPriceTextViewGlobalLayoutListener);
+                                runOnUiThread(OrderListActivity.this::setOnTotalPriceTextViewGlobalLayoutListener);
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 Customer.reset();

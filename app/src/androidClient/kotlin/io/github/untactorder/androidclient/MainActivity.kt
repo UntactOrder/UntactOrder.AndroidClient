@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity() {
      * show connected store information.
      */
     fun onMakeOrderButtonClicked(view: View) {
-        //startActivity(Intent(this, OrderListActivity::class.java))
+        startActivity(Intent(this, OrderListActivity::class.java))
     }
 
     /**

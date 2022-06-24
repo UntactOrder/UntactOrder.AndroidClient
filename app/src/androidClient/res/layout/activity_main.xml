@@ -260,7 +260,7 @@
                             android:tint="@color/white"
                             android:scaleType="fitCenter"
                             app:layout_constraintHeight_min="60dp"
-                            />
+                            android:onClick="onMakeOrderButtonClicked"/>
 
                     <TextView
                             android:text="@string/at_main_ordermenu_orderplacement_msg"
@@ -282,7 +282,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginStart="12dp"
                             app:layout_goneMarginBottom="12dp"
-                            />
+                            android:onClick="onMakeOrderButtonClicked"/>
 
                     <View
                             android:id="@+id/main_div_ordermenu_orderplacement_center"
