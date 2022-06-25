@@ -6,7 +6,7 @@ pluginManagement {
 		
 		maven {
             // Adding Kakao SDK Repo
-            url 'https://devrepo.kakao.com/nexus/content/groups/public/'
+            setUrl("https://devrepo.kakao.com/nexus/content/groups/public/")
         }
     }
 }

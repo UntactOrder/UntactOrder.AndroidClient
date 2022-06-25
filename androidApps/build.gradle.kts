@@ -8,16 +8,17 @@ plugins {
 // 민감한 API 키 등을 숨기기 위해 local.properties 사용
 // 참고 : https://blog.mindorks.com/using-local-properties-file-to-avoid-api-keys-check-in-into-version-control-system
 // 참고 : https://medium.com/affirmativedev/%EC%A4%91%EC%9A%94%ED%95%9C-%EA%B0%92%EB%93%A4%EC%9D%84-%EC%88%A8%EA%B2%A8%EB%B4%85%EC%8B%9C%EB%8B%A4-e5be00d2e921
-Properties localProperties = new Properties()
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+val localProperties = Properties()
 localProperties.load(new FileInputStream(rootProject.file("local.properties")))
-HashMap<String, String> debugKeyInfo = new HashMap<>()
+val debugKeyInfo = HashMap<String, String>()
 debugKeyInfo.put("keyStoreDir", localProperties.getProperty('sign_key_config.debug.key_store.dir'))
 debugKeyInfo.put("keyStorePassword", localProperties.getProperty('sign_key_config.debug.key_store.password'))
 debugKeyInfo.put("keyAlias", localProperties.getProperty('sign_key_config.debug.key.alias'))
 debugKeyInfo.put("keyPassword", localProperties.getProperty('sign_key_config.debug.key.password'))
-def KAKAO_NATIVE_APP_KEY = localProperties.getProperty('kakao.sdk.native_app_key')
-def NAVER_CLIENT_ID = localProperties.getProperty('naver.sdk.client_id')
-def NAVER_CLIENT_SECRET = localProperties.getProperty('naver.sdk.client_secret')
+val KAKAO_NATIVE_APP_KEY = localProperties.getProperty('kakao.sdk.native_app_key')
+val NAVER_CLIENT_ID = localProperties.getProperty('naver.sdk.client_id')
+val NAVER_CLIENT_SECRET = localProperties.getProperty('naver.sdk.client_secret')
 
 android {
     compileSdk = 32
@@ -30,9 +31,9 @@ android {
     signingConfigs {
         debug {
             storeFile file(debugKeyInfo.get("keyStoreDir"))
-            storePassword debugKeyInfo.get("keyStorePassword")
-            keyAlias debugKeyInfo.get("keyAlias")
-            keyPassword debugKeyInfo.get("keyPassword")
+            storePassword = debugKeyInfo.get("keyStorePassword")
+            keyAlias = debugKeyInfo.get("keyAlias")
+            keyPassword = debugKeyInfo.get("keyPassword")
         }
     }
 
@@ -41,7 +42,7 @@ android {
         minSdk = 24
         targetSdk = 32
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
         // KAKAO NATIVE APP KEY & NAVER CLIENT ID를 local.properties로부터 가져오기
@@ -61,38 +62,38 @@ android {
 
     // Specifies one flavor dimension.
     // 참고 : https://developer.android.com/studio/build/build-variants#build-types
-    flavorDimensions "version"
+    flavorDimensions = "version"
     // Assigns this product flavor to the "version" flavor dimension.
     // If you are using only one dimension, this property is optional,
     // and the plugin automatically assigns all the module's flavors to
     // that dimension.
     productFlavors {
         androidClient {
-            dimension "version"
-            applicationIdSuffix ".androidclient"
-            versionCode 7
-            versionName "1.0.0.7"
-            signingConfig signingConfigs.debug
+            dimension = "version"
+            applicationIdSuffix = ".androidclient"
+            versionCode = 7
+            versionName = "1.0.0.7"
+            signingConfig = signingConfigs.debug
         }
         orderAssistant {
-            dimension "version"
-            applicationIdSuffix ".orderassistant"
-            versionCode 2
-            versionName "1.0.0.2"
-            signingConfig signingConfigs.debug
+            dimension = "version"
+            applicationIdSuffix = ".orderassistant"
+            versionCode = 2
+            versionName = "1.0.0.2"
+            signingConfig = signingConfigs.debug
         }
     }
 
     sourceSets {
         androidClient {
             // AndroidClient - UntactOrder
-            manifest.srcFile "src/androidClient/AndroidManifest.xml"
+            manifest.srcFile = "src/androidClient/AndroidManifest.xml"
             java.srcDirs += ["src/androidClient/java", "src/androidClient/kotlin", "src/main/kotlin"]
             res.srcDirs += "src/androidClient/res"
         }
         orderAssistant {
             // OrderAssistant - UntactOrder
-            manifest.srcFile "src/orderAssistant/AndroidManifest.xml"
+            manifest.srcFile = "src/orderAssistant/AndroidManifest.xml"
             java.srcDirs += ["src/orderAssistant/kotlin", "src/main/kotlin"]
             res.srcDirs += "src/orderAssistant/res"
         }
@@ -104,9 +105,9 @@ android {
 
             // proguard settings
             isMinifyEnabled = true
-            proguardFile getDefaultProguardFile("proguard-android-optimize.txt")  // basic settings
-            proguardFile "proguard-rules.pro"
-            proguardFile "proguard-debug.pro"  // debug-specific settings
+            proguardFile = getDefaultProguardFile("proguard-android-optimize.txt")  // basic settings
+            proguardFile = "proguard-rules.pro"
+            proguardFile = "proguard-debug.pro"  // debug-specific settings
 
             // 여기에 디버그 서버 주소를 입력하세요
             //buildConfigField("String", "SERVER", "\"" + SOMETHING + "\"")
@@ -115,7 +116,10 @@ android {
         getByName("release") {
             // proguard settings
             isMinifyEnabled = true
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
 
             // 여기에 릴리즈 서버 주소를 입력하세요
             //buildConfigField("String", "SERVER", "\"" + SOMETHING + "\"")
@@ -130,8 +134,8 @@ android {
     // language features (either in its source code or
     // through dependencies).
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
     }
 
     // For Kotlin projects
