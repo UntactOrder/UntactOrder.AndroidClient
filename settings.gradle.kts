@@ -1,15 +1,16 @@
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+pluginManagement {
     repositories {
         google()  // Google's Maven repository
+        gradlePluginPortal()
         mavenCentral()
-
-        maven {
+		
+		maven {
             // Adding Kakao SDK Repo
             url 'https://devrepo.kakao.com/nexus/content/groups/public/'
         }
     }
 }
 
-rootProject.name = "AndroidClientApps"
-include ':app'
+rootProject.name = "MobileClient"
+include(":androidApps")
+include(":common")
