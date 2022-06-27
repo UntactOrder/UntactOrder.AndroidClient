@@ -3,11 +3,6 @@ pluginManagement {
         google()  // Google's Maven repository
         gradlePluginPortal()
         mavenCentral()
-		
-		maven {
-            // Adding Kakao SDK Repo
-            setUrl("https://devrepo.kakao.com/nexus/content/groups/public/")
-        }
     }
 }
 
