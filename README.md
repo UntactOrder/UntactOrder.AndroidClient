@@ -1,7 +1,7 @@
 # [EN]UntactOrder: Non-Contact Order<br/>[KO]언택트오더: 비대면 주문
 > UntactOrder Android Client(주문 고객용 안드로이드 클라이언트 앱) <TargetSDK 33, MinSDK 24>
 
-> UntactOrder Darwin Client(주문 고객용 다윈 계열 OS 클라이언트 앱) <TargetSDK ?, MinSDK ?>
+> UntactOrder Darwin Client(주문 고객용 다윈 계열 OS 클라이언트 앱) <TargetSDK 15.5, MinSDK ->
 > 
 ![AC로고](/androidApps/src/androidClient/ic_launcher-playstore.png)
 ![AC로고1](/androidApps/src/androidClient/res/mipmap-xxxhdpi/ic_launcher.png)
@@ -28,7 +28,7 @@
 # 빌드 방법
 ## 유의사항
 - 프로젝트 경로에 한글 끼워넣지 말자 (계정명이 한글이면... 드라이브 최상위에 클론 해서 빌드 해보고 안되면 ㅠㅠ)
-- 그래들이 . 붙어 있는 경로에서 빌드가 안되는거 같으니 레포 클론할 때 AndroidClientApps로 폴더명 바꾸는거 잊지 말자
+- 그래들이 . 붙어 있는 경로에서 빌드가 안되는거 같으니 레포 클론할 때 MobileClient로 폴더명 바꾸는거 잊지 말자
 
 ### [빌드 전 사전 작업]
 <pre>(1). 개발 환경 세팅 필요 (상단 개발 환경 설명된 부분 참고)</pre>
@@ -64,7 +64,12 @@ naver.sdk.client_id=__YOUR_NAVER_SDK_CLIENT_ID__
 naver.sdk.client_secret=__YOUR_NAVER_SDK_CLIENT_SECRET__
 
 </pre>
-<pre>(5). firebase 프로젝트 설정 페이지에서 google-services.json 파일 받아 app 모듈 루트에 집어넣기 </pre>
+<pre>(5). Build Config Sync (.idea/workspace.xml) - manually
+cp ./.idea/workspace.xml.bak ./.idea/workspace.xml
+</pre>
+<pre>(6). firebase 프로젝트 설정 페이지에서 google-services.json 파일 받아 app 모듈 루트에 집어넣기</pre>
+
+<pre>(END). Open Project!</pre>
 
 
 ### 1. ??
