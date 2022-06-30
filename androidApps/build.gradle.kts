@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
 
-	id("com.google.gms.google-services")  // Firebase SDK
+    id("com.google.gms.google-services")  // Firebase SDK
 }
 
 // 민감한 API 키 등을 숨기기 위해 local.properties 사용
@@ -62,20 +62,20 @@ android {
 
     // Specifies one flavor dimension.
     // 참고 : https://developer.android.com/studio/build/build-variants#build-types
-    flavorDimensions += "version"
+    flavorDimensions += "type"
     // Assigns this product flavor to the "version" flavor dimension.
     // If you are using only one dimension, this property is optional,
     // and the plugin automatically assigns all the module's flavors to
     // that dimension.
     productFlavors {
         create("androidClient") {
-            dimension = "version"
+            dimension = "type"
             applicationIdSuffix = ".androidclient"
             versionCode = 7
             versionName = "1.0.0.7"
         }
         create("orderAssistant") {
-            dimension = "version"
+            dimension = "type"
             applicationIdSuffix = ".orderassistant"
             versionCode = 2
             versionName = "1.0.0.2"
