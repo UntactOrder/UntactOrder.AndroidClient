@@ -1,23 +1,25 @@
 # [EN]UntactOrder: Non-Contact Order<br/>[KO]언택트오더: 비대면 주문
-> UntactOrder Android Client(주문 고객용 안드로이드 클라이언트 앱) <TargetSDK 32, MinSDK 24>
-> 
-![AC로고](/app/src/androidClient/ic_launcher-playstore.png)
-![AC로고1](/app/src/androidClient/res/mipmap-xxxhdpi/ic_launcher.png)
+> UntactOrder Android Client(주문 고객용 안드로이드 클라이언트 앱) <TargetSDK 33, MinSDK 24>
 
-> UntactOrder Order Assistant(자영업자용 주문 관리 클라이언트 앱) <TargetSDK 32, MinSDK 24>
+> UntactOrder Darwin Client(주문 고객용 다윈 계열 OS 클라이언트 앱) <TargetSDK ?, MinSDK ?>
 > 
-![OA로고](/app/src/orderAssistant/ic_launcher-playstore.png)
-![OA로고1](/app/src/orderAssistant/res/mipmap-xxxhdpi/ic_launcher.png)
+![AC로고](/androidApps/src/androidClient/ic_launcher-playstore.png)
+![AC로고1](/androidApps/src/androidClient/res/mipmap-xxxhdpi/ic_launcher.png)
+
+> UntactOrder Order Assistant(자영업자용 주문 관리 클라이언트 앱) <TargetSDK 33, MinSDK 24>
+> 
+![OA로고](/androidApps/src/orderAssistant/ic_launcher-playstore.png)
+![OA로고1](/androidApps/src/orderAssistant/res/mipmap-xxxhdpi/ic_launcher.png)
 
 ### 개발 환경
-* IntelliJ IDEA 2021.3 with Android Extention (or up)
-* Gradle 7.4-rc-1 (or up)
-* Android Gradle Plugin 7.0.4 (or up)
-* Android 12L (Android API 32 Platform JetBrains Runtime) (or up)
+* IntelliJ IDEA 2022.2 with Android Extention (or up)
+* Gradle 7.4 (or up)
+* Android Gradle Plugin 7.3.0-beta04 (or up)
+* Android 13 (Android API 33 Platform JetBrains Runtime) (or up)
 
 ### 사용 언어
-* Java/Kotlin
-* XML
+* Kotlin/XML
+* Swift
 * etc
 
 ### 필요 모듈
@@ -32,7 +34,7 @@
 <pre>(1). 개발 환경 세팅 필요 (상단 개발 환경 설명된 부분 참고)</pre>
 <pre>(2). git clone
 
-git clone https://github.com/UntactOrder/UntactOrder.AndroidClientApps.git AndroidClientApps
+git clone https://github.com/UntactOrder/UntactOrder.MobileClient.git MobileClient
 </pre>
 <pre>(3). git branch(분기) 변경 - main/beta/dev </pre>
 <pre>(4). 프로젝트 루트에 local.properties 생성
@@ -51,10 +53,10 @@ __________________________________________________________
 sdk.dir=C\:\\Users\\__YOUR_WINDOWS_USER_NAME__\\AppData\\Local\\Android\\Sdk
 #
 # Apk Key-Signing Configurations
-sign_key_config.debug.key_store.dir=__YOUR_SIGNKEY_KEYSTORE_DIR__
-sign_key_config.debug.key_store.password=__YOUR_SIGNKEY_KEYSTORE_PW__
-sign_key_config.debug.key.alias=__YOUR_SIGNKEY_KEY_ALIAS__
-sign_key_config.debug.key.password=__YOUR_SIGNKEY_KEY_PW__
+sign_key_config.release.key_store.dir=__YOUR_SIGNKEY_KEYSTORE_DIR__
+sign_key_config.release.key_store.password=__YOUR_SIGNKEY_KEYSTORE_PW__
+sign_key_config.release.key.alias=__YOUR_SIGNKEY_KEY_ALIAS__
+sign_key_config.release.key.password=__YOUR_SIGNKEY_KEY_PW__
 #
 # SSO SDK Keys
 kakao.sdk.native_app_key=__YOUR_KAKAO_SDK_NATIVE_APP_KEY__
