@@ -19,6 +19,7 @@ val NAVER_CLIENT_ID = gradleLocalProperties(rootDir).getProperty("naver.sdk.clie
 val NAVER_CLIENT_SECRET = gradleLocalProperties(rootDir).getProperty("naver.sdk.client_secret")
 
 android {
+    namespace = "io.github.untactorder"
     compileSdk = 33
     buildToolsVersion = "33.0.0"
 
@@ -146,17 +147,19 @@ dependencies {
     implementation(project(":common"))
 
     // Android 기본 의존성 모듈
-    implementation("androidx.appcompat:appcompat:1.4.2")
-    implementation("com.google.android.material:material:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.android.volley:volley:1.2.1")
+    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.security:security-crypto-ktx:1.1.0-alpha03")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.0")
+    implementation("androidx.core:core-splashscreen:1.0.0-rc01")  // Android 12 SplashScreen compat library
+    implementation("com.google.android.material:material:1.7.0-alpha02")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${rootProject.extra["kotlin_version"]}")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${rootProject.extra["kotlin_version"]}")
-    implementation("androidx.core:core-splashscreen:1.0.0-rc01")  // Android 12 SplashScreen compat library
 
     // Kakao SDK 사용을 위한 의존성 모듈 | API 21: Android 5.0(Lollipop) 이상이어야 함
     implementation("com.kakao.sdk:v2-user:2.10.0") // 카카오 로그인
