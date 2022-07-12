@@ -1,8 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    extra["kotlin_version"] = "1.7.0"
-    extra["ktor_version"] = "1.6.5"
-    extra["paho_mqtt_client_version"] = "1.2.5"
+    extra["kotlin_version"] = "1.7.10"
+    extra["ktor_version"] = "2.0.3"
     repositories {
         gradlePluginPortal()
         google()

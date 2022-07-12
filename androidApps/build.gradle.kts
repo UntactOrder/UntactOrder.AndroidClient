@@ -189,7 +189,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth-api-phone:18.0.1")
 
     // 기타 모듈
-    implementation("com.googlecode.libphonenumber:libphonenumber:8.12.50")  // 유심 관련 라이브러리
+    implementation("com.googlecode.libphonenumber:libphonenumber:8.12.51")  // 유심 관련 라이브러리
     "androidClientImplementation"("com.journeyapps:zxing-android-embedded:4.3.0")  // qr 관련 라이브러리
     "androidClientImplementation"("com.google.zxing:core:3.5.0")  // qr 관련 라이브러리
     implementation("com.google.code.gson:gson:2.9.0")  // json 관련 라이브러리
