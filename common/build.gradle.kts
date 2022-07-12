@@ -58,7 +58,7 @@ android {
 
 dependencies {
     // MQTT
-    implementation(project(mapOf("path" to ":lib:KMQTT-Client")))
+    //implementation(project(mapOf("path" to ":lib:KMQTT-Client")))
 
     // Ktor Client dependencies
     implementation("io.ktor:ktor-client-core:${rootProject.extra["ktor_version"]}")
