@@ -55,3 +55,15 @@ android {
         targetSdk = 33
     }
 }
+
+dependencies {
+    // Ktor Client dependencies
+    implementation("io.ktor:ktor-client-core:${rootProject.extra["ktor_version"]}")
+    implementation("io.ktor:ktor-client-cio:${rootProject.extra["ktor_version"]}")
+    implementation("io.ktor:ktor-server-core:${rootProject.extra["ktor_version"]}")
+    api("org.eclipse.paho:org.eclipse.paho.mqttv5.client:${rootProject.extra["paho_mqtt_client_version"]}")
+    testImplementation("io.ktor:ktor-server-test-host:${rootProject.extra["ktor_version"]}")
+
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("junit:junit:4.13.2")
+}
