@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -8,7 +10,6 @@ plugins {
 // 민감한 API 키 등을 숨기기 위해 local.properties 사용
 // 참고 : https://blog.mindorks.com/using-local-properties-file-to-avoid-api-keys-check-in-into-version-control-system
 // 참고 : https://medium.com/affirmativedev/%EC%A4%91%EC%9A%94%ED%95%9C-%EA%B0%92%EB%93%A4%EC%9D%84-%EC%88%A8%EA%B2%A8%EB%B4%85%EC%8B%9C%EB%8B%A4-e5be00d2e921
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 val debugKeyInfo = HashMap<String, String>()
 debugKeyInfo["keyStoreDir"] = gradleLocalProperties(rootDir).getProperty("sign_key_config.release.key_store.dir")
 debugKeyInfo["keyStorePassword"] = gradleLocalProperties(rootDir).getProperty("sign_key_config.release.key_store.password")
