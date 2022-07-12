@@ -57,10 +57,14 @@ android {
 }
 
 dependencies {
+    // MQTT
+    implementation(project(mapOf("path" to ":lib:KMQTT-Client")))
+
     // Ktor Client dependencies
     implementation("io.ktor:ktor-client-core:${rootProject.extra["ktor_version"]}")
     implementation("io.ktor:ktor-client-cio:${rootProject.extra["ktor_version"]}")
     implementation("io.ktor:ktor-server-core:${rootProject.extra["ktor_version"]}")
+
     testImplementation("io.ktor:ktor-server-test-host:${rootProject.extra["ktor_version"]}")
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("junit:junit:4.13.2")

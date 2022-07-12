@@ -9,3 +9,4 @@ pluginManagement {
 rootProject.name = "MobileClient"
 include(":androidApps")
 include(":common")
+include(":lib:KMQTT-Client")

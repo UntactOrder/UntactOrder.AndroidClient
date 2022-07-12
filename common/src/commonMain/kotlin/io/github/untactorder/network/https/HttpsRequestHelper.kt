@@ -1,8 +1,7 @@
-package io.github.untactorder.network
+package io.github.untactorder.network.https
 
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
