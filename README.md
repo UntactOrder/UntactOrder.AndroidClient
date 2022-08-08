@@ -12,7 +12,7 @@
 ![OA로고1](/androidApps/src/orderAssistant/res/mipmap-xxxhdpi/ic_launcher.png)
 
 ### 개발 환경
-* IntelliJ IDEA 2022.2 with Android Extention (or up)
+* IntelliJ IDEA 2022.2 with Android Extenion (or up)
 * Gradle 7.4 (or up)
 * Android Gradle Plugin 7.3.0-beta04 (or up)
 * Android 13 (Android API 33 Platform JetBrains Runtime) (or up)
